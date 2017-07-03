@@ -1,16 +1,26 @@
+var path = require('path');
+var webpack = require('webpack');
+
 module.exports = [
     {
-        devtool: 'source-map',
         entry: __dirname + '/src/app.js',
         output: {
             path: __dirname + '/dist', 
-            filename: '/bundle.js',
+            filename: 'bundle.js',
+        },
+        externals: {
+            'handsontable': {
+                root: 'Handsontable',
+                commonjs2: 'handsontable',
+                commonjs: 'handsontable',
+                amd: 'handsontable',
+                umd: 'handsontable'
+            }
         },
         module: {
             loaders: [
                 {
                     test: /\.js$/,
-                    exclude: /node_modules/,
                     loader: 'babel-loader',
                     query: {
                         presets: ['es2015']
