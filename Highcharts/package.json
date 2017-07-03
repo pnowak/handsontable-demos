@@ -1,6 +1,6 @@
 {
   "name": "handontable-demos",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "A Handsontable integrations",
   "author": "pnowak",
   "license": "MIT",
@@ -44,7 +44,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "npm test -- --watch",
-    "lint": "eslint **/**.js"
+    "lint": "eslint **/**.js",
+    "build": "webpack"
   },
   "jest": {
     "testRegex": "(/test/.*\\.spec.js)$"
