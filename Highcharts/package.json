@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/pnowak/handontable-demos/issues"
   },
-  "main": "./dist/.js",
+  "main": "./dist/bundle.js",
   "devDependencies": {
     "babel-core": "^6.18.2",
     "babel-jest": "^17.0.2",

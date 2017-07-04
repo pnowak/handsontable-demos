@@ -3,21 +3,13 @@ var webpack = require('webpack');
 
 module.exports = [
     {
-        entry: __dirname + '/src/app.js',
+        entry: __dirname + '/index.js',
         output: {
-            path: __dirname + '/dist', 
+            path: __dirname + '/dist',
             filename: 'bundle.js',
         },
-        externals: {
-            'handsontable': {
-                root: 'Handsontable',
-                commonjs2: 'handsontable',
-                commonjs: 'handsontable',
-                amd: 'handsontable',
-                umd: 'handsontable'
-            }
-        },
         module: {
+            noParse: [path.join(__dirname, 'node_modules/handsontable/dist/handsontable.full.js')],
             loaders: [
                 {
                     test: /\.js$/,
@@ -27,6 +19,11 @@ module.exports = [
                     }
                 }
             ]
+        },
+        resolve: {
+            alias: {
+                'handsontable': path.join(__dirname, 'node_modules/handsontable/dist/handsontable.full.js')
+            }
         },
         stats: {
             // Nice colored output
