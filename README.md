@@ -1,7 +1,7 @@
- #[Handsontable](https://github.com/handsontable/handsontable) intergation with different data charts.
+ # [Handsontable](https://github.com/handsontable/handsontable) intergation with different data charts.
 
 
-###Building
+### Building
 
 If you want to make a build yourself, go to the directory where source of a given integration is located and run:
 
