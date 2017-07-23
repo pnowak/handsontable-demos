@@ -3,8 +3,8 @@
 
 ### Building
 
-If you want to make a build yourself, go to the directory where source of a given integration is located and run:
+If you want to make a build yourself run:
 
 `npm run build`
 
-This will create a /dist/ directory bundle.js for you to use.
+This will create a /dist/bundle.js for you to use.
