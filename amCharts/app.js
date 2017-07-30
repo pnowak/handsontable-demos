@@ -23,33 +23,33 @@ class AmChart {
 			'theme': 'light',
 			'dataProvider': this.merge(hotOptions().colHeaders, hotOptions().data[0]),
 			'valueAxes': [ {
-					'gridColor': '#FFFFFF',
-					'gridAlpha': 0.2,
-					'dashLength': 0
+				'gridColor': '#FFFFFF',
+				'gridAlpha': 0.2,
+				'dashLength': 0
 			} ],
 			'gridAboveGraphs': true,
 			'startDuration': 1,
 			'graphs': [ {
-					'balloonText': '[[category]]: <b>[[value]]</b>',
-					'fillAlphas': 0.8,
-					'lineAlpha': 0.2,
-					'type': 'column',
-					'valueField': 'value'
+				'balloonText': '[[category]]: <b>[[value]]</b>',
+				'fillAlphas': 0.8,
+				'lineAlpha': 0.2,
+				'type': 'column',
+				'valueField': 'value'
 			} ],
 			'chartCursor': {
-					'categoryBalloonEnabled': false,
-					'cursorAlpha': 0,
-					'zoomable': false
+				'categoryBalloonEnabled': false,
+				'cursorAlpha': 0,
+				'zoomable': false
 			},
 			'categoryField': 'key',
 			'categoryAxis': {
-					'gridPosition': 'start',
-					'gridAlpha': 0,
-					'tickPosition': 'start',
-					'tickLength': 20
+				'gridPosition': 'start',
+				'gridAlpha': 0,
+				'tickPosition': 'start',
+				'tickLength': 20
 			},
 			'export': {
-					'enabled': true
+				'enabled': true
 			}
 		}
 	}
@@ -62,10 +62,10 @@ class AmChart {
 				if (i === j) {
 					let obj = {};
 
-				  	obj.key = key[i];
+					obj.key = key[i];
 					obj.value = value[j];
 
-				 	destination.push(obj);
+					destination.push(obj);
 				}
 			}
 		}
