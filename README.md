@@ -1,4 +1,4 @@
- # [Handsontable](https://github.com/handsontable/handsontable) intergation with different data charts.
+ # [Handsontable](https://github.com/handsontable/handsontable) integration with different data charts.
 
 
 ### Building
