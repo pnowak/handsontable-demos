@@ -1,8 +1,8 @@
 'use strict';
 
 import HotChart from './src/app';
-import HighChart from './Highchart/app';
-import AmChart from './Amchart/app';
+import HighChart from './Highcharts/app';
+import AmChart from './amCharts/app';
 
 const highChart = new HighChart('container');
 const amChart = new AmChart('chartdiv');
