@@ -18,7 +18,12 @@ buttons.addEventListener('click', (e) => {
             let name = chart.name;
 
             if (value === name) {
-                get(value).classList.remove('disappear');
+            	let container = get(value);
+            	let desc = container.querySelectorAll('desc')[0].textContent;
+            	let vs = get('version');
+
+                container.classList.remove('disappear');
+                vs.textContent = desc;
             } else {
                 get(name).classList.add('disappear');
             }
