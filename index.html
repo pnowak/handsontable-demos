@@ -8,9 +8,17 @@
 </head>
 <body>
     <section>
+    	<ul id="buttons">
+          	<li><button type="button" value="highcharts">highcharts</button></li>
+          	<li><button type="button" value="amcharts">amcharts</button></li>
+        </ul>
+
         <div id="root"></div>
-        <div id="container"></div>
-        <div id="chartdiv"></div>
+
+        <div class="charts">
+            <div class="disappear" id="highcharts"></div>
+            <div class="disappear" id="amcharts"></div>
+        </div>
     </section>
 
     <script src="./dist/bundle.js" type="text/javascript"></script>

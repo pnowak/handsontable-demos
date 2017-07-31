@@ -1,5 +1,33 @@
-#chartdiv {
-	width: 100%; 
-	height: 400px; 
-	background-color: #ffffff;
+ul {
+    list-style: none;
+}
+
+li {
+    display: inline-block;
+    margin: 5px;
+    padding: 3px 5px;
+}
+
+button {
+    padding: 10px 15px;
+    color: #ffffff;
+    background-color: #000000;
+    font-size: 0.875em;  /* 14px / 16px */
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e60000;
+}
+
+#amcharts {
+    width: 100%;
+    height: 400px;
+    background-color: #ffffff;
+}
+
+.disappear {
+    display: none;
+    visibility: hidden;
 }
