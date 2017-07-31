@@ -3,12 +3,13 @@
 import HotChart from './src/app';
 import HighChart from './Highcharts/app';
 import AmChart from './amCharts/app';
+import get from './src/helpers/get';
 
 const highChart = new HighChart('highcharts');
 const amChart = new AmChart('amcharts');
 const hotChart = new HotChart('root', highChart, amChart);
 
-const buttons = document.getElementById('buttons');
+const buttons = get('buttons');
 
 buttons.addEventListener('click', (e) => {
     if (e.target.nodeName.toLowerCase() === "button") {
@@ -17,9 +18,9 @@ buttons.addEventListener('click', (e) => {
             let name = chart.name;
 
             if (value === name) {
-                document.getElementById(value).classList.remove('disappear');
+                get(value).classList.remove('disappear');
             } else {
-                document.getElementById(name).classList.add('disappear');
+                get(name).classList.add('disappear');
             }
         });
     }

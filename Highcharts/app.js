@@ -2,10 +2,11 @@
 
 import Highcharts from 'highcharts';
 import { hotOptions } from '.././src/app';
+import get from '.././src/helpers/get';
 
 class HighCharts {
 	constructor(highRoot, highOptions) {
-		this.highcharts = new Highcharts.Chart(document.getElementById(highRoot), this.highOptions());
+		this.highcharts = new Highcharts.Chart(get(highRoot), this.highOptions());
 		this.name = 'highcharts';
 	}
 

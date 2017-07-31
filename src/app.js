@@ -1,10 +1,11 @@
 'use strict';
 
 import Handsontable from 'handsontable';
+import get from './helpers/get';
 
 export default class HotChart {
 	constructor(hotRoot, ...charts) {
-		this.hot = new Handsontable(document.getElementById(hotRoot), hotOptions());
+		this.hot = new Handsontable(get(hotRoot), hotOptions());
 		this.charts = charts;
 	}
 }
