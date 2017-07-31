@@ -6,6 +6,7 @@ import { hotOptions } from '.././src/app';
 class HighCharts {
 	constructor(highRoot, highOptions) {
 		this.highcharts = new Highcharts.Chart(document.getElementById(highRoot), this.highOptions());
+		this.name = 'highcharts';
 	}
 
 	valueChanged(col, value) {

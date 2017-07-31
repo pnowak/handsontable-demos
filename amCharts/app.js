@@ -9,6 +9,7 @@ import { hotOptions } from '.././src/app';
 class AmChart {
 	constructor(amRoot, amOptions) {
 		this.amcharts = AmCharts.makeChart(amRoot, this.amOptions());
+		this.name = 'amcharts';
 	}
 
 	valueChanged(col, value) {
