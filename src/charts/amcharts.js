@@ -1,3 +1,5 @@
+/*eslint no-undef: 1*/
+
 'use strict';
 
 import 'amcharts3';
@@ -7,7 +9,7 @@ import 'amcharts3/amcharts/themes/light';
 import { hotOptions } from '.././app';
 
 class AmChart {
-	constructor(amRoot, amOptions) {
+	constructor(amRoot) {
 		this.amcharts = AmCharts.makeChart(amRoot, this.amOptions());
 		this.name = 'amcharts';
 	}

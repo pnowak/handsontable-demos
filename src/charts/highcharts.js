@@ -4,7 +4,7 @@ import Highcharts from 'highcharts';
 import { hotOptions, get } from '../app';
 
 class HighCharts {
-	constructor(highRoot, highOptions) {
+	constructor(highRoot) {
 		this.highcharts = new Highcharts.Chart(get(highRoot), this.highOptions());
 		this.name = 'highcharts';
 	}
