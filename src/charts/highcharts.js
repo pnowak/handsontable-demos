@@ -16,17 +16,17 @@ class HighCharts {
 	highOptions() {
 		return {
 			title: {
-					text: 'HighChart & Handsontable'
+				text: 'HighChart & Handsontable'
 			},
 
 			xAxis: {
-					categories: hotOptions().colHeaders //colHeaders from Hot
+				categories: hotOptions().colHeaders //colHeaders from Hot
 			},
 
 			series: [{
-					type: 'column',
-					colorByPoint: true,
-					data: hotOptions().data[0] //data from Hot
+				type: 'column',
+				colorByPoint: true,
+				data: hotOptions().data[0] //data from Hot
 			}]
 		}
 	}
