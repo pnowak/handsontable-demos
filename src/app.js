@@ -34,5 +34,5 @@ export function hotOptions() {
 }
 
 export function get(id) {
-		return document.getElementById(id);
+	return document.getElementById(id);
 }
