@@ -1,7 +1,6 @@
 'use strict';
 
 import Handsontable from 'handsontable';
-import get from './helpers/get';
 
 export default class HotChart {
 	constructor(hotRoot, ...charts) {
@@ -32,4 +31,8 @@ export function hotOptions() {
 			{type: 'numeric'}
 		]
 	}
+}
+
+export function get(id) {
+		return document.getElementById(id);
 }

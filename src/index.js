@@ -1,9 +1,9 @@
 'use strict';
 
-import HotChart from './src/app';
-import HighChart from './Highcharts/app';
-import AmChart from './amCharts/app';
-import get from './src/helpers/get';
+import HotChart from './app';
+import HighChart from './charts/highcharts';
+import AmChart from './charts/amcharts';
+import { get } from './app';
 
 const highChart = new HighChart('highcharts');
 const amChart = new AmChart('amcharts');
@@ -13,17 +13,17 @@ const buttons = get('buttons');
 
 buttons.addEventListener('click', (e) => {
     if (e.target.nodeName.toLowerCase() === "button") {
-        hotChart.charts.forEach(function (chart, index) {
+        hotChart.charts.forEach(function (chart) {
             let value = e.target.value;
             let name = chart.name;
 
             if (value === name) {
-            	let container = get(value);
-            	let desc = container.querySelectorAll('desc')[0].textContent;
-            	let vs = get('version');
+                let container = get(value);
+                let desc = container.querySelectorAll('desc')[0].textContent;
+                let versionDOMElement = get('version');
 
                 container.classList.remove('disappear');
-                vs.textContent = desc;
+                versionDOMElement.textContent = desc;
             } else {
                 get(name).classList.add('disappear');
             }
@@ -31,15 +31,11 @@ buttons.addEventListener('click', (e) => {
     }
 }, false);
 
-hotChart.hot.addHook('beforeChange', function(changes, source) {
-    if (source === 'loadData' || source === 'internal' || changes.length > 1) {
-    	return;
-    }
-
+hotChart.hot.addHook('beforeChange', function(changes) {
     let col = changes[0][1];
     let value = changes[0][3];
 
-    hotChart.charts.forEach(function (chart, index) {
+    hotChart.charts.forEach(function (chart) {
         chart.valueChanged(col, value);
     });
 });
