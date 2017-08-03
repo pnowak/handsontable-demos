@@ -2,6 +2,18 @@
 
 import Handsontable from 'handsontable';
 
+/**
+* A Handsontable integrate with different charts.
+*
+*
+* Create Handsontable instance linked with data from different chart/charts.
+*
+* const highChart = new HighChart('highcharts');
+* const amChart = new AmChart('amcharts');
+* const hotChart = new HotChart('root', highChart, amChart);
+*
+* @class HotChart.
+*/
 export default class HotChart {
 	constructor(hotRoot, ...charts) {
 		this.hot = new Handsontable(get(hotRoot), hotOptions());
@@ -9,6 +21,12 @@ export default class HotChart {
 	}
 }
 
+/**
+*
+* Handsontable options object.
+*
+* @returns {Object} Handsontable object settings.
+*/
 export function hotOptions() {
 	return {
 		data: [
@@ -33,6 +51,12 @@ export function hotOptions() {
 	}
 }
 
+/**
+* Helper function.
+*
+* @param {String} id is a string which can be used to uniquely identify the element, found in the HTML id attribute.
+* @returns {Object} a reference to the element by its id.
+*/
 export function get(id) {
 	return document.getElementById(id);
 }

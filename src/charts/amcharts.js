@@ -8,18 +8,39 @@ import 'amcharts3/amcharts/pie';
 import 'amcharts3/amcharts/themes/light';
 import { hotOptions } from '.././app';
 
+/**
+* A amChart data visualisation.
+*
+* Create amChart instance linked with data from Handsontable.
+*
+* @class AmChart.
+*/
 class AmChart {
 	constructor(amRoot) {
 		this.amcharts = AmCharts.makeChart(amRoot, this.amOptions());
 		this.name = 'amcharts';
 	}
 
+	/**
+	*
+	* Listener for changes from Handsontable and updates it in the chart.
+	*
+	* @param {Number} col column index.
+	* @param {Number} value column value.
+	*
+	*/
 	valueChanged(col, value) {
 		this.amcharts.dataProvider[col].value = value;
 
 		this.amcharts.validateNow(true);
 	}
 
+	/**
+	*
+	* amChart options object.
+	*
+	* @returns {Object} amChart object configs.
+	*/
 	amOptions() {
 		return {
 			'type': 'serial',
@@ -57,6 +78,20 @@ class AmChart {
 		}
 	}
 
+	/**
+    * Helper function.
+	*
+	* Merge column header to the value of the column from Handsontable object settings.
+	* amCharts data provider needs data array in form:
+	* {
+    *  "key": "May",
+    *  "value": 144
+    * }
+    *
+    * @param {String} key column header from Handsontable object settings.
+	* @param {Number} value column value from Handsontable object settings.
+    * @returns {Array} a merged key-value pair in array.
+    */
 	merge(key, value) {
 		let destination = [];
 
