@@ -6,7 +6,7 @@ import 'amcharts3';
 import 'amcharts3/amcharts/serial';
 import 'amcharts3/amcharts/pie';
 import 'amcharts3/amcharts/themes/light';
-import { hotOptions } from '.././app';
+import { hotOptions } from '.././hotchart';
 
 /**
 * A amChart data visualisation.

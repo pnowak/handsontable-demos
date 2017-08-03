@@ -1,7 +1,7 @@
 'use strict';
 
 import Highcharts from 'highcharts';
-import { hotOptions, get } from '../app';
+import { hotOptions, get } from '../hotchart';
 
 /**
 * A Highcharts data visualisation.

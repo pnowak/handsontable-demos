@@ -1,9 +1,9 @@
 'use strict';
 
-import HotChart from './app';
+import HotChart from './hotchart';
 import HighChart from './charts/highcharts';
 import AmChart from './charts/amcharts';
-import { get } from './app';
+import { get } from './hotchart';
 
 const highChart = new HighChart('highcharts');
 const amChart = new AmChart('amcharts');
