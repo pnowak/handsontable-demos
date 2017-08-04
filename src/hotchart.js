@@ -55,7 +55,7 @@ export function hotOptions() {
 * Helper function.
 *
 * @param {String} id is a string which can be used to uniquely identify the element, found in the HTML id attribute.
-* @returns {Object} a reference to the element by its id.
+* @returns {HTMLElement} a reference to the element by its id or null if an element with the specified ID is not in the document.
 */
 export function get(id) {
 	return document.getElementById(id);
