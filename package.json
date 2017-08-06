@@ -36,7 +36,8 @@
     "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-standard": "^2.0.1",
     "expose-loader": "^0.7.1",
-    "jest": "^17.0.3",
+    "jasmine": "^2.7.0",
+    "jasmine-terminal-reporter": "^1.0.3",
     "style-loader": "^0.13.1",
     "webpack": "^3.2.0"
   },
@@ -50,8 +51,7 @@
     "pikaday": "^1.5.1"
   },
   "scripts": {
-    "test": "jest",
-    "test:watch": "npm test -- --watch",
+    "test": "babel-node spec/run.js",
     "lint": "eslint **/*.js",
     "build": "webpack"
   },
