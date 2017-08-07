@@ -1,15 +1,20 @@
 {
   "parser": "babel-eslint",
   "plugins": [
-    "import"
+    "react",
+    "jsx-a11y",
+    "import",
+    "jasmine"
   ],
   "env": {
     "browser": true,
     "es6": true,
-    "node": true
+    "node": true,
+    "jasmine": true
   },
   "extends": [
-    "eslint:recommended"
+    "airbnb",
+    "plugin:jasmine/recommended"
   ],
   "settings": {
     "import/ignore": [
