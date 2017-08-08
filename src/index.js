@@ -26,7 +26,7 @@ buttons.addEventListener('click', (e) => {
       }
     });
   }
-}, false);
+});
 
 hotChart.hot.addHook('beforeChange', (changes) => {
   const col = changes[0][1];
