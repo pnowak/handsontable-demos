@@ -19,7 +19,10 @@ module.exports = [
     stats: {
       colors: true,
     },
-    watch: true,
-    debug: true,
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000,
+      ignored: /node_modules/,
+    },
   },
 ];
