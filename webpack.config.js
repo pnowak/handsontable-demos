@@ -19,5 +19,7 @@ module.exports = [
     stats: {
       colors: true,
     },
+    watch: true,
+    debug: true,
   },
 ];
