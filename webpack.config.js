@@ -1,3 +1,6 @@
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = [
   {
     entry: `${__dirname}/src/index.js`,
@@ -16,8 +19,19 @@ module.exports = [
         },
       ],
     },
+    plugins: [
+      new CopyWebpackPlugin([{
+        from: `${__dirname}/src/index.html`,
+        to: `${__dirname}/dist/index.html`,
+      }]),
+    ],
     stats: {
       colors: true,
+    },
+    resolve: {
+      alias: {
+        amcharts: path.resolve('./node_modules/amcharts3/amcharts/amcharts.js'),
+      },
     },
     watchOptions: {
       aggregateTimeout: 300,
