@@ -28,11 +28,6 @@ module.exports = [
     stats: {
       colors: true,
     },
-    resolve: {
-      alias: {
-        amcharts: path.resolve('./node_modules/amcharts3/amcharts/amcharts.js'),
-      },
-    },
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000,

@@ -2,22 +2,18 @@
   "parser": "babel-eslint",
   "plugins": [
     "import",
-    "jasmine"
+    "jasmine",
+    "jest"
   ],
   "env": {
     "browser": true,
     "es6": true,
     "node": true,
-    "jasmine": true
+    "jasmine": true,
+    "jest/globals": true
   },
   "extends": [
     "airbnb",
     "plugin:jasmine/recommended"
-  ],
-  "settings": {
-    "import/ignore": [
-      "node_modules",
-      "modules/index.js"
-    ]
-  }
+  ]
 }
