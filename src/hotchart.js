@@ -36,6 +36,7 @@ export function hotOptions() {
 *
 * Create Handsontable instance linked with data from different chart/charts.
 *
+* @example
 * const highChart = new HighChart('highcharts');
 * const amChart = new AmChart('amcharts');
 * const hotChart = new HotChart('root', highChart, amChart);
@@ -43,9 +44,16 @@ export function hotOptions() {
 * @class HotChart.
 */
 
-export default class HotChart {
+class HotChart {
+/**
+* Create a hotchart.
+* @param {string} hotRoot - a reference to the element by its id.
+* @param {string} charts - one or more chart object.
+*/
   constructor(hotRoot, ...charts) {
     this.hot = new Handsontable(document.getElementById(hotRoot), hotOptions());
     this.charts = charts;
   }
 }
+
+export default HotChart;

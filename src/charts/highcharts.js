@@ -9,13 +9,17 @@ import { hotOptions } from '../hotchart';
 * @class HighCharts.
 */
 class HighCharts {
+/**
+* Create a highchart.
+* @param {string} highRoot - a reference to the element by its id.
+*/
   constructor(highRoot) {
     this.highcharts = new Highcharts.Chart(document.getElementById(highRoot),
     this.constructor.highOptions());
     this.name = 'highcharts';
   }
 
-  /**
+/**
 *
 * HighCharts options object.
 *

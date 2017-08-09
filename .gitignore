@@ -1,6 +1,7 @@
 node_modules
 bower_components
 dist
+out
 .DS_Store
 .idea
 *.log

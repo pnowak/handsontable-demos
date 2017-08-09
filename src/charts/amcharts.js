@@ -12,12 +12,16 @@ import { hotOptions } from '.././hotchart';
 * @class AmChart.
 */
 class AmChart {
+/**
+* Create a amchart.
+* @param {string} amRoot - a reference to the element by its id.
+*/
   constructor(amRoot) {
     this.amcharts = window.AmCharts.makeChart(amRoot, this.constructor.amOptions());
     this.name = 'amcharts';
   }
 
-  /**
+ /**
 *
 * amChart options object.
 *
@@ -65,6 +69,8 @@ class AmChart {
 *
 * Merge column header to the value of the column from Handsontable object settings.
 * amCharts data provider needs data array in form:
+*
+* @example
 * {
 *  "key": "May",
 *  "value": 144

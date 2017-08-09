@@ -21,7 +21,10 @@
   "devDependencies": {
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^6.2.8",
+    "babel-plugin-dynamic-import-node": "^1.0.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-transform-require-ignore": "^0.1.0",
     "babel-preset-env": "^1.6.0",
@@ -29,12 +32,14 @@
     "babel-preset-latest": "^6.24.1",
     "babel-register": "^6.24.1",
     "babel-runtime": "~5.8.20",
+    "copy-webpack-plugin": "^4.0.1",
     "eslint": "^3.8.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-loader": "^1.6.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jasmine": "^2.8.3",
+    "eslint-plugin-jest": "^20.0.3",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-react": "^7.1.0",
@@ -42,25 +47,41 @@
     "expose-loader": "^0.7.1",
     "jasmine": "^2.7.0",
     "jasmine-terminal-reporter": "^1.0.3",
-    "karma": "^1.7.0",
-    "karma-jasmine": "^1.1.0",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-webpack": "^2.0.4",
+    "jest": "^20.0.4",
+    "jest-cli": "^20.0.4",
+    "jsdoc": "^3.5.4",
+    "regenerator-runtime": "^0.10.5",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.0"
   },
   "dependencies": {
     "amcharts3": "github:amcharts/amcharts3",
     "handsontable": "^0.33.0",
-    "highcharts": "^5.0.12",
-    "zeroclipboard": "^2.3.0",
-    "moment": "^2.17.1",
-    "numbro": "^1.9.3",
-    "pikaday": "^1.5.1"
+    "highcharts": "^5.0.12"
   },
   "scripts": {
-    "test": "babel-node spec/run.js",
+    "test": "jest",
     "lint": "eslint **/*.js",
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "doc": "./node_modules/.bin/jsdoc src/hotchart.js src/charts/amcharts.js src/charts/highcharts.js"
+  },
+  "jest": {
+    "roots": [
+      "./test"
+    ],
+    "testRegex": "(/test/.*\\.spec.js)$",
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "globals": {
+      "__HOT_BUILD_DATE__": "",
+      "__HOT_PACKAGE_NAME__": "",
+      "__HOT_VERSION__": "",
+      "__HOT_BASE_VERSION__": ""
+    }
   }
 }
