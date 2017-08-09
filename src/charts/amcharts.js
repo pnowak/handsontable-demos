@@ -1,6 +1,3 @@
-/* eslint no-undef: 0 */
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["merge"] }] */
-
 import 'amcharts3';
 import 'amcharts3/amcharts/serial';
 import 'amcharts3/amcharts/pie';
@@ -16,35 +13,21 @@ import { hotOptions } from '.././hotchart';
 */
 class AmChart {
   constructor(amRoot) {
-    this.amcharts = AmCharts.makeChart(amRoot, this.amOptions());
+    this.amcharts = window.AmCharts.makeChart(amRoot, this.constructor.amOptions());
     this.name = 'amcharts';
   }
 
-/**
-*
-* Listener for changes from Handsontable and updates it in the chart.
-*
-* @param {Number} col column index.
-* @param {Number} value column value.
-*
-*/
-  valueChanged(col, value) {
-    this.amcharts.dataProvider[col].value = value;
-
-    this.amcharts.validateNow(true);
-  }
-
-/**
+  /**
 *
 * amChart options object.
 *
 * @returns {Object} amChart object configs.
 */
-  amOptions() {
+  static amOptions() {
     return {
       type: 'serial',
       theme: 'light',
-      dataProvider: this.merge(hotOptions().colHeaders, hotOptions().data[0]),
+      dataProvider: AmChart.merge(hotOptions().colHeaders, hotOptions().data[0]),
       valueAxes: [{
         gridColor: '#FFFFFF',
         gridAlpha: 0.2,
@@ -91,7 +74,7 @@ class AmChart {
 * @param {Number} value column value from Handsontable object settings.
 * @returns {Array} a merged key-value pair in array.
 */
-  merge(key, value) {
+  static merge(key, value) {
     const destination = [];
 
     for (let i = 0, k = key.length; i < k; i += 1) {
@@ -108,6 +91,20 @@ class AmChart {
     }
 
     return destination;
+  }
+
+/**
+*
+* Listener for changes from Handsontable and updates it in the chart.
+*
+* @param {Number} col column index.
+* @param {Number} value column value.
+*
+*/
+  valueChanged(col, value) {
+    this.amcharts.dataProvider[col].value = value;
+
+    this.amcharts.validateNow(true);
   }
 }
 

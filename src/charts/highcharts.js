@@ -1,5 +1,3 @@
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["highOptions"] }] */
-
 import Highcharts from 'highcharts';
 import { hotOptions } from '../hotchart';
 
@@ -12,29 +10,18 @@ import { hotOptions } from '../hotchart';
 */
 class HighCharts {
   constructor(highRoot) {
-    this.highcharts = new Highcharts.Chart(document.getElementById(highRoot), this.highOptions());
+    this.highcharts = new Highcharts.Chart(document.getElementById(highRoot),
+    this.constructor.highOptions());
     this.name = 'highcharts';
   }
 
-/**
-*
-* Listener for changes from Handsontable and updates it in the chart.
-*
-* @param {Number} col column index.
-* @param {Number} value column value.
-*
-*/
-  valueChanged(col, value) {
-    this.highcharts.series[0].data[col].update(value);
-  }
-
-/**
+  /**
 *
 * HighCharts options object.
 *
 * @returns {Object} HighCharts object configs.
 */
-  highOptions() {
+  static highOptions() {
     return {
       title: {
         text: 'HighChart & Handsontable',
@@ -50,6 +37,18 @@ class HighCharts {
         data: hotOptions().data[0],
       }],
     };
+  }
+
+/**
+*
+* Listener for changes from Handsontable and updates it in the chart.
+*
+* @param {Number} col column index.
+* @param {Number} value column value.
+*
+*/
+  valueChanged(col, value) {
+    this.highcharts.series[0].data[col].update(value);
   }
 }
 
