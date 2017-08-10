@@ -1,6 +1,4 @@
- # [Handsontable](https://github.com/handsontable/handsontable) integration with different data charts.
-
-# Name of the project
+# [Handsontable](https://github.com/handsontable/handsontable) integration with different data charts.
 
 Handsontable for Charts
 
@@ -8,7 +6,7 @@ Handsontable for Charts
 
 ```
 npm install
-
+```
 
 ## Developing
 
