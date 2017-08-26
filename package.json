@@ -62,7 +62,7 @@
     "lint": "eslint **/*.js",
     "build": "webpack",
     "watch": "webpack --watch",
-    "doc": "./node_modules/.bin/jsdoc src/hotchart.js src/charts/amcharts.js src/charts/highcharts.js"
+    "doc": "./node_modules/.bin/jsdoc src -r"
   },
   "jest": {
     "roots": [
