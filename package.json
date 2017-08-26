@@ -31,6 +31,7 @@
     "babel-register": "^6.24.1",
     "babel-runtime": "~5.8.20",
     "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.5",
     "eslint": "^3.8.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-standard": "^6.2.1",
@@ -49,7 +50,7 @@
     "jest-cli": "^20.0.4",
     "jsdoc": "^3.5.4",
     "regenerator-runtime": "^0.10.5",
-    "style-loader": "^0.13.1",
+    "style-loader": "^0.13.2",
     "webpack": "^2.2.0"
   },
   "dependencies": {

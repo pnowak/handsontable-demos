@@ -1,9 +1,11 @@
-const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = [
   {
-    entry: `${__dirname}/src/index.js`,
+    entry: [
+      `${__dirname}/src/index.js`,
+      `${__dirname}/src/style.css`,
+    ],
     output: {
       path: `${__dirname}/dist`,
       filename: 'bundle.js',
@@ -16,6 +18,10 @@ module.exports = [
           query: {
             presets: ['env'],
           },
+        },
+        {
+          test: /\.css$/,
+          loader: 'style-loader!css-loader',
         },
       ],
     },
