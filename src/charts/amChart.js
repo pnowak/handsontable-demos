@@ -31,7 +31,8 @@ class AmChartExtends {
     return {
       type: 'serial',
       theme: 'light',
-      dataProvider: AmChartExtends.merge(hotOptions().colHeaders, hotOptions().data[0]),
+      dataProvider: AmChartExtends.zipHeadersWithValues(
+        hotOptions().colHeaders, hotOptions().data[0]),
       valueAxes: [{
         gridColor: '#FFFFFF',
         gridAlpha: 0.2,
@@ -67,7 +68,7 @@ class AmChartExtends {
 /**
 * Helper function.
 *
-* Merge column header to the value of the column from Handsontable object settings.
+* Zip column header to the value of the column from Handsontable object settings.
 * amCharts data provider needs data array in form:
 *
 * @example
@@ -76,27 +77,19 @@ class AmChartExtends {
 *  "value": 144
 * }
 *
-* @param {String} key column header from Handsontable object settings.
-* @param {Number} value column value from Handsontable object settings.
+* @param {String} columnHeaders column header from Handsontable object settings.
+* @param {Number} columnValues column value from Handsontable object settings.
 * @returns {Array} a merged key-value pair in array.
 */
-  static merge(key, value) {
-    const destination = [];
+  static zipHeadersWithValues(columnHeaders, columnValues) {
+    return columnHeaders.map((item, index) => {
+      const obj = {};
 
-    for (let i = 0, k = key.length; i < k; i += 1) {
-      for (let j = 0, v = value.length; j < v; j += 1) {
-        if (i === j) {
-          const obj = {};
+      obj.key = item;
+      obj.value = columnValues[index];
 
-          obj.key = key[i];
-          obj.value = value[j];
-
-          destination.push(obj);
-        }
-      }
-    }
-
-    return destination;
+      return obj;
+    });
   }
 
 /**
