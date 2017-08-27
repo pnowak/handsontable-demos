@@ -13,7 +13,7 @@ import { hotOptions } from '.././hotCharts';
 */
 class AmChartExtends {
 /**
-* Create a AmChartExtends.
+* Create a amChartExtends.
 * @param {string} amRoot - a reference to the element by its id.
 */
   constructor(amRoot) {

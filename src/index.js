@@ -1,6 +1,6 @@
 import HotCharts from './hotCharts';
-import HighChartExtends from './charts/highCharts';
-import AmChartExtends from './charts/amCharts';
+import HighChartExtends from './charts/highChart';
+import AmChartExtends from './charts/amChart';
 
 const highChart = new HighChartExtends('highcharts');
 const amChart = new AmChartExtends('amcharts');
