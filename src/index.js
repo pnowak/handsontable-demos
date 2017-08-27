@@ -29,10 +29,9 @@ buttons.addEventListener('click', (event) => {
 });
 
 hotChart.hot.addHook('beforeChange', (changes) => {
-  const col = changes[0][1];
-  const value = changes[0][3];
+  const [row, column, previousValue, currentValue] = changes[0];
 
   hotChart.charts.forEach((chart) => {
-    chart.valueChanged(col, value);
+    chart.valueChanged(column, currentValue);
   });
 });
