@@ -8,10 +8,10 @@ const hotChart = new HotChart('root', highChart, amChart);
 
 const buttons = document.getElementById('buttons');
 
-buttons.addEventListener('click', (e) => {
-  if (e.target.nodeName.toLowerCase() === 'button') {
+buttons.addEventListener('click', (event) => {
+  if (event.target.nodeName.toLowerCase() === 'button') {
     hotChart.charts.forEach((chart) => {
-      const value = e.target.value;
+      const value = event.target.value;
       const name = chart.name;
 
       if (value === name) {
