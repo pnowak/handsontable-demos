@@ -41,10 +41,10 @@ export function hotOptions() {
 * const amChart = new AmChart('amcharts');
 * const hotChart = new HotChart('root', highChart, amChart);
 *
-* @class HotChart.
+* @class HotCharts.
 */
 
-class HotChart {
+class HotCharts {
 /**
 * Create a hotchart.
 * @param {string} hotRoot - a reference to the element by its id.
@@ -56,4 +56,4 @@ class HotChart {
   }
 }
 
-export default HotChart;
+export default HotCharts;

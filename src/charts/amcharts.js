@@ -2,22 +2,22 @@ import 'amcharts3';
 import 'amcharts3/amcharts/serial';
 import 'amcharts3/amcharts/pie';
 import 'amcharts3/amcharts/themes/light';
-import { hotOptions } from '.././hotchart';
+import { hotOptions } from '.././hotCharts';
 
 /**
 * A amChart data visualisation.
 *
 * Create amChart instance linked with data from Handsontable.
 *
-* @class AmChart.
+* @class AmChartExtends.
 */
-class AmChart {
+class AmChartExtends {
 /**
-* Create a amchart.
+* Create a AmChartExtends.
 * @param {string} amRoot - a reference to the element by its id.
 */
   constructor(amRoot) {
-    this.amcharts = window.AmCharts.makeChart(amRoot, this.constructor.amOptions());
+    this.amChart = window.AmCharts.makeChart(amRoot, this.constructor.amOptions());
     this.name = 'amcharts';
   }
 
@@ -31,7 +31,7 @@ class AmChart {
     return {
       type: 'serial',
       theme: 'light',
-      dataProvider: AmChart.merge(hotOptions().colHeaders, hotOptions().data[0]),
+      dataProvider: AmChartExtends.merge(hotOptions().colHeaders, hotOptions().data[0]),
       valueAxes: [{
         gridColor: '#FFFFFF',
         gridAlpha: 0.2,
@@ -108,10 +108,10 @@ class AmChart {
 *
 */
   observeChange(column, value) {
-    this.amcharts.dataProvider[column].value = value;
+    this.amChart.dataProvider[column].value = value;
 
-    this.amcharts.validateNow(true);
+    this.amChart.validateNow(true);
   }
 }
 
-export default AmChart;
+export default AmChartExtends;

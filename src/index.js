@@ -1,16 +1,16 @@
-import HotChart from './hotchart';
-import HighChart from './charts/highcharts';
-import AmChart from './charts/amcharts';
+import HotCharts from './hotCharts';
+import HighChartExtends from './charts/highCharts';
+import AmChartExtends from './charts/amCharts';
 
-const highChart = new HighChart('highcharts');
-const amChart = new AmChart('amcharts');
-const hotChart = new HotChart('root', highChart, amChart);
+const highChart = new HighChartExtends('highcharts');
+const amChart = new AmChartExtends('amcharts');
+const hotCharts = new HotCharts('root', highChart, amChart);
 
 const buttons = document.getElementById('buttons');
 
 buttons.addEventListener('click', (event) => {
   if (event.target.nodeName.toLowerCase() === 'button') {
-    hotChart.charts.forEach((chart) => {
+    hotCharts.charts.forEach((chart) => {
       const value = event.target.value;
       const name = chart.name;
 
@@ -28,10 +28,10 @@ buttons.addEventListener('click', (event) => {
   }
 });
 
-hotChart.hot.addHook('beforeChange', (changes) => {
+hotCharts.hot.addHook('beforeChange', (changes) => {
   const [row, column, previousValue, currentValue] = changes[0];
 
-  hotChart.charts.forEach((chart) => {
+  hotCharts.charts.forEach((chart) => {
     chart.observeChange(column, currentValue);
   });
 });

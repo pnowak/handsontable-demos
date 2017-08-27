@@ -1,20 +1,20 @@
 import Highcharts from 'highcharts';
-import { hotOptions } from '../hotchart';
+import { hotOptions } from '../hotCharts';
 
 /**
 * A Highcharts data visualisation.
 *
 * Create Highcharts instance linked with data from Handsontable.
 *
-* @class HighCharts.
+* @class HighChartExtends.
 */
-class HighCharts {
+class HighChartExtends {
 /**
-* Create a highchart.
+* Create a highChartExtends.
 * @param {string} highRoot - a reference to the element by its id.
 */
   constructor(highRoot) {
-    this.highcharts = new Highcharts.Chart(document.getElementById(highRoot),
+    this.highChart = new Highcharts.Chart(document.getElementById(highRoot),
     this.constructor.highOptions());
     this.name = 'highcharts';
   }
@@ -50,8 +50,8 @@ class HighCharts {
 *
 */
   observeChange(column, value) {
-    this.highcharts.series[0].data[column].update(value);
+    this.highChart.series[0].data[column].update(value);
   }
 }
 
-export default HighCharts;
+export default HighChartExtends;
