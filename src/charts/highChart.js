@@ -10,7 +10,7 @@ import { hotOptions } from '../hotCharts';
 */
 class HighChartExtends {
 /**
-* Create a highChartExtends.
+* Create a HighChartExtends.
 * @param {string} highRoot - a reference to the element by its id.
 */
   constructor(highRoot) {

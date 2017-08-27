@@ -13,20 +13,8 @@ export function hotOptions() {
     ],
     colHeaders: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     rowHeaders: true,
-    columns: [
-      { type: 'numeric' },
-      { type: 'numeric' },
-      { type: 'numeric' },
-      { type: 'numeric' },
-      { type: 'numeric' },
-      { type: 'numeric' },
-      { type: 'numeric' },
-      { type: 'numeric' },
-      { type: 'numeric' },
-      { type: 'numeric' },
-      { type: 'numeric' },
-      { type: 'numeric' },
-    ],
+    type: 'numeric',
+    allowInvalid: false,
   };
 }
 
@@ -46,7 +34,7 @@ export function hotOptions() {
 
 class HotCharts {
 /**
-* Create a hotchart.
+* Create a HotCharts.
 * @param {string} hotRoot - a reference to the element by its id.
 * @param {string} charts - one or more chart object.
 */

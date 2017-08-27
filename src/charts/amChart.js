@@ -13,7 +13,7 @@ import { hotOptions } from '.././hotCharts';
 */
 class AmChartExtends {
 /**
-* Create a amChartExtends.
+* Create a AmChartExtends.
 * @param {string} amRoot - a reference to the element by its id.
 */
   constructor(amRoot) {
@@ -21,7 +21,7 @@ class AmChartExtends {
     this.name = 'amcharts';
   }
 
- /**
+/**
 *
 * amChart options object.
 *
