@@ -29,7 +29,7 @@ buttons.addEventListener('click', (event) => {
 });
 
 hotCharts.hot.addHook('beforeChange', (changes) => {
-  const [row, column, previousValue, currentValue] = changes[0];
+  const [, column, , currentValue] = changes[0];
 
   hotCharts.charts.forEach((chart) => {
     chart.observeChange(column, currentValue);
