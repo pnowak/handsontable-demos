@@ -30,11 +30,9 @@ class HighCharts {
       title: {
         text: 'HighChart & Handsontable',
       },
-
       xAxis: {
         categories: hotOptions().colHeaders,
       },
-
       series: [{
         type: 'column',
         colorByPoint: true,
@@ -45,14 +43,14 @@ class HighCharts {
 
 /**
 *
-* Listener for changes from Handsontable and updates it in the chart.
+* Watches changes from Handsontable and updates it in the chart.
 *
-* @param {Number} col column index.
+* @param {Number} column column index.
 * @param {Number} value column value.
 *
 */
-  valueChanged(col, value) {
-    this.highcharts.series[0].data[col].update(value);
+  observeChange(column, value) {
+    this.highcharts.series[0].data[column].update(value);
   }
 }
 

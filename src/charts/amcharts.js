@@ -101,14 +101,14 @@ class AmChart {
 
 /**
 *
-* Listener for changes from Handsontable and updates it in the chart.
+* Watches changes from Handsontable and updates it in the chart.
 *
-* @param {Number} col column index.
+* @param {Number} column column index.
 * @param {Number} value column value.
 *
 */
-  valueChanged(col, value) {
-    this.amcharts.dataProvider[col].value = value;
+  observeChange(column, value) {
+    this.amcharts.dataProvider[column].value = value;
 
     this.amcharts.validateNow(true);
   }

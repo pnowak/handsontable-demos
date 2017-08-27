@@ -32,6 +32,6 @@ hotChart.hot.addHook('beforeChange', (changes) => {
   const [row, column, previousValue, currentValue] = changes[0];
 
   hotChart.charts.forEach((chart) => {
-    chart.valueChanged(column, currentValue);
+    chart.observeChange(column, currentValue);
   });
 });
