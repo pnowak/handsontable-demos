@@ -63,7 +63,7 @@
     "lint": "eslint **/*.js",
     "build": "webpack",
     "watch": "webpack --watch",
-    "doc": "./node_modules/.bin/jsdoc src -r"
+    "doc": "./node_modules/.bin/jsdoc src -r -d ./docs/"
   },
   "jest": {
     "roots": [
