@@ -1,3 +1,4 @@
+import Handsontable from 'handsontable';
 import HotCharts from './hotCharts';
 import HighChartsWrapper from './charts/highChartsWrapper';
 import AmChartsWrapper from './charts/amChartsWrapper';
@@ -11,18 +12,15 @@ const buttons = document.getElementById('buttons');
 buttons.addEventListener('click', (event) => {
   if (event.target.nodeName.toLowerCase() === 'button') {
     hotCharts.charts.forEach((chart) => {
-      const value = event.target.value;
-      const name = chart.name;
-
-      if (value === name) {
-        const container = document.getElementById(value);
+      if (event.target.value === chart.name) {
+        const container = document.getElementById(chart.name);
         const desc = container.querySelectorAll('desc')[0].textContent;
         const versionDOMElement = document.getElementById('version');
 
-        container.classList.remove('disappear');
+        Handsontable.dom.removeClass(container, 'disappear');
         versionDOMElement.textContent = desc;
       } else {
-        document.getElementById(name).classList.add('disappear');
+        Handsontable.dom.addClass(document.getElementById(chart.name), 'disappear');
       }
     });
   }
