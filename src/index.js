@@ -1,10 +1,10 @@
 import HotCharts from './hotCharts';
-import HighChartExtends from './charts/highChart';
-import AmChartExtends from './charts/amChart';
+import HighChartsWrapper from './charts/highChartsWrapper';
+import AmChartsWrapper from './charts/amChartsWrapper';
 
-const highChart = new HighChartExtends('highcharts');
-const amChart = new AmChartExtends('amcharts');
-const hotCharts = new HotCharts('root', highChart, amChart);
+const highChartsWrapper = new HighChartsWrapper('highCharts');
+const amChartsWrapper = new AmChartsWrapper('amCharts');
+const hotCharts = new HotCharts('root', highChartsWrapper, amChartsWrapper);
 
 const buttons = document.getElementById('buttons');
 
@@ -32,6 +32,6 @@ hotCharts.hot.addHook('beforeChange', (changes) => {
   const [, column, , currentValue] = changes[0];
 
   hotCharts.charts.forEach((chart) => {
-    chart.observeChange(column, currentValue);
+    chart.updateChartData(column, currentValue);
   });
 });

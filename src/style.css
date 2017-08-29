@@ -32,7 +32,7 @@ button:focus {
   padding: 10px 15px;
 }
 
-#amcharts {
+#amCharts {
   width: 100%;
   height: 400px;
   background-color: #ffffff;
@@ -40,5 +40,4 @@ button:focus {
 
 .disappear {
   display: none;
-  visibility: hidden;
 }

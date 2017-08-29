@@ -9,16 +9,16 @@ import { hotOptions } from '.././hotCharts';
 *
 * Create amChart instance linked with data from Handsontable.
 *
-* @class AmChartExtends.
+* @class AmChartsWrapper.
 */
-class AmChartExtends {
+class AmChartsWrapper {
 /**
-* Create a AmChartExtends.
-* @param {string} amRoot - a reference to the element by its id.
+* Create a AmChartsWrapper.
+* @param {string} amChartsRootId - a reference to the element by its id.
 */
-  constructor(amRoot) {
-    this.amChart = window.AmCharts.makeChart(amRoot, this.constructor.amOptions());
-    this.name = 'amcharts';
+  constructor(amChartsRootId) {
+    this.amChart = window.AmCharts.makeChart(amChartsRootId, this.constructor.amOptions());
+    this.name = 'amCharts';
   }
 
 /**
@@ -31,7 +31,7 @@ class AmChartExtends {
     return {
       type: 'serial',
       theme: 'light',
-      dataProvider: AmChartExtends.zipHeadersWithValues(
+      dataProvider: AmChartsWrapper.zipHeadersWithValues(
         hotOptions().colHeaders, hotOptions().data[0]),
       valueAxes: [{
         gridColor: '#FFFFFF',
@@ -77,8 +77,8 @@ class AmChartExtends {
 *  "value": 144
 * }
 *
-* @param {String} columnHeaders column header from Handsontable object settings.
-* @param {Number} columnValues column value from Handsontable object settings.
+* @param {String} columnHeaders column headers from Handsontable object settings.
+* @param {Number} columnValues column values from Handsontable object settings.
 * @returns {Array} a merged key-value pair in array.
 */
   static zipHeadersWithValues(columnHeaders, columnValues) {
@@ -100,11 +100,11 @@ class AmChartExtends {
 * @param {Number} value column value.
 *
 */
-  observeChange(column, value) {
+  updateChartData(column, value) {
     this.amChart.dataProvider[column].value = value;
 
     this.amChart.validateNow(true);
   }
 }
 
-export default AmChartExtends;
+export default AmChartsWrapper;

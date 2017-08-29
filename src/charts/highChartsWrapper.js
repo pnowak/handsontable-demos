@@ -6,17 +6,17 @@ import { hotOptions } from '../hotCharts';
 *
 * Create Highcharts instance linked with data from Handsontable.
 *
-* @class HighChartExtends.
+* @class HighChartsWrapper.
 */
-class HighChartExtends {
+class HighChartsWrapper {
 /**
-* Create a HighChartExtends.
-* @param {string} highRoot - a reference to the element by its id.
+* Create a HighChartsWrapper.
+* @param {string} highChartsRootId - a reference to the element by its id.
 */
-  constructor(highRoot) {
-    this.highChart = new Highcharts.Chart(document.getElementById(highRoot),
+  constructor(highChartsRootId) {
+    this.highChart = new Highcharts.Chart(document.getElementById(highChartsRootId),
     this.constructor.highOptions());
-    this.name = 'highcharts';
+    this.name = 'highCharts';
   }
 
 /**
@@ -49,9 +49,9 @@ class HighChartExtends {
 * @param {Number} value column value.
 *
 */
-  observeChange(column, value) {
+  updateChartData(column, value) {
     this.highChart.series[0].data[column].update(value);
   }
 }
 
-export default HighChartExtends;
+export default HighChartsWrapper;
