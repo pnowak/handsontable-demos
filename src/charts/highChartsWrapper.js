@@ -15,7 +15,7 @@ class HighChartsWrapper {
 */
   constructor(highChartsRootId) {
     this.highChart = new Highcharts.Chart(document.getElementById(highChartsRootId),
-    this.constructor.highOptions());
+    HighChartsWrapper.highOptions());
     this.name = 'highCharts';
   }
 

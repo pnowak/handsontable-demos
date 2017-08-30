@@ -17,7 +17,7 @@ class AmChartsWrapper {
 * @param {string} amChartsRootId - a reference to the element by its id.
 */
   constructor(amChartsRootId) {
-    this.amChart = window.AmCharts.makeChart(amChartsRootId, this.constructor.amOptions());
+    this.amChart = window.AmCharts.makeChart(amChartsRootId, AmChartsWrapper.amOptions());
     this.name = 'amCharts';
   }
 
