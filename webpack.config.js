@@ -1,4 +1,5 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 module.exports = [
   {
@@ -31,6 +32,11 @@ module.exports = [
         to: `${__dirname}/dist/index.html`,
       }]),
     ],
+    resolve: {
+      alias: {
+        amcharts: path.resolve('../../amCharts.js'),
+      },
+    },
     stats: {
       colors: true,
     },
