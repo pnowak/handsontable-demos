@@ -36,7 +36,7 @@ class HotCharts {
 /**
 * Create a HotCharts.
 * @param {string} hotRoot - a reference to the element by its id.
-* @param {object} charts - one or more chart object.
+* @param {...object} charts - one or more chart object.
 */
   constructor(hotRoot, ...charts) {
     this.hot = new Handsontable(document.getElementById(hotRoot), hotOptions());
