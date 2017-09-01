@@ -27,9 +27,11 @@ buttons.addEventListener('click', (event) => {
 });
 
 hotCharts.hot.addHook('beforeChange', (changes) => {
-  const [, column, , currentValue] = changes[0];
+  changes.forEach((item) => {
+    hotCharts.charts.forEach((chart) => {
+      const [, column, , currentValue] = item;
 
-  hotCharts.charts.forEach((chart) => {
-    chart.updateChartData(column, currentValue);
+      chart.updateChartData(column, currentValue);
+    });
   });
 });
