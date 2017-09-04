@@ -1,5 +1,4 @@
-import '../amCharts';
-import { hotOptions } from '.././hotCharts';
+import './amCharts';
 
 /**
 * A amChart data visualisation.
@@ -12,9 +11,10 @@ class AmChartsWrapper {
 /**
 * Create a AmChartsWrapper.
 * @param {string} amChartsRootId - a reference to the element by its id.
+* @param {object} hotInstance - a reference to the Handsontable instance.
 */
-  constructor(amChartsRootId) {
-    this.amChart = window.AmCharts.makeChart(amChartsRootId, AmChartsWrapper.amOptions());
+  constructor(amChartsRootId, hotInstance) {
+    this.amChart = AmCharts.makeChart(amChartsRootId, AmChartsWrapper.amOptions(hotInstance));
     this.name = 'amCharts';
   }
 
@@ -24,12 +24,12 @@ class AmChartsWrapper {
 *
 * @returns {Object} amChart object configs.
 */
-  static amOptions() {
+  static amOptions(hotInstance) {
     return {
       type: 'serial',
       theme: 'light',
       dataProvider: AmChartsWrapper.zipHeadersWithValues(
-        hotOptions().colHeaders, hotOptions().data[0]),
+        hotInstance.getSettings().colHeaders, hotInstance.getSettings().data[0]),
       valueAxes: [{
         gridColor: '#FFFFFF',
         gridAlpha: 0.2,

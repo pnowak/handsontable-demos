@@ -1,5 +1,4 @@
 import Highcharts from 'highcharts';
-import { hotOptions } from '../hotCharts';
 
 /**
 * A Highcharts data visualisation.
@@ -12,10 +11,11 @@ class HighChartsWrapper {
 /**
 * Create a HighChartsWrapper.
 * @param {string} highChartsRootId - a reference to the element by its id.
+* @param {object} hotInstance - a reference to the Handsontable instance.
 */
-  constructor(highChartsRootId) {
+  constructor(highChartsRootId, hotInstance) {
     this.highChart = new Highcharts.Chart(document.getElementById(highChartsRootId),
-    HighChartsWrapper.highOptions());
+    HighChartsWrapper.highOptions(hotInstance));
     this.name = 'highCharts';
   }
 
@@ -25,18 +25,18 @@ class HighChartsWrapper {
 *
 * @returns {Object} HighCharts object configs.
 */
-  static highOptions() {
+  static highOptions(hotInstance) {
     return {
       title: {
         text: 'HighChart & Handsontable',
       },
       xAxis: {
-        categories: hotOptions().colHeaders,
+        categories: hotInstance.getSettings().colHeaders,
       },
       series: [{
         type: 'column',
         colorByPoint: true,
-        data: hotOptions().data[0],
+        data: hotInstance.getSettings().data[0],
       }],
     };
   }
