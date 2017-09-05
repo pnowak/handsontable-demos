@@ -3,6 +3,7 @@ import HighChartsWrapper from './charts/highChartsWrapper';
 import AmChartsWrapper from './charts/amChartsWrapper';
 
 const buttons = document.getElementById('buttons');
+const chartsWrapper = [];
 
 const hot = new Handsontable(document.getElementById('root'), {
   data: [
@@ -13,17 +14,15 @@ const hot = new Handsontable(document.getElementById('root'), {
   type: 'numeric',
   allowInvalid: false,
   afterInit: function afterInit() {
-    this.charts = [];
-
-    this.charts.push(new HighChartsWrapper('highcharts', this));
-    this.charts.push(new AmChartsWrapper('amCharts', this));
+    chartsWrapper.push(new HighChartsWrapper('highcharts', this));
+    chartsWrapper.push(new AmChartsWrapper('amCharts', this));
   },
 });
 
-hot.addHook('beforeChange', function beforeChange(changes) {
-  changes.forEach((item) => {
-    this.charts.forEach((chart) => {
-      const [, column, , currentValue] = item;
+hot.addHook('beforeChange', (changes) => {
+  changes.forEach((change) => {
+    chartsWrapper.forEach((chart) => {
+      const [, column, , currentValue] = change;
 
       chart.updateChartData(column, currentValue);
     });

@@ -14,7 +14,7 @@ class AmChartsWrapper {
 * @param {object} hotInstance - a reference to the Handsontable instance.
 */
   constructor(amChartsRootId, hotInstance) {
-    this.amCharts = AmCharts.makeChart(amChartsRootId, AmChartsWrapper.amOptions(hotInstance));
+    this.amCharts = AmCharts.makeChart(amChartsRootId, AmChartsWrapper.getChartOptions(hotInstance));
     this.name = 'amCharts';
   }
 
@@ -24,12 +24,12 @@ class AmChartsWrapper {
 *
 * @returns {Object} amChart object configs.
 */
-  static amOptions(hotInstance) {
+  static getChartOptions(hotInstance) {
     return {
       type: 'serial',
       theme: 'light',
       dataProvider: AmChartsWrapper.zipHeadersWithValues(
-        hotInstance.getSettings().colHeaders, hotInstance.getSettings().data[0]),
+        hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0)),
       valueAxes: [{
         gridColor: '#FFFFFF',
         gridAlpha: 0.2,

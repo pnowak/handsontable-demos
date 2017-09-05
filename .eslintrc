@@ -15,5 +15,8 @@
   "extends": [
     "airbnb",
     "plugin:jasmine/recommended"
-  ]
+  ],
+  "globals": {
+    "AmCharts": true,
+  }
 }

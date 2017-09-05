@@ -15,7 +15,7 @@ class HighChartsWrapper {
 */
   constructor(highChartsRootId, hotInstance) {
     this.highcharts = new Highcharts.Chart(document.getElementById(highChartsRootId),
-    HighChartsWrapper.highOptions(hotInstance));
+    HighChartsWrapper.getChartOptions(hotInstance));
     this.name = 'highcharts';
   }
 
@@ -25,7 +25,7 @@ class HighChartsWrapper {
 *
 * @returns {Object} HighCharts object configs.
 */
-  static highOptions(hotInstance) {
+  static getChartOptions(hotInstance) {
     return {
       title: {
         text: 'Highcharts & Handsontable',
@@ -36,7 +36,7 @@ class HighChartsWrapper {
       series: [{
         type: 'column',
         colorByPoint: true,
-        data: hotInstance.getSettings().data[0],
+        data: hotInstance.getDataAtRow(0),
       }],
     };
   }
