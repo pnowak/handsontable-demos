@@ -15,7 +15,8 @@ class AmChartsWrapper {
 * @param {object} hotInstance - a reference to the Handsontable instance.
 */
   constructor(amChartsRootId, hotInstance) {
-    this.amCharts = AmCharts.makeChart(amChartsRootId, AmChartsWrapper.getChartOptions(hotInstance));
+    this.amCharts = AmCharts.makeChart(amChartsRootId,
+    AmChartsWrapper.getChartOptions(hotInstance));
     this.name = 'amCharts';
   }
 
