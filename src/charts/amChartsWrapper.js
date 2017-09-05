@@ -1,4 +1,4 @@
-// TODO #1
+// TODO: #1
 import '../lib/amCharts';
 
 /**
