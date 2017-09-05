@@ -12,6 +12,7 @@ const hot = new Handsontable(document.getElementById('root'), {
   colHeaders: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
   rowHeaders: true,
   type: 'numeric',
+  maxRows: 1,
   allowInvalid: false,
   afterInit: function afterInit() {
     chartsWrapper.push(new HighChartsWrapper('highcharts', this));
