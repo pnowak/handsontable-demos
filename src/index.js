@@ -15,7 +15,7 @@ const hot = new Handsontable(document.getElementById('root'), {
   afterInit: function afterInit() {
     this.charts = [];
 
-    this.charts.push(new HighChartsWrapper('highCharts', this));
+    this.charts.push(new HighChartsWrapper('highcharts', this));
     this.charts.push(new AmChartsWrapper('amCharts', this));
   },
 });

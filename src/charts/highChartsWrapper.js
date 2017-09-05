@@ -14,9 +14,9 @@ class HighChartsWrapper {
 * @param {object} hotInstance - a reference to the Handsontable instance.
 */
   constructor(highChartsRootId, hotInstance) {
-    this.highChart = new Highcharts.Chart(document.getElementById(highChartsRootId),
+    this.highcharts = new Highcharts.Chart(document.getElementById(highChartsRootId),
     HighChartsWrapper.highOptions(hotInstance));
-    this.name = 'highCharts';
+    this.name = 'highcharts';
   }
 
 /**
@@ -28,7 +28,7 @@ class HighChartsWrapper {
   static highOptions(hotInstance) {
     return {
       title: {
-        text: 'HighChart & Handsontable',
+        text: 'Highcharts & Handsontable',
       },
       xAxis: {
         categories: hotInstance.getSettings().colHeaders,
@@ -50,7 +50,7 @@ class HighChartsWrapper {
 *
 */
   updateChartData(column, value) {
-    this.highChart.series[0].data[column].update(value);
+    this.highcharts.series[0].data[column].update(value);
   }
 }
 
