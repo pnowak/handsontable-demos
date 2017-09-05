@@ -33,6 +33,7 @@ module.exports = [
         to: `${__dirname}/dist/index.html`,
       }]),
     ],
+    // TODO #1
     resolve: {
       alias: {
         amcharts: path.resolve('../../amCharts.js'),

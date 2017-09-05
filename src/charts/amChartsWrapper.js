@@ -1,4 +1,5 @@
-import './amCharts';
+// TODO #1
+import '../lib/amCharts';
 
 /**
 * A amChart data visualisation.
