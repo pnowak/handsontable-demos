@@ -1,5 +1,4 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path');
 
 module.exports = [
   {
@@ -7,6 +6,7 @@ module.exports = [
     entry: [
       `${__dirname}/src/index.js`,
       `${__dirname}/src/style.css`,
+      `${__dirname}/node_modules/handsontable/dist/handsontable.full.min.css`,
     ],
     output: {
       path: `${__dirname}/dist`,
@@ -33,12 +33,6 @@ module.exports = [
         to: `${__dirname}/dist/index.html`,
       }]),
     ],
-    // TODO: #1
-    resolve: {
-      alias: {
-        amcharts: path.resolve('../../amCharts.js'),
-      },
-    },
     stats: {
       colors: true,
     },

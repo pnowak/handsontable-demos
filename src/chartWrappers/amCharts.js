@@ -1,5 +1,8 @@
 // TODO: #1
-import '../lib/amCharts';
+import 'amcharts3';
+import 'amcharts3/amcharts/serial';
+import 'amcharts3/amcharts/pie';
+import 'amcharts3/amcharts/themes/light';
 
 /**
 * A amChart data visualisation.
@@ -15,9 +18,9 @@ class AmChartsWrapper {
 * @param {object} hotInstance - a reference to the Handsontable instance.
 */
   constructor(amChartsRootId, hotInstance) {
+    this.name = 'amCharts';
     this.amCharts = AmCharts.makeChart(amChartsRootId,
     AmChartsWrapper.getChartOptions(hotInstance));
-    this.name = 'amCharts';
   }
 
 /**

@@ -7,16 +7,16 @@ import Highcharts from 'highcharts';
 *
 * @class HighChartsWrapper.
 */
-class HighChartsWrapper {
+class HighchartsWrapper {
 /**
 * Create a HighChartsWrapper.
 * @param {string} highChartsRootId - a reference to the element by its id.
 * @param {object} hotInstance - a reference to the Handsontable instance.
 */
   constructor(highChartsRootId, hotInstance) {
-    this.highcharts = new Highcharts.Chart(document.getElementById(highChartsRootId),
-    HighChartsWrapper.getChartOptions(hotInstance));
     this.name = 'highcharts';
+    this.highcharts = new Highcharts.Chart(document.getElementById(highChartsRootId),
+    HighchartsWrapper.getChartOptions(hotInstance));
   }
 
 /**
@@ -54,4 +54,4 @@ class HighChartsWrapper {
   }
 }
 
-export default HighChartsWrapper;
+export default HighchartsWrapper;
