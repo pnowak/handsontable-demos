@@ -1,7 +1,4 @@
 node_modules
-bower_components
 dist
 docs
-.DS_Store
-.idea
 *.log

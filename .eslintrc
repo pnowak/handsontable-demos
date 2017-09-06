@@ -16,7 +16,8 @@
     "airbnb",
     "plugin:jasmine/recommended"
   ],
+  // TODO: #1
   "globals": {
-    "AmCharts": true,
+    "AmCharts": true
   }
 }
