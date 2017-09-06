@@ -24,11 +24,7 @@ hot.addHook('beforeChange', (changes) => {
   changes.forEach((change) => {
     chartsWrapper.forEach((chart) => {
       const column = change[1];
-      let currentValue = change[3];
-
-      if (currentValue === '') {
-        currentValue = 0;
-      }
+      const currentValue = change[3] === '' ? 0 : change[3];
 
       chart.updateChartData(column, currentValue);
     });
