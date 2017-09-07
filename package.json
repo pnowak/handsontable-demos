@@ -37,20 +37,15 @@
     "eslint-config-standard": "^6.2.1",
     "eslint-loader": "^1.6.0",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jasmine": "^2.8.3",
-    "eslint-plugin-jest": "^20.0.3",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-promise": "^3.3.0",
-    "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-standard": "^2.0.1",
+    "eslint-plugin-testcafe": "^0.2.1",
     "expose-loader": "^0.7.1",
-    "jasmine": "^2.7.0",
-    "jasmine-terminal-reporter": "^1.0.3",
-    "jest": "^20.0.4",
-    "jest-cli": "^20.0.4",
     "jsdoc": "^3.5.4",
+    "nightwatch": "^0.9.16",
     "regenerator-runtime": "^0.10.5",
     "style-loader": "^0.13.2",
+    "testcafe": "^0.17.2",
     "webpack": "^2.2.0"
   },
   "dependencies": {
@@ -59,22 +54,10 @@
     "highcharts": "^5.0.12"
   },
   "scripts": {
-    "test": "jest",
-    "lint": "eslint **/*.js",
+    "test": "testcafe chrome tests/test.js",
+    "lint": "eslint src tests",
     "build": "webpack",
     "watch": "webpack --watch",
     "doc": "./node_modules/.bin/jsdoc src -r -d ./docs/"
-  },
-  "jest": {
-    "roots": [
-      "./test"
-    ],
-    "testRegex": "(/test/.*\\.spec.js)$",
-    "testPathIgnorePatterns": [
-      "<rootDir>/node_modules/"
-    ],
-    "transform": {
-      "^.+\\.js?$": "babel-jest"
-    }
   }
 }

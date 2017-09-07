@@ -1,20 +1,19 @@
 {
   "parser": "babel-eslint",
   "plugins": [
-    "import",
-    "jasmine",
-    "jest"
+    "import"
   ],
   "env": {
     "browser": true,
     "es6": true,
-    "node": true,
-    "jasmine": true,
-    "jest/globals": true
+    "node": true
   },
   "extends": [
     "airbnb",
-    "plugin:jasmine/recommended"
+    "plugin:testcafe/recommended"
+  ],
+  "plugins": [
+    "testcafe"
   ],
   // TODO: #1
   "globals": {
