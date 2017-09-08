@@ -2,10 +2,5 @@
   "presets": [
     "env"
   ],
-  "plugins": ["transform-object-rest-spread", "syntax-dynamic-import"],
-  "env": {
-    "test": {
-      "plugins": ["dynamic-import-node"]
-    }
-  }
+  "plugins": ["transform-object-rest-spread"]
 }
