@@ -5,7 +5,7 @@ import Highcharts from 'highcharts';
 *
 * Create Highcharts instance linked with data from Handsontable.
 *
-* @class HighChartsWrapper.
+* @class HighchartsWrapper.
 */
 class HighchartsWrapper {
 /**
@@ -15,7 +15,7 @@ class HighchartsWrapper {
 */
   constructor(highChartsRootId, hotInstance) {
     this.name = 'highcharts';
-    this.highcharts = new Highcharts.Chart(document.getElementById(highChartsRootId),
+    this.chart = new Highcharts.Chart(document.getElementById(highChartsRootId),
     HighchartsWrapper.getChartOptions(hotInstance));
   }
 
@@ -50,7 +50,7 @@ class HighchartsWrapper {
 *
 */
   updateChartData(column, value) {
-    this.highcharts.series[0].data[column].update(value);
+    this.chart.series[0].data[column].update(value);
   }
 }
 

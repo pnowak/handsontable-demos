@@ -19,7 +19,7 @@ class AmChartsWrapper {
 */
   constructor(amChartsRootId, hotInstance) {
     this.name = 'amCharts';
-    this.amCharts = AmCharts.makeChart(amChartsRootId,
+    this.chart = AmCharts.makeChart(amChartsRootId,
     AmChartsWrapper.getChartOptions(hotInstance));
   }
 
@@ -103,9 +103,9 @@ class AmChartsWrapper {
 *
 */
   updateChartData(column, value) {
-    this.amCharts.dataProvider[column].value = value;
+    this.chart.dataProvider[column].value = value;
 
-    this.amCharts.validateNow(true);
+    this.chart.validateNow(true);
   }
 }
 
