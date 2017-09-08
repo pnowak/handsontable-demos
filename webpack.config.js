@@ -2,7 +2,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = [
   {
-    devtool: 'eval',
     entry: [
       `${__dirname}/src/index.js`,
       `${__dirname}/src/style.css`,

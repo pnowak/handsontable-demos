@@ -51,8 +51,8 @@
   "scripts": {
     "test": "testcafe chrome tests/test.js",
     "lint": "eslint src tests",
-    "build": "webpack",
-    "watch": "webpack --watch",
+    "build": "webpack --devtool source-map",
+    "watch": "webpack --watch --devtool eval",
     "doc": "./node_modules/.bin/jsdoc src -r -d ./docs/"
   }
 }
