@@ -1,47 +1,52 @@
 /* eslint-disable no-new */
+/* eslint-disable padded-blocks */
 import Handsontable from 'handsontable';
 import HighchartsWrapper from './chartWrappers/highcharts';
 import AmChartsWrapper from './chartWrappers/amCharts';
 
-function clickButtonsInit() {
-  const buttons = document.getElementById('buttons');
+const chartWrappers = [];
 
-  buttons.addEventListener('click', (event) => {
-    if (event.target.nodeName.toLowerCase() === 'button') {
-      const charts = Array.from(buttons.getElementsByTagName('button'));
+function initButtonsListener() {
+  const buttonsWrapper = document.getElementById('buttons');
 
-      charts.forEach((chart) => {
-        const isTarget = event.target.value === chart.value;
+  buttonsWrapper.addEventListener('click', (event) => {
+    const isButton = event.target.nodeName.toLowerCase() === 'button';
 
-        if (isTarget) {
-          const chartContainer = document.getElementById(chart.value);
+    if (isButton) {
+      const buttonsArray = Array.from(buttonsWrapper.getElementsByTagName('button'));
+
+      buttonsArray.forEach((chartWrapper) => {
+        const chartWrapperIsTarget = event.target.value === chartWrapper.value;
+
+        if (chartWrapperIsTarget) {
+          const chartContainer = document.getElementById(chartWrapper.value);
           const chartVersionDesc = chartContainer.querySelectorAll('desc')[0].textContent;
           const chartVersionDOMElement = document.getElementById('version');
 
-          Handsontable.dom.removeClass(chartContainer, 'disappear');
           chartVersionDOMElement.textContent = chartVersionDesc;
+
+          Handsontable.dom.removeClass(chartContainer, 'disappear');
+
         } else {
-          Handsontable.dom.addClass(document.getElementById(chart.value), 'disappear');
+          Handsontable.dom.addClass(document.getElementById(chartWrapper.value), 'disappear');
         }
       });
     }
   });
 }
 
-const chartsWrapper = [];
-
 function onAfterInit() {
-  chartsWrapper.push(new HighchartsWrapper('highcharts', this));
-  chartsWrapper.push(new AmChartsWrapper('amCharts', this));
+  chartWrappers.push(new HighchartsWrapper('highcharts', this));
+  chartWrappers.push(new AmChartsWrapper('amCharts', this));
 }
 
 function onBeforeChange(changes) {
   changes.forEach((change) => {
-    chartsWrapper.forEach((chart) => {
+    chartWrappers.forEach((chartWrapper) => {
       const column = change[1];
       const currentValue = change[3] === '' ? 0 : change[3];
 
-      chart.updateChartData(column, currentValue);
+      chartWrapper.updateChartData(column, currentValue);
     });
   });
 }
@@ -59,4 +64,4 @@ new Handsontable(document.getElementById('root'), {
   beforeChange: onBeforeChange,
 });
 
-clickButtonsInit();
+initButtonsListener();
