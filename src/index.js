@@ -3,6 +3,7 @@
 import Handsontable from 'handsontable';
 import HighchartsWrapper from './chartWrappers/highcharts';
 import AmChartsWrapper from './chartWrappers/amCharts';
+import ChartJsWrapper from './chartWrappers/Chart';
 
 const chartWrappers = [];
 
@@ -11,17 +12,17 @@ function initButtonsListener() {
 
   buttonsWrapper.addEventListener('click', (event) => {
     const isButton = event.target.nodeName.toLowerCase() === 'button';
+    const buttonsArray = Array.from(buttonsWrapper.getElementsByTagName('button'));
 
     if (isButton) {
-      const buttonsArray = Array.from(buttonsWrapper.getElementsByTagName('button'));
-
       buttonsArray.forEach((chartWrapper) => {
         const chartWrapperIsTarget = event.target.value === chartWrapper.value;
 
         if (chartWrapperIsTarget) {
           const chartContainer = document.getElementById(chartWrapper.value);
-          const chartVersionDesc = chartContainer.querySelectorAll('desc')[0].textContent;
           const chartVersionDOMElement = document.getElementById('version');
+          const chartVersionDesc = chartContainer.querySelectorAll('desc')[0] ?
+          chartContainer.querySelectorAll('desc')[0].textContent : '';
 
           chartVersionDOMElement.textContent = chartVersionDesc;
 
@@ -38,6 +39,7 @@ function initButtonsListener() {
 function onAfterInit() {
   chartWrappers.push(new HighchartsWrapper('highcharts', this));
   chartWrappers.push(new AmChartsWrapper('amCharts', this));
+  chartWrappers.push(new ChartJsWrapper('Chart', this));
 }
 
 function onBeforeChange(changes) {

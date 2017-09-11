@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "amcharts3": "github:amcharts/amcharts3",
+    "chart.js": "^2.7.0",
     "handsontable": "^0.33.0",
     "highcharts": "^5.0.12"
   },
