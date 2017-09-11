@@ -1,8 +1,8 @@
 {
   "name": "handontable-demos",
   "version": "0.1.0",
-  "description": "A Handsontable integrations",
-  "author": "pnowak",
+  "description": "Integration samples of Handsontable and charting libraries",
+  "author": "Handsoncode",
   "license": "MIT",
   "keywords": [
     "handsontable",
