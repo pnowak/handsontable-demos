@@ -65,9 +65,10 @@ hot.addHook('beforeChange', (changes) => {
 ```
 
 ## Examples
+- [handsontable-demos implementation](https://codepen.io/handsoncode/pen/PKgpaJ?editors=1010)
 - [Simple handsontable-demos implementation with Highcharts](https://codepen.io/handsoncode/pen/prBejL?editors=1010)
 - [Simple handsontable-demos implementation with AmCharts](https://codepen.io/handsoncode/pen/yorXbb?editors=1010)
-- [handsontable-demos implementation](https://codepen.io/handsoncode/pen/PKgpaJ?editors=1010)
+- [Simple handsontable-demos implementation with Chart.js](https://codepen.io/handsoncode/pen/dVbGKw)
 
 
 
