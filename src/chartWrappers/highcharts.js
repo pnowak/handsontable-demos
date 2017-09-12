@@ -27,6 +27,10 @@ class HighchartsWrapper {
 */
   static getChartOptions(hotInstance) {
     return {
+      chart: {
+        type: 'column',
+        width: 650,
+      },
       title: {
         text: 'Highcharts & Handsontable',
       },
@@ -34,7 +38,6 @@ class HighchartsWrapper {
         categories: hotInstance.getSettings().colHeaders,
       },
       series: [{
-        type: 'column',
         colorByPoint: true,
         data: hotInstance.getDataAtRow(0),
       }],
