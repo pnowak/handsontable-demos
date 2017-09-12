@@ -16,5 +16,8 @@
   // TODO: #1
   "globals": {
     "AmCharts": true
+  },
+  "rules": {
+    "padded-blocks": 0
   }
 }
