@@ -1,14 +1,18 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const extractSass = new ExtractTextPlugin({
+  filename: '[name].[contenthash].css',
+  disable: process.env.NODE_ENV === 'development',
+});
 module.exports = [
   {
     entry: [
-      `${__dirname}/src/index.js`,
-      `${__dirname}/src/style.css`,
+      `${__dirname}/public/index.js`,
+      `${__dirname}/public/main.sass`,
       `${__dirname}/node_modules/handsontable/dist/handsontable.full.min.css`,
     ],
     output: {
-      path: `${__dirname}/dist`,
+      path: `${__dirname}/public/dist`,
       filename: 'bundle.js',
     },
     module: {
@@ -21,16 +25,24 @@ module.exports = [
           },
         },
         {
+          test: /\.sass$/,
+          use: extractSass.extract({
+            use: [{
+              loader: 'css-loader',
+            }, {
+              loader: 'sass-loader',
+            }],
+            fallback: 'style-loader',
+          }),
+        },
+        {
           test: /\.css$/,
           loader: 'style-loader!css-loader',
         },
       ],
     },
     plugins: [
-      new CopyWebpackPlugin([{
-        from: `${__dirname}/src/index.html`,
-        to: `${__dirname}/dist/index.html`,
-      }]),
+      new ExtractTextPlugin('styles.css'),
     ],
     stats: {
       colors: true,
