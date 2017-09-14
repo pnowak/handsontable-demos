@@ -1,20 +1,20 @@
 import Handsontable from 'handsontable';
 import HighchartsWrapper from './chartWrappers/highcharts';
 import AmChartsWrapper from './chartWrappers/amCharts';
-import ChartJsWrapper from './chartWrappers/Chart';
+import ChartJsWrapper from './chartWrappers/chartJs';
 
 const chartWrappers = [];
 
 const mapChartsToWrapper = {
   HighCharts: HighchartsWrapper,
   amCharts: AmChartsWrapper,
-  ChartJs: ChartJsWrapper,
+  'Chart.js': ChartJsWrapper,
 };
 
 const mapChartNameToPackage = {
   HighCharts: 'highcharts',
   amCharts: 'amcharts3',
-  ChartJs: 'chart.js',
+  'Chart.js': 'chart.js',
 };
 
 function chartVersionFromPkg(chart, name) {

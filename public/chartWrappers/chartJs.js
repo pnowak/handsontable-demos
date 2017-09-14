@@ -13,9 +13,9 @@ class ChartJsWrapper {
 * @param {string} chartRootId - element id.
 * @param {object} hotInstance - a reference to the Handsontable instance.
 */
-  constructor(chartRootId, hotInstance) {
+  constructor(chartJsRootId, hotInstance) {
     this.name = 'ChartJs';
-    this.chart = new Chart(document.getElementById(chartRootId),
+    this.chart = new Chart(document.getElementById(chartJsRootId),
     ChartJsWrapper.getChartOptions(hotInstance));
   }
 
@@ -69,14 +69,24 @@ class ChartJsWrapper {
         },
         title: {
           display: true,
-          fontSize: 24,
+          fontSize: 32,
           fontStyle: 'normal',
           text: 'Chart.js & Handsontable',
+        },
+        tooltips: {
+          titleFontSize: 24,
+          bodyFontSize: 21,
         },
         scales: {
           yAxes: [{
             ticks: {
               beginAtZero: true,
+              fontSize: 24,
+            },
+          }],
+          xAxes: [{
+            ticks: {
+              fontSize: 24,
             },
           }],
         },
