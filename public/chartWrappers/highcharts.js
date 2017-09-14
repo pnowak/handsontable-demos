@@ -10,7 +10,7 @@ import Highcharts from 'highcharts';
 class HighchartsWrapper {
 /**
 * Create a HighChartsWrapper.
-* @param {string} highChartsRootId - a reference to the element by its id.
+* @param {string} highChartsRootId - element id.
 * @param {object} hotInstance - a reference to the Handsontable instance.
 */
   constructor(highChartsRootId, hotInstance) {

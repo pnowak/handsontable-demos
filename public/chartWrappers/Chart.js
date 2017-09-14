@@ -10,7 +10,7 @@ import Chart from 'chart.js';
 class ChartJsWrapper {
 /**
 * Create a ChartJsWrapper.
-* @param {string} chartRootId - a reference to the element by its id.
+* @param {string} chartRootId - element id.
 * @param {object} hotInstance - a reference to the Handsontable instance.
 */
   constructor(chartRootId, hotInstance) {
@@ -69,7 +69,7 @@ class ChartJsWrapper {
         },
         title: {
           display: true,
-          fontSize: 18,
+          fontSize: 24,
           fontStyle: 'normal',
           text: 'Chart.js & Handsontable',
         },

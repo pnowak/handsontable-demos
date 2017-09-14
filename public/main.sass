@@ -1,0 +1,39 @@
+@import 'variables'
+
+body 
+  font-size: 1.125em
+
+ul#tabs 
+  width: $containerWidth
+  list-style: $dont
+  border-bottom: 1px solid $primary-color
+
+  li 
+    display: inline-block
+    padding: 10px
+
+    a 
+      color: $black
+      text-decoration: $dont
+
+  .selected 
+    border-bottom: 1px solid $white
+    border-top: 2px solid $black
+    border-right: 1px solid $primary-color
+    border-left: 1px solid $primary-color
+    margin-bottom: -1px;
+
+#root
+  padding-bottom: $quarter
+
+#chart 
+  width: $containerWidth !important
+  height: 420px !important
+
+#version 
+  font-size: 1em
+  padding-bottom: 10px
+
+
+#code 
+  padding-top: $quarter

@@ -14,7 +14,7 @@ import 'amcharts3/amcharts/themes/light';
 class AmChartsWrapper {
 /**
 * Create a AmChartsWrapper.
-* @param {string} amChartsRootId - a reference to the element by its id.
+* @param {string} amChartsRootId - element id.
 * @param {object} hotInstance - a reference to the Handsontable instance.
 */
   constructor(amChartsRootId, hotInstance) {
