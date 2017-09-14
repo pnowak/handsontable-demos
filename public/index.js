@@ -26,11 +26,11 @@ function chartVersionFromPkg(chart, name) {
 }
 
 function onAfterInit() {
-  const isLink = document.getElementsByTagName('li');
-  const allLinks = Array.from(isLink);
+  const isListItem = document.getElementsByTagName('li');
+  const allListItems = Array.from(isListItem);
   const chartVersionDOMElement = document.getElementById('version');
 
-  allLinks.forEach((li) => {
+  allListItems.forEach((li) => {
     if (Handsontable.dom.hasClass(li, 'selected')) {
       const chartName = li.children[0].textContent;
       const ActiveChart = mapChartsToWrapper[chartName];
