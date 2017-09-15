@@ -1,0 +1,11 @@
+{
+    "globals": {
+        "title": "Highcharts",
+        "description": "",
+        "github url": "https://github.com/highcharts/highcharts",
+        "website url": "https://www.highcharts.com/",
+        "document url": "http://api.highcharts.com/highcharts",
+        "author": "Highsoft",
+        "license": ""
+    }
+}
