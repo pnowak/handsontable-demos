@@ -6,22 +6,22 @@ body
 ul#tabs 
   width: $containerWidth
   list-style: $dont
-  border-bottom: 1px solid $primary-color
+  border-bottom: $one solid $primary-color
 
   li 
     display: inline-block
-    padding: 10px
+    padding: $ten
 
     a 
       color: $black
       text-decoration: $dont
 
   .selected 
-    border-bottom: 1px solid $white
+    border-bottom: $one solid $white
     border-top: 2px solid $black
-    border-right: 1px solid $primary-color
-    border-left: 1px solid $primary-color
-    margin-bottom: -1px;
+    border-right: $one solid $primary-color
+    border-left: $one solid $primary-color
+    margin-bottom: -$one;
 
 #root
   padding-bottom: $quarter
@@ -32,9 +32,9 @@ ul#tabs
 
 #version 
   font-size: 1em
-  padding-bottom: 10px
+  padding-bottom: $ten
 
 
 #code 
   width: $containerWidth
-  padding-top: $quarter
+  padding-top: $ten

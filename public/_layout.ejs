@@ -32,21 +32,17 @@
 
     <%- yield %>
 
-    <div id="code">
-      <script type="text/javascript">
-        const editor = CodeMirror(document.getElementById('code'), {
-          indentUnit: 2,
-          lineWrapping: true,
-          tabSize: 2,
-          lineNumbers: true,
-          readOnly: true,
-          mode: 'javascript',
-          theme: 'dracula',
-        });
-
-        editor.getValue();
-      </script>
-    </div>
+    <script type="text/javascript">
+      CodeMirror.fromTextArea(document.getElementById('codeExample'), {
+        indentUnit: 2,
+        lineWrapping: true,
+        tabSize: 2,
+        lineNumbers: true,
+        readOnly: true,
+        mode: 'javascript',
+        theme: 'dracula',
+      });
+    </script>
 
   </section>
 
