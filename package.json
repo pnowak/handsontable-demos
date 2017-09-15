@@ -58,10 +58,10 @@
   },
   "scripts": {
     "start": "npm run build && harp server",
-    "test": "./node_modules/.bin/testcafe chrome tests/test.js",
-    "lint": "./node_modules/.bin/eslint **/*.js",
-    "build": "./node_modules/.bin/webpack --devtool source-map",
-    "watch": "./node_modules/.bin/webpack --watch --devtool eval",
-    "doc": "./node_modules/.bin/jsdoc public -r -d ./docs/"
+    "test": "testcafe chrome tests/test.js",
+    "lint": "eslint **/*.js",
+    "build": "webpack --devtool source-map",
+    "watch": "webpack --watch --devtool eval",
+    "doc": "jsdoc public -r -d ./docs/"
   }
 }
