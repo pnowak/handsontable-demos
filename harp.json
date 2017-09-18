@@ -1,11 +1,8 @@
 {
     "globals": {
-        "title": "Highcharts",
-        "description": "",
-        "github url": "https://github.com/highcharts/highcharts",
-        "website url": "https://www.highcharts.com/",
-        "document url": "http://api.highcharts.com/highcharts",
-        "author": "Highsoft",
-        "license": ""
+        "title": "handsontable-demos",
+        "description": "Integration samples of Handsontable and charting libraries",
+        "github url": "https://github.com/pnowak/handontable-demos.git",
+        "author": "Handsoncode"
     }
 }

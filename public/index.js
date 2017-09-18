@@ -1,7 +1,7 @@
 import Handsontable from 'handsontable';
-import HighchartsWrapper from './chartWrappers/highcharts';
-import AmChartsWrapper from './chartWrappers/amCharts';
-import ChartJsWrapper from './chartWrappers/chartJs';
+import HighchartsWrapper from './integrations/highcharts';
+import AmChartsWrapper from './integrations/amCharts';
+import ChartJsWrapper from './integrations/chartJs';
 
 const chartWrappers = [];
 

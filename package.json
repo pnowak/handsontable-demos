@@ -29,8 +29,6 @@
     "babel-register": "^6.24.1",
     "babel-runtime": "~5.8.20",
     "codemirror": "^5.29.0",
-    "copy-webpack-plugin": "^4.0.1",
-    "css-loader": "^0.28.5",
     "eslint": "^3.8.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-loader": "^1.6.0",
@@ -40,12 +38,8 @@
     "eslint-plugin-standard": "^2.0.1",
     "eslint-plugin-testcafe": "^0.2.1",
     "expose-loader": "^0.7.1",
-    "extract-text-webpack-plugin": "^2.1.2",
     "jsdoc": "^3.5.4",
-    "node-sass": "^4.5.3",
     "regenerator-runtime": "^0.10.5",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.13.2",
     "testcafe": "^0.17.2",
     "webpack": "^2.7.0"
   },
@@ -57,11 +51,11 @@
     "highcharts": "^5.0.12"
   },
   "scripts": {
-    "start": "npm run build && harp server",
+    "start": "harp server",
+    "build": "harp compile  && webpack --devtool source-map",
+    "watch": "webpack --watch --devtool eval",
     "test": "testcafe chrome tests/test.js",
     "lint": "eslint **/*.js",
-    "build": "webpack --devtool source-map",
-    "watch": "webpack --watch --devtool eval",
     "doc": "jsdoc public -r -d ./docs/"
   }
 }
