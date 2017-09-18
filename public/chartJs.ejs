@@ -1,5 +1,10 @@
 <canvas id="chart"></canvas>
 <div id="code">
+  <ul>
+    <li class="right">
+      <a href="" id="jsfiddle">Edit in JSFiddle</a>
+    </li>
+  </ul>
   <textarea id="codeExample" name="">
 class ChartJsWrapper {
   constructor(chartJsRootId, hotInstance) {
@@ -86,14 +91,10 @@ class ChartJsWrapper {
 const chartWrappers = [];
 
 const mapChartsToWrapper = {
-  HighCharts: HighchartsWrapper,
-  amCharts: AmChartsWrapper,
   'Chart.js': ChartJsWrapper,
 };
 
 const mapChartNameToPackage = {
-  HighCharts: 'highcharts',
-  amCharts: 'amcharts3',
   'Chart.js': 'chart.js',
 };
 

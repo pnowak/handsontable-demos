@@ -54,6 +54,42 @@ function onBeforeChange(changes) {
   });
 }
 
+function initJsFiddle() {
+  const jsFiddleLink = document.getElementById('jsfiddle');
+  const textAreaValue = document.getElementById('codeExample').value;
+  const chartDOMElement = document.getElementById('chart');
+  const html = `<div id="root">${chartDOMElement.getContext ? '<canvas id="chart">' : '<div id="chart">'}`;
+  const css = '</style><link rel="stylesheet" type="text/css" href="http://docs.handsontable.com/pro/bower_components/handsontable-pro/dist/handsontable.full.min.css"><script src="http://docs.handsontable.com/pro/bower_components/handsontable-pro/dist/handsontable.full.min.js"></script>';
+  const js = textAreaValue;
+  const resources = [
+    'https://code.highcharts.com/highcharts.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
+    'https://www.amcharts.com/lib/3/amcharts.js',
+    'https://cdn.amcharts.com/lib/3/serial.js',
+    'https://cdn.amcharts.com/lib/3/pie.js',
+    'https://cdn.amcharts.com/lib/3/themes/light.js',
+  ];
+
+  const form = document.createElement('FORM');
+  form.action = 'http://jsfiddle.net/api/post/library/pure/';
+  form.method = 'POST';
+  form.target = '_blank';
+  form.innerHTML = `<input type="text" name="title" value="">
+    <textarea name="resources">${resources.join(', ').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+    <textarea name="html">${html.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+    <textarea name="css">${css.replace(/,/g, '').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>;
+    <textarea name="js">${js.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>`;
+
+  form.style.visibility = 'hidden';
+
+  document.body.appendChild(form);
+
+  jsFiddleLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    form.submit();
+  }, false);
+}
+
 // eslint-disable-next-line no-new
 new Handsontable(document.getElementById('root'), {
   data: [
@@ -70,3 +106,4 @@ new Handsontable(document.getElementById('root'), {
   beforeChange: onBeforeChange,
 });
 
+initJsFiddle();

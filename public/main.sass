@@ -3,18 +3,30 @@
 body 
   font-size: 1.125em
 
-ul#tabs 
-  width: $containerWidth
+a
+  color: #039be5
+  font-size: .8em
+  text-decoration: $dont
+
+ul 
   list-style: $dont
-  border-bottom: $one solid $primary-color
 
   li 
     display: inline-block
+
+.right 
+  text-align: right
+
+ul#tabs 
+  width: $containerWidth
+  border-bottom: $one solid $primary-color
+
+  li
     padding: $ten
 
     a 
       color: $black
-      text-decoration: $dont
+      font-size: 1em
 
   .selected 
     border-bottom: $one solid $white

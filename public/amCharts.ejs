@@ -1,5 +1,10 @@
 <div id="chart"></div>
 <div id="code">
+  <ul>
+    <li class="right">
+      <a href="" id="jsfiddle">Edit in JSFiddle</a>
+    </li>
+  </ul>
   <textarea id="codeExample" name="">
 class AmChartsWrapper {
   constructor(amChartsRootId, hotInstance) {
@@ -67,15 +72,11 @@ class AmChartsWrapper {
 const chartWrappers = [];
 
 const mapChartsToWrapper = {
-  HighCharts: HighchartsWrapper,
   amCharts: AmChartsWrapper,
-  'Chart.js': ChartJsWrapper,
 };
 
 const mapChartNameToPackage = {
-  HighCharts: 'highcharts',
   amCharts: 'amcharts3',
-  'Chart.js': 'chart.js',
 };
 
 function chartVersionFromPkg(chart, name) {
