@@ -71,38 +71,8 @@ class AmChartsWrapper {
 
 const chartWrappers = [];
 
-const mapChartsToWrapper = {
-  amCharts: AmChartsWrapper,
-};
-
-const mapChartNameToPackage = {
-  amCharts: 'amcharts3',
-};
-
-function chartVersionFromPkg(chart, name) {
-  // eslint-disable-line global-require
-  const pkgName = require(`../node_modules/${chart}/package.json`);
-  const version = JSON.stringify(pkgName.version);
-
-  return `${name}: ${version}`;
-}
-
 function onAfterInit() {
-  const isListItem = document.getElementsByTagName('li');
-  const allListItems = Array.from(isListItem);
-  const chartVersionDOMElement = document.getElementById('version');
-
-  allListItems.forEach((li) => {
-    if (Handsontable.dom.hasClass(li, 'selected')) {
-      const chartName = li.children[0].textContent;
-      const ActiveChart = mapChartsToWrapper[chartName];
-      const chartVersion = mapChartNameToPackage[chartName];
-
-      chartVersionDOMElement.textContent = chartVersionFromPkg(chartVersion, chartName);
-
-      chartWrappers.push(new ActiveChart('chart', this));
-    }
-  });
+  chartWrappers.push(new AmChartsWrapper('chart', this));
 }
 
 function onBeforeChange(changes) {
@@ -116,19 +86,21 @@ function onBeforeChange(changes) {
   });
 }
 
-new Handsontable(document.getElementById('root'), {
-  data: [
-    [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
-  ],
-  colHeaders: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  rowHeaders: true,
-  type: 'numeric',
-  width: 650,
-  maxRows: 1,
-  stretchH: 'all',
-  allowInvalid: false,
-  afterInit: onAfterInit,
-  beforeChange: onBeforeChange,
+document.addEventListener("DOMContentLoaded", function() {
+  new Handsontable(document.getElementById('root'), {
+    data: [
+      [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+    ],
+    colHeaders: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    rowHeaders: true,
+    type: 'numeric',
+    width: 650,
+    maxRows: 1,
+    stretchH: 'all',
+    allowInvalid: false,
+    afterInit: onAfterInit,
+    beforeChange: onBeforeChange,
+  });
 });
   </textarea>
 </div>
