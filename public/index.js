@@ -2,6 +2,7 @@ import Handsontable from 'handsontable';
 import HighchartsWrapper from './integrations/highcharts';
 import AmChartsWrapper from './integrations/amCharts';
 import ChartJsWrapper from './integrations/chartJs';
+import FusionChartsWrapper from './integrations/fusionCharts';
 
 const chartWrappers = [];
 
@@ -9,12 +10,14 @@ const mapChartsToWrapper = {
   HighCharts: HighchartsWrapper,
   amCharts: AmChartsWrapper,
   'Chart.js': ChartJsWrapper,
+  FusionCharts: FusionChartsWrapper,
 };
 
 const mapChartNameToPackage = {
   HighCharts: 'highcharts',
   amCharts: 'amcharts3',
   'Chart.js': 'chart.js',
+  FusionCharts: 'fusioncharts',
 };
 
 function chartVersionFromPkg(chart, name) {
@@ -59,7 +62,7 @@ function initJsFiddle() {
   const textAreaValue = document.getElementById('codeExample').value;
   const chartDOMElement = document.getElementById('chart');
   const html = `<div id="root"></div>\n${chartDOMElement.getContext ? '<canvas id="chart" style="width: 650px; height: 420px;"></canvas>' : '<div id="chart" style="width: 650px; height: 420px;"></div>'}`;
-  const css = '</style><link rel="stylesheet" type="text/css" href="http://docs.handsontable.com/pro/bower_components/handsontable-pro/dist/handsontable.full.min.css"><script src="http://docs.handsontable.com/pro/bower_components/handsontable-pro/dist/handsontable.full.min.js"></script><script src="https://code.highcharts.com/highcharts.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script><script src="https://www.amcharts.com/lib/3/amcharts.js"></script><script src="https://cdn.amcharts.com/lib/3/serial.js"></script><script src="https://cdn.amcharts.com/lib/3/pie.js"></script><script src="https://cdn.amcharts.com/lib/3/themes/light.js"></script>';
+  const css = '</style><link rel="stylesheet" type="text/css" href="http://docs.handsontable.com/pro/bower_components/handsontable-pro/dist/handsontable.full.min.css"><script src="http://docs.handsontable.com/pro/bower_components/handsontable-pro/dist/handsontable.full.min.js"></script><script src="https://code.highcharts.com/highcharts.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script><script src="https://www.amcharts.com/lib/3/amcharts.js"></script><script src="https://cdn.amcharts.com/lib/3/serial.js"></script><script src="https://cdn.amcharts.com/lib/3/pie.js"></script><script src="https://cdn.amcharts.com/lib/3/themes/light.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fusioncharts@3.12.1/fusioncharts.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fusioncharts@3.12.1/fusioncharts.charts.js"></script>';
   const js = textAreaValue;
 
   const form = document.createElement('FORM');
