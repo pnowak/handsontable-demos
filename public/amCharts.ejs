@@ -78,8 +78,12 @@ function onAfterInit() {
 function onBeforeChange(changes) {
   changes.forEach((change) => {
     chartWrappers.forEach((chartWrapper) => {
-      const column = change[1];
+      const [row, column] = change;
       const currentValue = change[3] === '' ? 0 : change[3];
+
+      if (change[3] === '') {
+        this.setDataAtCell(row, column, 0, 'onBeforeChange');
+      }
 
       chartWrapper.updateChartData(column, currentValue);
     });
