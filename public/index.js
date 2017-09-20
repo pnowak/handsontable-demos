@@ -13,35 +13,16 @@ const mapChartsToWrapper = {
   FusionCharts: FusionChartsWrapper,
 };
 
-const mapChartNameToPackage = {
-  HighCharts: 'highcharts',
-  amCharts: 'amcharts3',
-  'Chart.js': 'chart.js',
-  FusionCharts: 'fusioncharts',
-};
-
-function chartVersionFromPkg(chart, name) {
-  // eslint-disable-line global-require
-  const pkgName = require(`../node_modules/${chart}/package.json`);
-  const version = JSON.stringify(pkgName.version);
-
-  return `${name}: ${version}`;
-}
-
 function onAfterInit() {
   const isListItem = document.getElementsByTagName('li');
   const allListItems = Array.from(isListItem);
-  const chartVersionDOMElement = document.getElementById('version');
 
   allListItems.forEach((li) => {
     if (Handsontable.dom.hasClass(li, 'selected')) {
       const chartName = li.children[0].textContent;
-      const ActiveChart = mapChartsToWrapper[chartName];
-      const chartVersion = mapChartNameToPackage[chartName];
+      const ActiveChartWrapper = mapChartsToWrapper[chartName];
 
-      chartVersionDOMElement.textContent = chartVersionFromPkg(chartVersion, chartName);
-
-      chartWrappers.push(new ActiveChart('chart', this));
+      chartWrappers.push(new ActiveChartWrapper('chart', this));
     }
   });
 }
