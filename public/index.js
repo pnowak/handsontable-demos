@@ -5,22 +5,22 @@ import ChartJsWrapper from './integrations/chartJs';
 import FusionChartsWrapper from './integrations/fusionCharts';
 
 const chartWrappers = [];
+const selectedClass = 'selected';
+const mapChartsToWrapper = new Map();
 
-const mapChartsToWrapper = {
-  HighCharts: HighchartsWrapper,
-  amCharts: AmChartsWrapper,
-  'Chart.js': ChartJsWrapper,
-  FusionCharts: FusionChartsWrapper,
-};
+mapChartsToWrapper.set('Highcharts', HighchartsWrapper);
+mapChartsToWrapper.set('amCharts', AmChartsWrapper);
+mapChartsToWrapper.set('Chart.js', ChartJsWrapper);
+mapChartsToWrapper.set('FusionCharts', FusionChartsWrapper);
 
 function onAfterInit() {
   const isListItem = document.getElementsByTagName('li');
   const allListItems = Array.from(isListItem);
 
   allListItems.forEach((li) => {
-    if (Handsontable.dom.hasClass(li, 'selected')) {
+    if (Handsontable.dom.hasClass(li, selectedClass)) {
       const chartName = li.children[0].textContent;
-      const ActiveChartWrapper = mapChartsToWrapper[chartName];
+      const ActiveChartWrapper = mapChartsToWrapper.get(chartName);
 
       chartWrappers.push(new ActiveChartWrapper('chart', this));
     }
@@ -50,7 +50,7 @@ function initJsFiddle() {
   const css = '</style><link rel="stylesheet" type="text/css" href="http://docs.handsontable.com/pro/bower_components/handsontable-pro/dist/handsontable.full.min.css"><script src="http://docs.handsontable.com/pro/bower_components/handsontable-pro/dist/handsontable.full.min.js"></script><script src="https://code.highcharts.com/highcharts.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script><script src="https://www.amcharts.com/lib/3/amcharts.js"></script><script src="https://cdn.amcharts.com/lib/3/serial.js"></script><script src="https://cdn.amcharts.com/lib/3/pie.js"></script><script src="https://cdn.amcharts.com/lib/3/themes/light.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fusioncharts@3.12.1/fusioncharts.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fusioncharts@3.12.1/fusioncharts.charts.js"></script>';
   const js = textAreaValue;
 
-  const form = document.createElement('FORM');
+  const form = document.createElement('form');
   form.action = 'http://jsfiddle.net/api/post/library/pure/';
   form.method = 'POST';
   form.target = '_blank';
@@ -66,7 +66,7 @@ function initJsFiddle() {
   jsFiddleLink.addEventListener('click', (event) => {
     event.preventDefault();
     form.submit();
-  }, false);
+  });
 }
 
 // eslint-disable-next-line no-new
