@@ -13,9 +13,13 @@
     "airbnb",
     "plugin:testcafe/recommended"
   ],
-  // TODO: #1
   "globals": {
-    "AmCharts": true
+    "AmCharts": true,
+    "Chart": true,
+    "CodeMirror": true,
+    "FusionCharts": true,
+    "Handsontable": true,
+    "Highcharts": true
   },
   "rules": {
     "padded-blocks": 0

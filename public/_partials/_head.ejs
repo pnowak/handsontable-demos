@@ -1,0 +1,28 @@
+<title><%= title %></title>
+<meta charset="utf-8">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name="description" content="<%= description %>">
+
+<script src="./assets/js/handsontable.full.min.js"></script>
+<script src="./assets/js/codemirror.js"></script>
+<script src="./assets/js/javascript.js"></script>
+<script src="./assets/js/css.js"></script>
+
+<link rel="stylesheet" href="./assets/js/handsontable.full.min.css">
+<link rel="stylesheet" href="./assets/js/codemirror.css">
+<link rel="stylesheet" href="./assets/js/dracula.css">
+<link rel="stylesheet" href="./assets/styles/main.css">
+
+<% if (current.source === 'index') {  %>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+<% } else if (current.source === 'amCharts') {  %>
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://cdn.amcharts.com/lib/3/pie.js"></script>
+    <script src="https://cdn.amcharts.com/lib/3/themes/light.js"></script>
+<% } else if (current.source === 'chartJs') {  %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+<% } else if (current.source === 'fusionCharts') {  %>
+    <script src="https://cdn.jsdelivr.net/npm/fusioncharts@3.12.1/fusioncharts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fusioncharts@3.12.1/fusioncharts.charts.js"></script>
+<% } %>

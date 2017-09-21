@@ -1,5 +1,3 @@
-import Chart from 'chart.js';
-
 /**
 * A ChartJs data visualisation.
 *
@@ -10,7 +8,7 @@ import Chart from 'chart.js';
 class ChartJsWrapper {
 /**
 * Create a ChartJsWrapper.
-* @param {string} chartRootId - element id.
+* @param {string} chartJsRootId - element id.
 * @param {object} hotInstance - a reference to the Handsontable instance.
 */
   constructor(chartJsRootId, hotInstance) {

@@ -1,8 +1,8 @@
 {
-    "globals": {
-        "title": "handsontable-demos",
-        "description": "Integration samples of Handsontable and charting libraries",
-        "github url": "https://github.com/pnowak/handontable-demos.git",
-        "author": "Handsoncode"
-    }
+  "globals": {
+    "title": "handsontable-demos",
+    "description": "Integration samples of Handsontable and charting libraries",
+    "github url": "https://github.com/pnowak/handontable-demos.git",
+    "author": "Handsoncode"
+  }
 }

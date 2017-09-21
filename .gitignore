@@ -2,5 +2,4 @@ node_modules
 dist
 docs
 www
-public/assets
 *.log

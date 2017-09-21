@@ -1,0 +1,38 @@
+{
+  "index": {
+    "title": "Highcharts",
+    "description": "Interactive JavaScript charts for your web and mobile projects",
+    "github url": "https://github.com/highcharts/highcharts",
+    "website url": "https://www.highcharts.com/",
+    "document url": "http://api.highcharts.com/highcharts",
+    "author": "Highsoft",
+    "license": "Development and testing licenses are free. Non watermarked product version free for non commercial use. Deployment licenses start at $390"
+  },
+  "amCharts": {
+    "title": "amCharts",
+    "description": "Easily add charting capabilities to your websites and applications. Compatible with all modern and most legacy browsers (yes even IE7), JavaScript Charts allows creating flexible Pie, Column, Line, and number of other chart types.",
+    "github url": "https://github.com/amcharts/amcharts3",
+    "website url": "https://www.amcharts.com/",
+    "document url": "https://www.amcharts.com/knowledge-base/",
+    "author": "amCharts",
+    "license": "amCharts software is free under a linkware license. This means you may not remove or hide in any other way link to amCharts web site - www.amcharts.com. If you wish to remove the link, you should purchase commercial license."
+  },
+  "chartJs": {
+    "title": "Chart.js",
+    "description": "Easy, object oriented client side graphs for designers and developers",
+    "github url": "https://github.com/chartjs/Chart.js",
+    "website url": "http://www.chartjs.org/",
+    "document url": "http://www.chartjs.org/docs/latest/",
+    "author": "Chart.js",
+    "license": "Free under MIT license"
+  },
+  "fusionCharts": {
+    "title": "FusionCharts",
+    "description": "Delightful JavaScript charts for web and mobile applications",
+    "github url": "https://github.com/fusioncharts",
+    "website url": "http://www.fusioncharts.com/",
+    "document url": "http://www.fusioncharts.com/dev/",
+    "author": "FusionCharts",
+    "license": "Development and testing licenses are free. Non watermarked product version free for non commercial use. Deployment licenses start at $149"
+  }
+}

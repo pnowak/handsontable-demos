@@ -28,7 +28,8 @@
     "babel-preset-env": "^1.6.0",
     "babel-register": "^6.24.1",
     "babel-runtime": "~5.8.20",
-    "codemirror": "^5.29.0",
+    "codemirror": "^5.30.0",
+    "copy-webpack-plugin": "^4.0.1",
     "eslint": "^3.8.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-loader": "^1.6.0",
@@ -57,6 +58,6 @@
     "watch": "webpack --watch --devtool eval",
     "test": "testcafe chrome tests/test.js",
     "lint": "eslint **/*.js",
-    "doc": "jsdoc public -r -d ./docs/"
+    "doc": "jsdoc integrations -r -d ./docs/"
   }
 }

@@ -1,19 +1,7 @@
 <!doctype html>
 <html lang=en>
 <head>
-  <meta charset=utf-8>
-  <title>Handsontable and Charts</title>
-  <script src="https://docs.handsontable.com/bower_components/handsontable/dist/handsontable.full.min.js"></script>
-  <script src="http://esironal.github.io/cmtouch/lib/codemirror.js"></script>
-  <script src="http://esironal.github.io/cmtouch/mode/javascript/javascript.js" type="text/javascript"></script>
-  <script src="http://esironal.github.io/cmtouch/mode/css/css.js"></script>
-
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fusioncharts@3.12.1/fusioncharts.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fusioncharts@3.12.1/fusioncharts.charts.js"></script>
-
-  <link rel="stylesheet" href="https://docs.handsontable.com/bower_components/handsontable/dist/handsontable.full.min.css">
-  <link rel="stylesheet" href="http://esironal.github.io/cmtouch/lib/codemirror.css">
-  <link rel="stylesheet" href="https://codemirror.net/theme/dracula.css">
-  <link rel="stylesheet" href="./styles/main.css">
+  <%- partial("_partials/_head") %>
 </head>
 <body>
   <section>
@@ -33,24 +21,15 @@
       </li>
     </ul>
 
-    <div id="root"></div>
+    <div id="root"></div> 
 
     <%- yield %>
 
-    <script type="text/javascript">
-      CodeMirror.fromTextArea(document.getElementById('codeExample'), {
-        indentUnit: 2,
-        lineWrapping: true,
-        tabSize: 2,
-        lineNumbers: true,
-        readOnly: true,
-        mode: 'javascript',
-        theme: 'dracula',
-      });
-    </script>
   </section>
 
-  <script src="./assets/bundle.js" type="text/javascript"></script>
+  <script src="./assets/js/codeMirror.config.js" type="text/javascript"></script>
+  <script src="./assets/js/jsFiddle.js" type="text/javascript"></script>
+  <script src="./assets/js/bundle.js" type="text/javascript"></script>
 
 </body>
 </html>

@@ -1,9 +1,3 @@
-import FusionCharts from 'fusioncharts';
-import Charts from 'fusioncharts/fusioncharts.charts';
-
-// Load the charts module pass FusionCharts as dependency
-Charts(FusionCharts);
-
 /**
 * A FusionCharts data visualisation.
 *
