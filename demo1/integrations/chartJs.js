@@ -98,8 +98,6 @@ class ChartJsWrapper {
   /**
 * Helper function.
 *
-*
-*
 * @param {Object} Handsontable object.
 * @returns {Array} a merged key-value pair in array.
 */
@@ -111,6 +109,81 @@ class ChartJsWrapper {
     }
 
     return categoriesArray;
+  }
+
+  /**
+*
+*
+*
+* @param {}
+*
+*/
+  addNewGame(hotInstance, index) {
+    const backgroundColors = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)',
+      'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'];
+    const obj = {};
+
+    obj.label = hotInstance.getSettings().rowHeaders(index);
+    obj.backgroundColor = backgroundColors[index];
+
+    obj.data = hotInstance.getDataAtRow(index).map((item) => {
+      const o = {};
+
+      o.value = item;
+
+      return o;
+    });
+
+    this.chart.data.datasets.push(obj);
+
+    this.chart.update();
+  }
+
+  /**
+*
+*
+*
+* @param {}
+*
+*/
+  addNewTeam(hotInstance, index) {
+    this.chart.data.labels.push(hotInstance.getSettings().colHeaders(index));
+
+    for (let i = 0; i < this.chart.data.datasets.length; i += 1) {
+      this.chart.data.datasets[i].data[index] = { value: null };
+    }
+
+    this.chart.update();
+  }
+
+  /**
+*
+*
+*
+* @param {}
+*
+*/
+  removeRow(index) {
+    this.chart.data.datasets.splice(index, 1);
+
+    this.chart.update();
+  }
+
+  /**
+*
+*
+*
+* @param {}
+*
+*/
+  removeColumn(index) {
+    this.chart.data.labels.splice(index, 1);
+
+    for (let i = 0; i < this.chart.data.datasets.length; i += 1) {
+      this.chart.data.datasets[i].data.splice(index, 1);
+    }
+
+    this.chart.update();
   }
 
 /**

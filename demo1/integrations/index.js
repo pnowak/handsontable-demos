@@ -54,6 +54,18 @@ function onAfterCreateRow(index) {
   });
 }
 
+function onAfterRemoveColumn(index) {
+  chartWrappers.forEach((chartWrapper) => {
+    chartWrapper.removeColumn(index);
+  });
+}
+
+function onAfterRemoveRow(index) {
+  chartWrappers.forEach((chartWrapper) => {
+    chartWrapper.removeRow(index);
+  });
+}
+
 const hot = new Handsontable(document.getElementById('root'), {
   data: [
     [120, 160, 80],
@@ -66,6 +78,7 @@ const hot = new Handsontable(document.getElementById('root'), {
   rowHeaders(index) {
     return `Game ${index + 1}`;
   },
+  contextMenu: ['remove_row', 'remove_col'],
   rowHeaderWidth: 100,
   className: 'htCenter',
   type: 'numeric',
@@ -78,6 +91,8 @@ const hot = new Handsontable(document.getElementById('root'), {
   beforeChange: onBeforeChange,
   afterCreateCol: onAfterCreateColumn,
   afterCreateRow: onAfterCreateRow,
+  afterRemoveCol: onAfterRemoveColumn,
+  afterRemoveRow: onAfterRemoveRow,
 });
 
 controls.addEventListener('click', (event) => {

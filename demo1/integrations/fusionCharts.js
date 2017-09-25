@@ -102,6 +102,80 @@ class FusionChartsWrapper {
     return category;
   }
 
+  /**
+*
+*
+*
+* @param {}
+*
+*/
+  addNewGame(hotInstance, index) {
+    const obj = {};
+
+    obj.seriesname = hotInstance.getSettings().rowHeaders(index);
+    obj.data = hotInstance.getDataAtRow(index).map((item) => {
+      const o = {};
+
+      o.value = item;
+
+      return o;
+    });
+
+    this.chart.args.dataSource.dataset.push(obj);
+
+    this.chart.setJSONData(this.chart.args.dataSource);
+  }
+
+  /**
+*
+*
+*
+* @param {}
+*
+*/
+  addNewTeam(hotInstance, index) {
+    const o = {};
+    o.label = hotInstance.getSettings().colHeaders(index);
+
+    this.chart.args.dataSource.categories[0].category.push(o);
+
+    for (let i = 0; i < this.chart.args.dataSource.dataset.length; i += 1) {
+      this.chart.args.dataSource.dataset[i].data[index] = { value: null };
+    }
+
+    this.chart.setJSONData(this.chart.args.dataSource);
+  }
+
+  /**
+*
+*
+*
+* @param {}
+*
+*/
+  removeRow(index) {
+    this.chart.args.dataSource.dataset.splice(index, 1);
+
+    this.chart.setJSONData(this.chart.args.dataSource);
+  }
+
+  /**
+*
+*
+*
+* @param {}
+*
+*/
+  removeColumn(index) {
+    this.chart.args.dataSource.categories[0].category.splice(index, 1);
+
+    for (let i = 0; i < this.chart.args.dataSource.dataset.length; i += 1) {
+      this.chart.args.dataSource.dataset[i].data.splice(index, 1);
+    }
+
+    this.chart.setJSONData(this.chart.args.dataSource);
+  }
+
 /**
 *
 * Watches changes from Handsontable and updates it in the chart.

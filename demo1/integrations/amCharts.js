@@ -159,6 +159,32 @@ class AmChartsWrapper {
     this.chart.validateNow(true);
   }
 
+  /**
+*
+*
+*
+* @param {}
+*
+*/
+  removeRow(index) {
+    this.chart.graphs.splice(index, 1);
+
+    this.chart.validateNow(true);
+  }
+
+  /**
+*
+*
+*
+* @param {}
+*
+*/
+  removeColumn(index) {
+    this.chart.dataProvider.splice(index, 1);
+
+    this.chart.validateNow(true);
+  }
+
 /**
 *
 * Watches changes from Handsontable and updates it in the chart.
