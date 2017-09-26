@@ -56,7 +56,7 @@ function onAfterCreateRow(index) {
 
 function onAfterRemoveColumn(index) {
   chartWrappers.forEach((chartWrapper) => {
-    chartWrapper.removeColumn(index);
+    chartWrapper.removeColumn(index, this);
   });
 }
 
