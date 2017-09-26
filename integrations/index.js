@@ -3,8 +3,9 @@ import AmChartsWrapper from './amCharts';
 import ChartJsWrapper from './chartJs';
 import FusionChartsWrapper from './fusionCharts';
 
+const SELECTED_CLASS = 'selected';
+
 const chartWrappers = [];
-const selectedClass = 'selected';
 const mapChartsToWrapper = new Map();
 
 mapChartsToWrapper.set('Highcharts', HighchartsWrapper);
@@ -17,7 +18,7 @@ function onAfterInit() {
   const allListItems = Array.from(isListItem);
 
   allListItems.forEach((li) => {
-    if (Handsontable.dom.hasClass(li, selectedClass)) {
+    if (Handsontable.dom.hasClass(li, SELECTED_CLASS)) {
       const chartName = li.children[0].textContent;
       const ActiveChartWrapper = mapChartsToWrapper.get(chartName);
 
