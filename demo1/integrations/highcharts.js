@@ -87,6 +87,65 @@ class HighchartsWrapper {
     return categoriesArray;
   }
 
+   /**
+*
+*
+*
+* @param {}
+*
+*/
+  addNewGame(hotInstance, index) {
+    const obj = {};
+
+    obj.name = hotInstance.getSettings().rowHeaders(index);
+    obj.data = hotInstance.getDataAtRow(index);
+
+    this.chart.addSeries(obj);
+
+    this.chart.update(HighchartsWrapper.getChartOptions(hotInstance));
+  }
+
+  /**
+*
+*
+*
+* @param {}
+*
+*/
+  addNewTeam(hotInstance, index) {
+    this.chart.xAxis[0].categories.push(hotInstance.getSettings().colHeaders(index));
+
+    for (let i = 0; i < this.chart.series.length; i += 1) {
+      this.chart.series[i].data[index] = hotInstance.getDataAtRow(index);
+    }
+
+    this.chart.update(HighchartsWrapper.getChartOptions(hotInstance));
+  }
+
+  /**
+*
+*
+*
+* @param {index}
+*
+*/
+  removeRow(index) {
+    this.chart.series[index].remove();
+  }
+
+  /**
+*
+*
+*
+* @param {}
+*
+*/
+  removeColumn(index, hotInstance) {
+    this.chart.xAxis[0].categories.splice(index, 1);
+
+    this.chart.update(HighchartsWrapper.getChartOptions(hotInstance));
+  }
+
 /**
 *
 * Watches changes from Handsontable and updates it in the chart.
