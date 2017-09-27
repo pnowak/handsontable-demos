@@ -9,8 +9,8 @@ class AmChartsWrapper {
     return {
       type: 'serial',
       theme: 'light',
-      dataProvider: AmChartsWrapper.zipHeadersWithValues(
-        hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0)),
+      dataProvider: zipHeadersWithValues(
+        hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0), 'key'),
       valueAxes: [{
         gridColor: '#FFFFFF',
         gridAlpha: 0.2,
@@ -43,17 +43,6 @@ class AmChartsWrapper {
     };
   }
 
-  static zipHeadersWithValues(columnHeaders, columnValues) {
-    return columnHeaders.map((item, index) => {
-      const obj = {};
-
-      obj.key = item;
-      obj.value = columnValues[index];
-
-      return obj;
-    });
-  }
-
   updateChartData(column, value) {
     this.chart.dataProvider[column].value = value;
 
@@ -62,6 +51,17 @@ class AmChartsWrapper {
 }
 
 const chartWrappers = [];
+
+function zipHeadersWithValues(columnHeaders, columnValues, key) {
+  return columnHeaders.map((item, index) => {
+    const obj = {};
+
+    obj[key] = item;
+    obj.value = columnValues[index];
+
+    return obj;
+  });
+}
 
 function onAfterInit() {
   chartWrappers.push(new AmChartsWrapper('chart', this));

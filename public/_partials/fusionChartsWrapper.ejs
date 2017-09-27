@@ -20,21 +20,10 @@ class FusionChartsWrapper {
           xAxisName: 'Month',
           yAxisName: 'Values',
         },
-        data: FusionChartsWrapper.zipHeadersWithValues(
-          hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0)),
+        data: zipHeadersWithValues(
+          hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0), 'label'),
       },
     };
-  }
-
-  static zipHeadersWithValues(columnHeaders, columnValues) {
-    return columnHeaders.map((item, index) => {
-      const obj = {};
-
-      obj.label = item;
-      obj.value = columnValues[index];
-
-      return obj;
-    });
   }
   
   updateChartData(column, value) {
@@ -45,6 +34,17 @@ class FusionChartsWrapper {
 }
 
 const chartWrappers = [];
+
+function zipHeadersWithValues(columnHeaders, columnValues, key) {
+  return columnHeaders.map((item, index) => {
+    const obj = {};
+
+    obj[key] = item;
+    obj.value = columnValues[index];
+
+    return obj;
+  });
+}
 
 function onAfterInit() {
   chartWrappers.push(new FusionChartsWrapper('chart', this));

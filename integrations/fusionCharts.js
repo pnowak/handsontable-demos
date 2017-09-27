@@ -1,3 +1,5 @@
+import zipHeadersWithValues from './helper/zip';
+
 /**
 * A FusionCharts data visualisation.
 *
@@ -38,37 +40,10 @@ class FusionChartsWrapper {
           xAxisName: 'Month',
           yAxisName: 'Values',
         },
-        data: FusionChartsWrapper.zipHeadersWithValues(
-          hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0)),
+        data: zipHeadersWithValues(
+          hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0), 'label'),
       },
     };
-  }
-
-/**
-* Helper function.
-*
-* Zip column header to the value of the column from Handsontable object settings.
-* amCharts data provider needs data array in form:
-*
-* @example
-* {
-*  "label": "May",
-*  "value": 144
-* }
-*
-* @param {String} columnHeaders column headers from Handsontable object settings.
-* @param {Number} columnValues column values from Handsontable object settings.
-* @returns {Array} a merged key-value pair in array.
-*/
-  static zipHeadersWithValues(columnHeaders, columnValues) {
-    return columnHeaders.map((item, index) => {
-      const obj = {};
-
-      obj.label = item;
-      obj.value = columnValues[index];
-
-      return obj;
-    });
   }
 
 /**

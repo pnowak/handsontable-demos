@@ -2,11 +2,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = [
   {
-    entry: [
-      `${__dirname}/integrations/index.js`,
-    ],
+    entry: {
+      amCharts: './integrations/amChartsIndex.js',
+      highCharts: './integrations/highchartsIndex.js',
+      fusionCharts: './integrations/fusionChartsIndex.js',
+      chartJs: './integrations/chartJsIndex.js',
+    },
     output: {
-      filename: 'bundle.js',
+      filename: '[name].bundle.js',
       path: `${__dirname}/public/assets/js`,
     },
     module: {
@@ -29,13 +32,13 @@ module.exports = [
     },
     plugins: [
       new CopyWebpackPlugin([
-        { from: 'node_modules/codemirror/lib', to: '' },
-        { from: 'node_modules/codemirror/mode/javascript', to: '' },
-        { from: 'node_modules/codemirror/mode/css', to: '' },
-        { from: 'node_modules/codemirror/lib/codemirror.css', to: '' },
-        { from: 'node_modules/codemirror/theme/dracula.css', to: '' },
-        { from: 'node_modules/handsontable/dist/handsontable.full.min.js', to: '' },
-        { from: 'node_modules/handsontable/dist/handsontable.full.min.css', to: '' },
+        { from: 'node_modules/codemirror/mode/javascript', to: `${__dirname}/public/assets/js/codeMirror` },
+        { from: 'node_modules/codemirror/mode/css', to: `${__dirname}/public/assets/js/codeMirror` },
+        { from: 'node_modules/codemirror/lib/codemirror.js', to: `${__dirname}/public/assets/js/codeMirror` },
+        { from: 'node_modules/codemirror/lib/codemirror.css', to: `${__dirname}/public/assets/styles` },
+        { from: 'node_modules/codemirror/theme/dracula.css', to: `${__dirname}/public/assets/styles` },
+        { from: 'node_modules/handsontable/dist/handsontable.full.min.js', to: `${__dirname}/public/assets/js` },
+        { from: 'node_modules/handsontable/dist/handsontable.full.min.css', to: `${__dirname}/public/assets/styles` },
       ]),
     ],
     stats: {
