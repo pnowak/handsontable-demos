@@ -129,8 +129,10 @@ class HighchartsWrapper {
 * @param {index}
 *
 */
-  removeRow(index) {
+  removeRow(index, hotInstance) {
     this.chart.series[index].remove();
+
+    this.chart.update(HighchartsWrapper.getChartOptions(hotInstance));
   }
 
   /**

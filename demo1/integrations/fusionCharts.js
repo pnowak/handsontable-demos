@@ -153,8 +153,12 @@ class FusionChartsWrapper {
 * @param {}
 *
 */
-  removeRow(index) {
+  removeRow(index, hotInstance) {
     this.chart.args.dataSource.dataset.splice(index, 1);
+
+    for (let i = 0; i < hotInstance.countRows(); i += 1) {
+      this.chart.args.dataSource.dataset[i].seriesname = hotInstance.getSettings().rowHeaders(i);
+    }
 
     this.chart.setJSONData(this.chart.args.dataSource);
   }
@@ -166,11 +170,17 @@ class FusionChartsWrapper {
 * @param {}
 *
 */
-  removeColumn(index) {
+  removeColumn(index, hotInstance) {
     this.chart.args.dataSource.categories[0].category.splice(index, 1);
 
-    for (let i = 0; i < this.chart.args.dataSource.dataset.length; i += 1) {
-      this.chart.args.dataSource.dataset[i].data.splice(index, 1);
+    for (let i = 0; i < hotInstance.countCols(); i += 1) {
+      this.chart.args.dataSource.categories[0].category[i].label =
+      hotInstance.getSettings().colHeaders(i);
+
+      for (let j = 0; j < hotInstance.countRows(); j += 1) {
+        this.chart.args.dataSource.dataset[j].seriesname = hotInstance.getSettings().rowHeaders(j);
+        this.chart.args.dataSource.dataset[j].data[i].value = hotInstance.getDataAtCell(j, i);
+      }
     }
 
     this.chart.setJSONData(this.chart.args.dataSource);

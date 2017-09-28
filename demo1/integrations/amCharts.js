@@ -135,6 +135,10 @@ class AmChartsWrapper {
 
     this.chart.graphs.push(objectGraph);
 
+    for (let i = 0; i < hotInstance.countCols(); i += 1) {
+      this.chart.dataProvider[i][hotInstance.getSettings().rowHeaders(index)] = 0;
+    }
+
     this.chart.validateNow(true);
   }
 
@@ -166,8 +170,18 @@ class AmChartsWrapper {
 * @param {}
 *
 */
-  removeRow(index) {
+  removeRow(index, hotInstance) {
     this.chart.graphs.splice(index, 1);
+
+    for (let j = 0; j < hotInstance.countRows(); j += 1) {
+      for (let i = 0; i < hotInstance.countCols(); i += 1) {
+        this.chart.dataProvider[i][hotInstance.getSettings().rowHeaders(j)] =
+        hotInstance.getDataAtCell(j, i);
+      }
+
+      this.chart.graphs[j].balloonText = `${hotInstance.getSettings().rowHeaders(j)}: [[${hotInstance.getSettings().rowHeaders(j)}]]`;
+      this.chart.graphs[j].valueField = `${hotInstance.getSettings().rowHeaders(j)}`;
+    }
 
     this.chart.validateNow(true);
   }
@@ -179,8 +193,17 @@ class AmChartsWrapper {
 * @param {}
 *
 */
-  removeColumn(index) {
+  removeColumn(index, hotInstance) {
     this.chart.dataProvider.splice(index, 1);
+
+    for (let i = 0; i < hotInstance.countCols(); i += 1) {
+      this.chart.dataProvider[i].team = hotInstance.getSettings().colHeaders(i);
+
+      for (let j = 0; j < hotInstance.countRows(); j += 1) {
+        this.chart.graphs[j].balloonText = `${hotInstance.getSettings().rowHeaders(j)}: [[${hotInstance.getSettings().rowHeaders(j)}]]`;
+        this.chart.graphs[j].valueField = `${hotInstance.getSettings().rowHeaders(j)}`;
+      }
+    }
 
     this.chart.validateNow(true);
   }

@@ -163,8 +163,12 @@ class ChartJsWrapper {
 * @param {}
 *
 */
-  removeRow(index) {
+  removeRow(index, hotInstance) {
     this.chart.data.datasets.splice(index, 1);
+
+    for (let i = 0; i < hotInstance.countRows(); i += 1) {
+      this.chart.data.datasets[i].label = hotInstance.getSettings().rowHeaders(i);
+    }
 
     this.chart.update();
   }
@@ -176,11 +180,16 @@ class ChartJsWrapper {
 * @param {}
 *
 */
-  removeColumn(index) {
+  removeColumn(index, hotInstance) {
     this.chart.data.labels.splice(index, 1);
 
-    for (let i = 0; i < this.chart.data.datasets.length; i += 1) {
-      this.chart.data.datasets[i].data.splice(index, 1);
+    for (let i = 0; i < hotInstance.countCols(); i += 1) {
+      this.chart.data.labels[i] = hotInstance.getSettings().colHeaders(i);
+
+      for (let j = 0; j < hotInstance.countRows(); j += 1) {
+        this.chart.data.datasets[j].label = hotInstance.getSettings().rowHeaders(j);
+        this.chart.data.datasets[j].data[index] = hotInstance.getDataAtCell(j, i);
+      }
     }
 
     this.chart.update();
