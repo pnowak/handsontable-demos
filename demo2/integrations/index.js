@@ -10,21 +10,21 @@ const mapChartsToWrapper = new Map();
 const clock = {
   totalSeconds: 0,
 
-  start(td) {
-    const parts = td.innerHTML.split(':');
+  start(td, hotInstance, row, column) {
+    const parts = td.textContent.split(':');
 
     this.interval = setInterval(() => {
       this.totalSeconds += 1;
 
-      parts[0] = Math.floor(this.totalSeconds / 3600);
+      parts[0] = Math.floor((this.totalSeconds / 3600) % 60);
       parts[1] = Math.floor((this.totalSeconds / 60) % 60);
       parts[2] = parseInt(this.totalSeconds % 60, 10);
 
-      const hour = (parts[0] < 10) ? `0${parts[0]}` : parts[0];
-      const minute = (parts[1] < 10) ? `0${parts[1]}` : parts[1];
-      const second = (parts[2] < 10) ? `0${parts[2]}` : parts[2];
+      const hour = (parts[0] < 10 ? '0' : '') + parts[0];
+      const minute = (parts[1] < 10 ? '0' : '') + parts[1];
+      const second = (parts[2] < 10 ? '0' : '') + parts[2];
 
-      td.textContent = `${hour}:${minute}:${second}`;
+      hotInstance.setDataAtCell(row, column, `${hour}:${minute}:${second}`);
     }, 1000);
   },
 
@@ -33,12 +33,13 @@ const clock = {
     delete this.interval;
   },
 
-  reset(td) {
+  reset(hotInstance, row, column) {
     clearInterval(this.interval);
     delete this.interval;
 
     this.totalSeconds = 0;
-    td.textContent = '00:00:00';
+
+    hotInstance.setDataAtCell(row, column, '00:00:00');
   },
 };
 
@@ -61,30 +62,14 @@ function onAfterInit() {
   });
 }
 
-function onBeforeChange(changes) {
+function onAfterSetDataAtCell(changes) {
   changes.forEach((change) => {
     chartWrappers.forEach((chartWrapper) => {
-      const [row, column] = change;
-      const currentValue = change[3] === '' ? 0 : change[3];
-
-      if (change[3] === '') {
-        this.setDataAtCell(row, column, 0, 'onBeforeChange');
-      }
+      const [row, column, , currentValue] = change;
+      console.log(row, column, currentValue);
 
       chartWrapper.updateChartData(row, column, currentValue, this);
     });
-  });
-}
-
-function onAfterCreateColumn(index) {
-  chartWrappers.forEach((chartWrapper) => {
-    chartWrapper.addNewTeam(this, index);
-  });
-}
-
-function onAfterCreateRow(index) {
-  chartWrappers.forEach((chartWrapper) => {
-    chartWrapper.addNewGame(this, index);
   });
 }
 
@@ -107,15 +92,25 @@ function startPauseButtonRenderer(instance, td, row, col, prop, value) {
 
   Handsontable.dom.addClass(td, 'htCenter');
 
-  Handsontable.dom.addEvent(td, 'click', () => {
-    const timeCell = instance.getCell(row, col - 1);
+  Handsontable.dom.addEvent(td, 'click', (event) => {
+    const target = event.target;
 
-    if (td.firstChild.textContent === 'Start') {
-      td.firstChild.textContent = 'Pause';
-      clock.start(timeCell);
-    } else {
-      td.firstChild.textContent = 'Start';
-      clock.pause();
+    if (target.nodeName.toLowerCase() === 'button') {
+      const buttons = Array.from(document.getElementsByTagName('button'));
+
+      buttons.forEach((button) => {
+        if (button === target) {
+          const timeCell = instance.getCell(row, col - 1);
+
+          if (target.textContent === 'Start') {
+            target.textContent = 'Pause';
+            clock.start(timeCell, instance, row, col - 1);
+          } else {
+            target.textContent = 'Start';
+            clock.pause();
+          }
+        }
+      });
     }
   });
 
@@ -130,12 +125,14 @@ function resetButtonRenderer(instance, td, row, col, prop, value) {
   Handsontable.dom.addClass(td, 'htCenter');
 
   Handsontable.dom.addEvent(td, 'click', () => {
-    const timeCell = instance.getCell(row, col - 2);
-    clock.reset(timeCell);
+    clock.reset(instance, row, col - 2);
   });
 
   return td;
 }
+
+Handsontable.renderers.registerRenderer('start/pauseButton', startPauseButtonRenderer);
+Handsontable.renderers.registerRenderer('resetButton', resetButtonRenderer);
 
 new Handsontable(document.getElementById('root'), {
   data: [
@@ -155,34 +152,31 @@ new Handsontable(document.getElementById('root'), {
       type: 'date',
       dateFormat: 'MM/DD/YYYY',
       correctFormat: true,
-      defaultDate: '01/01/1900',
       allowEmpty: false,
     },
     {
       type: 'time',
-      timeFormat: 'hh:mm:ss',
+      timeFormat: 'HH:mm:ss',
       correctFormat: true,
       readOnly: true,
     },
     {
-      renderer: startPauseButtonRenderer,
+      renderer: 'start/pauseButton',
       readOnly: true,
     },
     {
-      renderer: resetButtonRenderer,
+      renderer: 'resetButton',
       readOnly: true,
     },
   ],
-  contextMenu: ['remove_row', 'remove_col'],
+  contextMenu: ['remove_row', 'remove_col', 'commentsAddEdit'],
+  minSpareRows: 1,
   className: 'htCenter',
   width: 650,
-  maxRows: 5,
   stretchH: 'all',
   allowInvalid: false,
   afterInit: onAfterInit,
-  beforeChange: onBeforeChange,
-  afterCreateCol: onAfterCreateColumn,
-  afterCreateRow: onAfterCreateRow,
+  afterSetDataAtCell: onAfterSetDataAtCell,
   afterRemoveCol: onAfterRemoveColumn,
   afterRemoveRow: onAfterRemoveRow,
 });

@@ -25,12 +25,16 @@ class ChartJsWrapper {
 */
   static getChartOptions(hotInstance) {
     return {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: ChartJsWrapper.updateChartColumns(hotInstance),
-        datasets: ChartJsWrapper.zipTeamWithRowData(hotInstance),
+        labels: ChartJsWrapper.updateTimeDate(hotInstance),
+        datasets: [{ data: ChartJsWrapper.zipTeamWithRowData(hotInstance) }],
       },
       options: {
+        animation: {
+          duration: 1000,
+          easing: 'linear',
+        },
         legend: {
           display: false,
         },
@@ -50,10 +54,18 @@ class ChartJsWrapper {
               beginAtZero: true,
               fontSize: 23,
             },
+            scaleLabel: {
+              display: true,
+              labelString: 'Time spent',
+            },
           }],
           xAxes: [{
             ticks: {
               fontSize: 23,
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Date',
             },
           }],
         },
@@ -79,17 +91,11 @@ class ChartJsWrapper {
 */
   static zipTeamWithRowData(hotInstance) {
     const rowsArray = [];
-    const backgroundColors = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)',
-      'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'];
 
     for (let index = 0; index < hotInstance.countRows(); index += 1) {
-      const obj = {};
-
-      obj.label = hotInstance.getSettings().rowHeaders(index);
-      obj.backgroundColor = backgroundColors[index];
-      obj.data = hotInstance.getDataAtRow(index);
-
-      rowsArray.push(obj); console.log(obj);
+      if (hotInstance.getDataAtCell(index, 3) != null) {
+        rowsArray.push([hotInstance.getDataAtCell(index, 3)]);
+      }
     }
 
     return rowsArray;
@@ -101,59 +107,16 @@ class ChartJsWrapper {
 * @param {Object} Handsontable object.
 * @returns {Array} a merged key-value pair in array.
 */
-  static updateChartColumns(hotInstance) {
+  static updateTimeDate(hotInstance) {
     const categoriesArray = [];
 
-    for (let index = 0; index < hotInstance.countCols(); index += 1) {
-      categoriesArray.push(hotInstance.getSettings().colHeaders(index));
+    for (let index = 0; index < hotInstance.countRows(); index += 1) {
+      if (hotInstance.getDataAtCell(index, 3) != null) {
+        categoriesArray.push(hotInstance.getSettings().data[index][2]);
+      }
     }
 
     return categoriesArray;
-  }
-
-  /**
-*
-*
-*
-* @param {}
-*
-*/
-  addNewGame(hotInstance, index) {
-    const backgroundColors = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)',
-      'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'];
-    const obj = {};
-
-    obj.label = hotInstance.getSettings().rowHeaders(index);
-    obj.backgroundColor = backgroundColors[index];
-
-    obj.data = hotInstance.getDataAtRow(index).map((item) => {
-      const o = {};
-
-      o.value = item;
-
-      return o;
-    });
-
-    this.chart.data.datasets.push(obj);
-
-    this.chart.update();
-  }
-
-  /**
-*
-*
-*
-* @param {}
-*
-*/
-  addNewTeam(hotInstance, index) {
-    this.chart.data.labels.push(hotInstance.getSettings().colHeaders(index));
-
-    for (let i = 0; i < this.chart.data.datasets.length; i += 1) {
-      this.chart.data.datasets[i].data[index] = { value: null };
-    }
-
-    this.chart.update();
   }
 
   /**
@@ -204,7 +167,7 @@ class ChartJsWrapper {
 *
 */
   updateChartData(row, column, value) {
-    this.chart.data.datasets[row].data[column] = value;
+    this.chart.config.data.datasets[0].data[row].push(value);
     this.chart.update();
   }
 }
