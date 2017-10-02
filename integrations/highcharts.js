@@ -1,3 +1,5 @@
+import Highcharts from 'highcharts';
+
 /**
 * A Highcharts data visualisation.
 *

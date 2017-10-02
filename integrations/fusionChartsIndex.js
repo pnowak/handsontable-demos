@@ -1,3 +1,4 @@
+import Handsontable from 'handsontable';
 import FusionChartsWrapper from './fusionCharts';
 
 const chartWrappers = [];

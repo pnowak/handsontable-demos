@@ -1,3 +1,4 @@
+import Handsontable from 'handsontable';
 import AmChartsWrapper from './amCharts';
 
 const chartWrappers = [];

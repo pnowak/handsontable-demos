@@ -1,3 +1,5 @@
+import Chart from 'chart.js';
+
 /**
 * A ChartJs data visualisation.
 *

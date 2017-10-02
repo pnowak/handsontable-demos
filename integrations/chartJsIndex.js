@@ -1,3 +1,4 @@
+import Handsontable from 'handsontable';
 import ChartJsWrapper from './chartJs';
 
 const chartWrappers = [];

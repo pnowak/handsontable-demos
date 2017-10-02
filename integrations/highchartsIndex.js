@@ -1,3 +1,4 @@
+import Handsontable from 'handsontable';
 import HighchartsWrapper from './highcharts';
 
 const chartWrappers = [];

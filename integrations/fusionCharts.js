@@ -1,4 +1,9 @@
+import FusionCharts from 'fusioncharts';
+import Charts from 'fusioncharts/fusioncharts.charts';
 import zipHeadersWithValues from './helper/zip';
+
+// Load the charts module pass FusionCharts as dependency
+Charts(FusionCharts);
 
 /**
 * A FusionCharts data visualisation.
