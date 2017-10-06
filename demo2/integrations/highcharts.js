@@ -26,14 +26,31 @@ class HighchartsWrapper {
   static getChartOptions(hotInstance) {
     return {
       chart: {
-        type: 'column',
+        type: 'spline',
         width: 650,
+        animation: Highcharts.svg,
       },
       title: {
         text: 'Highcharts & Handsontable',
       },
+      plotOptions: {
+        spline: {
+          dataLabels: {
+            enabled: true,
+          },
+          marker: {
+            enabled: true,
+          },
+          enableMouseTracking: false,
+        },
+      },
       xAxis: {
-        categories: HighchartsWrapper.updateChartColumns(hotInstance),
+        categories: HighchartsWrapper.updateTimeDate(hotInstance),
+      },
+      yAxis: {
+        title: {
+          text: 'Value',
+        },
       },
       series: HighchartsWrapper.zipTeamWithRowData(hotInstance),
     };
@@ -60,8 +77,8 @@ class HighchartsWrapper {
     for (let index = 0; index < hotInstance.countRows(); index += 1) {
       const obj = {};
 
-      obj.name = hotInstance.getSettings().rowHeaders(index);
-      obj.data = hotInstance.getDataAtRow(index);
+      obj.name = hotInstance.getDataAtCell(index, 0);
+      obj.data = [0];
 
       rowsArray.push(obj); console.log(obj);
     }
@@ -77,49 +94,14 @@ class HighchartsWrapper {
 * @param {Object} Handsontable object.
 * @returns {Array} a merged key-value pair in array.
 */
-  static updateChartColumns(hotInstance) {
+  static updateTimeDate(hotInstance) {
     const categoriesArray = [];
 
-    for (let index = 0; index < hotInstance.countCols(); index += 1) {
-      categoriesArray.push(hotInstance.getSettings().colHeaders(index));
+    for (let index = 0; index < hotInstance.countRows(); index += 1) {
+      categoriesArray.push(hotInstance.getDataAtCell(index, 2));
     }
-
+    console.log(categoriesArray);
     return categoriesArray;
-  }
-
-   /**
-*
-*
-*
-* @param {}
-*
-*/
-  addNewGame(hotInstance, index) {
-    const obj = {};
-
-    obj.name = hotInstance.getSettings().rowHeaders(index);
-    obj.data = hotInstance.getDataAtRow(index);
-
-    this.chart.addSeries(obj);
-
-    this.chart.update(HighchartsWrapper.getChartOptions(hotInstance));
-  }
-
-  /**
-*
-*
-*
-* @param {}
-*
-*/
-  addNewTeam(hotInstance, index) {
-    this.chart.xAxis[0].categories.push(hotInstance.getSettings().colHeaders(index));
-
-    for (let i = 0; i < this.chart.series.length; i += 1) {
-      this.chart.series[i].data[index] = hotInstance.getDataAtRow(index);
-    }
-
-    this.chart.update(HighchartsWrapper.getChartOptions(hotInstance));
   }
 
   /**
@@ -158,7 +140,31 @@ class HighchartsWrapper {
 *
 */
   updateChartData(row, column, value) {
+    if (column === 3) {
+      return;
+    }
+
     this.chart.series[row].data[column].update(value);
+  }
+
+  /**
+*
+* Watches changes from Handsontable and updates it in the chart.
+*
+* @param {Number} column column index.
+* @param {Number} value column value.
+*
+*/
+
+  updateCellData(row, column, value) {
+    if (column === 3) {
+      const valueSplit = value.split(':');
+      const seconds = ((+valueSplit[0]) * (60 * 60)) + ((+valueSplit[1]) * 60) + (+valueSplit[2]);
+
+      this.chart.series[row].data.push(seconds);
+
+      this.chart.update(this.chart.series[row].data);
+    }
   }
 }
 

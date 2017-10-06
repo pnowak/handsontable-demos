@@ -7,7 +7,9 @@ const SELECTED_CLASS = 'selected';
 const START = 'Start';
 const PAUSE = 'Pause';
 const RESET = 'Reset';
+const STARTTIME = '00:00:00';
 const chartWrappers = [];
+const mapTimerRow = new Map();
 const mapChartsToWrapper = new Map();
 
 mapChartsToWrapper.set('Highcharts', HighchartsWrapper);
@@ -29,12 +31,27 @@ function onAfterInit() {
   });
 }
 
+function onBeforeChange(changes) {
+  changes.forEach((change) => {
+    chartWrappers.forEach((chartWrapper) => {
+      const [row, column] = change;
+      const currentValue = change[3] === '' ? 0 : change[3];
+
+      if (change[3] === '') {
+        this.setDataAtCell(row, column, 0, 'onBeforeChange');
+      }
+
+      chartWrapper.updateChartData(row, column, currentValue, this);
+    });
+  });
+}
+
 function onAfterSetDataAtCell(changes) {
   changes.forEach((change) => {
     chartWrappers.forEach((chartWrapper) => {
       const [row, column, , currentValue] = change;
 
-      chartWrapper.updateChartData(row, column, currentValue, this);
+      chartWrapper.updateCellData(row, column, currentValue, this);
     });
   });
 }
@@ -72,24 +89,20 @@ class Timer {
 
         this.duration = moment.duration(this.duration.asSeconds() + 1, 'seconds');
 
-        let h = this.duration.hours();
-        let m = this.duration.minutes();
-        let s = this.duration.seconds();
+        const hours = this.duration.hours();
+        const minutes = this.duration.minutes();
+        const seconds = this.duration.seconds();
 
-        h = h.length === 1 ? `${0}h` : h;
-        m = m.length === 1 ? `${0}m` : m;
-        s = s.length === 1 ? `${0}s` : s;
-
-        hotInstance.setDataAtCell(row, column, `${h}:${m}:${s}`);
+        hotInstance.setDataAtCell(row, column, `${hours}:${minutes}:${seconds}`);
       }, 1000);
     }
   }
 
   pause() {
-    if (status === 1) {
+    if (this.status === 1) {
       this.status = 0;
       clearInterval(this.interval);
-      this.interval = null;
+      this.interval = 0;
     }
   }
 
@@ -98,15 +111,35 @@ class Timer {
     clearInterval(this.interval);
     this.interval = null;
 
-    this.currentTime = '00:00:00';
+    this.currentTime = STARTTIME;
     this.duration = moment.duration(this.currentTime);
 
-    hotInstance.setDataAtCell(row, column, '00:00:00');
+    hotInstance.setDataAtCell(row, column, STARTTIME);
   }
 }
 
-function startPauseResetButtonRenderer(instance, td, row, col, prop, value) {
-  const escaped = Handsontable.helper.stringify(value);
+function startPauseButtonRenderer(instance, td, row, col, prop, value) {
+  let escaped;
+
+  if (mapTimerRow.get(row) === undefined) {
+    escaped = Handsontable.helper.stringify('<button type="button">Start</button>');
+  } else if ((mapTimerRow.get(row).status === 1) && (mapTimerRow.get(row).interval > 0)) {
+    escaped = Handsontable.helper.stringify('<button type="button">Pause</button>');
+  } else if ((mapTimerRow.get(row).status === 0) && (mapTimerRow.get(row).interval === 0)) {
+    escaped = Handsontable.helper.stringify('<button type="button">Start</button>');
+  } else {
+    escaped = Handsontable.helper.stringify('<button type="button">Start</button>');
+  }
+
+  Handsontable.dom.addClass(td, 'htCenter');
+
+  td.innerHTML = escaped;
+
+  return td;
+}
+
+function resetButtonRenderer(instance, td, row, col, prop, value) {
+  const escaped = Handsontable.helper.stringify('<button type="button">Reset</button>');
 
   Handsontable.dom.addClass(td, 'htCenter');
 
@@ -117,7 +150,6 @@ function startPauseResetButtonRenderer(instance, td, row, col, prop, value) {
 
 function initButtonsListener(hotInstance) {
   const rootElement = document.getElementById('root');
-  const mapTimerRow = new Map();
 
   for (let rowIndex = 0; rowIndex < hotInstance.countRows(); rowIndex += 1) {
     mapTimerRow.set(rowIndex, new Timer(rowIndex));
@@ -133,16 +165,10 @@ function initButtonsListener(hotInstance) {
       const rowIndex = td.parentNode.rowIndex - 1;
 
       if (target.textContent === START) {
-        target.textContent = PAUSE;
         mapTimerRow.get(rowIndex).start(hotInstance, rowIndex, colIndex);
-      }
-
-      if (target.textContent === PAUSE) {
-        target.textContent = START;
+      } else if (target.textContent === PAUSE) {
         mapTimerRow.get(rowIndex).pause();
-      }
-
-      if (target.textContent === RESET) {
+      } else if (target.textContent === RESET) {
         mapTimerRow.get(rowIndex).reset(hotInstance, rowIndex, colIndex - 1);
       }
     }
@@ -150,13 +176,14 @@ function initButtonsListener(hotInstance) {
 }
 
 
-Handsontable.renderers.registerRenderer('start/pause/reset', startPauseResetButtonRenderer);
+Handsontable.renderers.registerRenderer('start/pause', startPauseButtonRenderer);
+Handsontable.renderers.registerRenderer('reset', resetButtonRenderer);
 
 const hot = new Handsontable(document.getElementById('root'), {
   data: [
-    ['Task 1', 'Tom', '13/11/2018', '00:00:00', '<button type="button">Start</button>', '<button type="button">Reset</button>'],
-    ['Task 2', 'Mark', '14/11/2018', '00:00:00', '<button type="button">Start</button>', '<button type="button">Reset</button>'],
-    ['Task 3', 'Kate', '15/11/2018', '00:00:00', '<button type="button">Start</button>', '<button type="button">Reset</button>'],
+    ['Task 1', 'Tom', '13/11/2018', STARTTIME, null, null],
+    ['Task 2', 'Mark', '14/11/2018', STARTTIME, null, null],
+    ['Task 3', 'Kate', '15/11/2018', STARTTIME, null, null],
   ],
   colHeaders: ['Task', 'User', 'Date', 'Time spent', 'Start/Pause', 'Reset'],
   rowHeaders: true,
@@ -179,21 +206,21 @@ const hot = new Handsontable(document.getElementById('root'), {
       readOnly: true,
     },
     {
-      renderer: 'start/pause/reset',
+      renderer: 'start/pause',
       readOnly: true,
     },
     {
-      renderer: 'start/pause/reset',
+      renderer: 'reset',
       readOnly: true,
     },
   ],
   contextMenu: ['remove_row', 'remove_col', 'commentsAddEdit'],
-  minSpareRows: 1,
   className: 'htCenter',
   width: 650,
-  stretchH: 'all',
+  colWidth: 110,
   allowInvalid: false,
   afterInit: onAfterInit,
+  beforeChange: onBeforeChange,
   afterSetDataAtCell: onAfterSetDataAtCell,
   afterRemoveCol: onAfterRemoveColumn,
   afterRemoveRow: onAfterRemoveRow,

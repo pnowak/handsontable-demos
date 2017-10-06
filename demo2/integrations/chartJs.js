@@ -28,13 +28,14 @@ class ChartJsWrapper {
       type: 'line',
       data: {
         labels: ChartJsWrapper.updateTimeDate(hotInstance),
-        datasets: [{ data: ChartJsWrapper.zipTeamWithRowData(hotInstance) }],
+        datasets: ChartJsWrapper.zipTeamWithRowData(hotInstance),
       },
       options: {
         animation: {
           duration: 1000,
           easing: 'linear',
         },
+        scaleOverride: true,
         legend: {
           display: false,
         },
@@ -45,27 +46,32 @@ class ChartJsWrapper {
           text: 'Chart.js & Handsontable',
         },
         tooltips: {
-          titleFontSize: 21,
-          bodyFontSize: 18,
+          titleFontSize: 24,
+          bodyFontSize: 21,
         },
         scales: {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              fontSize: 23,
+              stepSize: 6,
+            },
+            time: {
+              unit: 'second',
             },
             scaleLabel: {
               display: true,
-              labelString: 'Time spent',
+              fontSize: 11,
+              labelString: 'Time (in seconds)',
             },
           }],
           xAxes: [{
-            ticks: {
-              fontSize: 23,
+            time: {
+              unit: 'day',
             },
             scaleLabel: {
               display: true,
-              labelString: 'Date',
+              fontSize: 11,
+              labelString: 'Day',
             },
           }],
         },
@@ -82,7 +88,6 @@ class ChartJsWrapper {
 * @example
 * {
 *  label: "Game 1",
-*  backgroundColor: "rgba(255, 99, 132, 0.2)",
 *  data: [144, 12, 13]
 * }
 *
@@ -91,11 +96,19 @@ class ChartJsWrapper {
 */
   static zipTeamWithRowData(hotInstance) {
     const rowsArray = [];
+    const colors = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'];
 
     for (let index = 0; index < hotInstance.countRows(); index += 1) {
-      if (hotInstance.getDataAtCell(index, 3) != null) {
-        rowsArray.push([hotInstance.getDataAtCell(index, 3)]);
-      }
+      const obj = {};
+
+      obj.fillColor = colors[index];
+      obj.strokeColor = colors[index];
+      obj.pointColor = colors[index];
+
+      obj.label = hotInstance.getDataAtCell(index, 0);
+      obj.data = [0];
+
+      rowsArray.push(obj); console.log(obj);
     }
 
     return rowsArray;
@@ -112,7 +125,7 @@ class ChartJsWrapper {
 
     for (let index = 0; index < hotInstance.countRows(); index += 1) {
       if (hotInstance.getDataAtCell(index, 3) != null) {
-        categoriesArray.push(hotInstance.getSettings().data[index][2]);
+        categoriesArray.push(hotInstance.getDataAtCell(index, 2));
       }
     }
 
@@ -130,7 +143,7 @@ class ChartJsWrapper {
     this.chart.data.datasets.splice(index, 1);
 
     for (let i = 0; i < hotInstance.countRows(); i += 1) {
-      this.chart.data.datasets[i].label = hotInstance.getSettings().rowHeaders(i);
+      this.chart.data.datasets[i].label = hotInstance.getRowHeader(index);
     }
 
     this.chart.update();
@@ -158,7 +171,7 @@ class ChartJsWrapper {
     this.chart.update();
   }
 
-/**
+  /**
 *
 * Watches changes from Handsontable and updates it in the chart.
 *
@@ -167,7 +180,30 @@ class ChartJsWrapper {
 *
 */
   updateChartData(row, column, value) {
-    this.chart.config.data.datasets[0].data[row].push(value);
+    if (column === 3) {
+      return;
+    }
+
+    this.chart.data.datasets[row].data[column] = value;
+    this.chart.update();
+  }
+
+/**
+*
+* Watches changes from Handsontable and updates it in the chart.
+*
+* @param {Number} column column index.
+* @param {Number} value column value.
+*
+*/
+  updateCellData(row, column, value) {
+    if (column === 3) {
+      const valueSplit = value.split(':');
+      const seconds = ((+valueSplit[0]) * (60 * 60)) + ((+valueSplit[1]) * 60) + (+valueSplit[2]);
+
+      this.chart.data.datasets[row].data.push(seconds);
+    }
+
     this.chart.update();
   }
 }

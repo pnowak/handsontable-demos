@@ -27,7 +27,7 @@ class FusionChartsWrapper {
   static getChartOptions(fusionChartsRootId, hotInstance) {
     return {
       id: 'fusionChart',
-      type: 'mscolumn2d',
+      type: 'msline',
       renderAt: fusionChartsRootId,
       width: 650,
       height: 420,
@@ -35,7 +35,7 @@ class FusionChartsWrapper {
       dataSource: {
         chart: {
           caption: 'FusionCharts & Handsontable',
-          xAxisName: 'Teams',
+          xAxisName: 'Date',
           yAxisName: 'Values',
         },
         categories: [{ category: FusionChartsWrapper.updateChartColumns(hotInstance) }],
@@ -52,8 +52,8 @@ class FusionChartsWrapper {
 *
 * @example
 * {
-*  "seriesname": "Game 1",
-*  "data": [144, 12, 13]
+*  "seriesname": "1",
+*  "data": [0, 1, 2, 3]
 * }
 *
 * @param {Object} Handsontable object.
@@ -65,14 +65,8 @@ class FusionChartsWrapper {
     for (let index = 0; index < hotInstance.countRows(); index += 1) {
       const obj = {};
 
-      obj.seriesname = hotInstance.getSettings().rowHeaders(index);
-      obj.data = hotInstance.getDataAtRow(index).map((item) => {
-        const o = {};
-
-        o.value = item;
-
-        return o;
-      });
+      obj.seriesname = hotInstance.getRowHeader(index);
+      obj.data = [0];
 
       rowsArray.push(obj); console.log(obj);
     }
@@ -91,59 +85,15 @@ class FusionChartsWrapper {
   static updateChartColumns(hotInstance) {
     const category = [];
 
-    for (let index = 0; index < hotInstance.countCols(); index += 1) {
+    for (let index = 0; index < hotInstance.countRows(); index += 1) {
       const o = {};
 
-      o.label = hotInstance.getSettings().colHeaders(index);
+      o.label = hotInstance.getDataAtCell(index, 2);
 
       category.push(o);
     }
 
     return category;
-  }
-
-  /**
-*
-*
-*
-* @param {}
-*
-*/
-  addNewGame(hotInstance, index) {
-    const obj = {};
-
-    obj.seriesname = hotInstance.getSettings().rowHeaders(index);
-    obj.data = hotInstance.getDataAtRow(index).map((item) => {
-      const o = {};
-
-      o.value = item;
-
-      return o;
-    });
-
-    this.chart.args.dataSource.dataset.push(obj);
-
-    this.chart.setJSONData(this.chart.args.dataSource);
-  }
-
-  /**
-*
-*
-*
-* @param {}
-*
-*/
-  addNewTeam(hotInstance, index) {
-    const o = {};
-    o.label = hotInstance.getSettings().colHeaders(index);
-
-    this.chart.args.dataSource.categories[0].category.push(o);
-
-    for (let i = 0; i < this.chart.args.dataSource.dataset.length; i += 1) {
-      this.chart.args.dataSource.dataset[i].data[index] = { value: null };
-    }
-
-    this.chart.setJSONData(this.chart.args.dataSource);
   }
 
   /**
@@ -195,7 +145,22 @@ class FusionChartsWrapper {
 *
 */
   updateChartData(row, column, value) {
+    if (column === 3) {
+      return;
+    }
+
     this.chart.args.dataSource.dataset[row].data[column].value = value;
+
+    this.chart.setJSONData(this.chart.args.dataSource);
+  }
+
+  updateCellData(row, column, value) {
+    if (column === 3) {
+      const valueSplit = value.split(':');
+      const seconds = ((+valueSplit[0]) * (60 * 60)) + ((+valueSplit[1]) * 60) + (+valueSplit[2]);
+
+      this.chart.args.dataSource.dataset[row].data.push(seconds);
+    }
 
     this.chart.setJSONData(this.chart.args.dataSource);
   }

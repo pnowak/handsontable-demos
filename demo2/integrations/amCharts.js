@@ -27,26 +27,14 @@ class AmChartsWrapper {
     return {
       type: 'serial',
       theme: 'light',
-      dataProvider: AmChartsWrapper.zipTeamWithGameData(hotInstance),
-      valueAxes: [{
-        gridColor: '#FFFFFF',
-        gridAlpha: 0.2,
-        dashLength: 0,
-      }],
+      dataProvider: AmChartsWrapper.zipTeamWithRowData(hotInstance),
       gridAboveGraphs: true,
-      startDuration: 1,
+      startDuration: 0,
       graphs: AmChartsWrapper.updateChartGraphs(hotInstance),
-      chartCursor: {
-        categoryBalloonEnabled: false,
-        cursorAlpha: 0,
-        zoomable: false,
-      },
-      categoryField: 'team',
+      dataDateFormat: 'DD',
+      categoryField: 'day',
       categoryAxis: {
-        gridPosition: 'start',
-        gridAlpha: 0,
-        tickPosition: 'start',
-        tickLength: 20,
+        minPeriod: 'mm',
       },
       export: {
         enabled: true,
@@ -71,24 +59,19 @@ class AmChartsWrapper {
 * @param {Object} Handsontable object.
 * @returns {Array} a merged key-value pair in array.
 */
-  static zipTeamWithGameData(hotInstance) {
-    const colsArray = [];
+  static zipTeamWithRowData(hotInstance) {
+    const rowsArray = [];
 
-    for (let i = 0; i < hotInstance.countCols(); i += 1) {
+    for (let index = 0; index < hotInstance.countRows(); index += 1) {
       const obj = {};
 
-      obj.team = hotInstance.getSettings().colHeaders(i);
+      obj.day = hotInstance.getDataAtCell(index, 2);
+      obj.data = [0];
 
-      hotInstance.getDataAtCol(i).map((item, index) => {
-        obj[hotInstance.getSettings().rowHeaders(index)] = item;
-
-        return obj;
-      });
-
-      colsArray.push(obj); console.log(obj);
+      rowsArray.push(obj); console.log(obj);
     }
 
-    return colsArray;
+    return rowsArray;
   }
 
   /**
@@ -107,60 +90,13 @@ class AmChartsWrapper {
 
       obj.fillAlphas = 0.8;
       obj.lineAlpha = 0.2;
-      obj.type = 'column';
-      obj.balloonText = `${hotInstance.getSettings().rowHeaders(index)}: [[${hotInstance.getSettings().rowHeaders(index)}]]`;
-      obj.valueField = `${hotInstance.getSettings().rowHeaders(index)}`;
+      obj.type = 'smoothedLine';
+      obj.valueField = 'data';
 
-      graphs.push(obj);
+      graphs.push(obj); console.log(obj);
     }
-    console.log(graphs);
+
     return graphs;
-  }
-
-  /**
-*
-*
-*
-* @param {}
-*
-*/
-  addNewGame(hotInstance, index) {
-    const objectGraph = {
-      fillAlphas: 0.8,
-      lineAlpha: 0.2,
-      type: 'column',
-      balloonText: `${hotInstance.getSettings().rowHeaders(index)}: [[${hotInstance.getSettings().rowHeaders(index)}]]`,
-      valueField: `${hotInstance.getSettings().rowHeaders(index)}`,
-    };
-
-    this.chart.graphs.push(objectGraph);
-
-    for (let i = 0; i < hotInstance.countCols(); i += 1) {
-      this.chart.dataProvider[i][hotInstance.getSettings().rowHeaders(index)] = 0;
-    }
-
-    this.chart.validateNow(true);
-  }
-
-  /**
-*
-*
-*
-* @param {}
-*
-*/
-  addNewTeam(hotInstance, index) {
-    const objectTeam = {
-      team: `Team ${index + 1}`,
-    };
-
-    for (let i = 0; i < hotInstance.countRows(); i += 1) {
-      objectTeam[hotInstance.getSettings().rowHeaders(i)] = 0;
-    }
-
-    this.chart.dataProvider.push(objectTeam);
-
-    this.chart.validateNow(true);
   }
 
   /**
@@ -216,10 +152,34 @@ class AmChartsWrapper {
 * @param {Number} value column value.
 *
 */
-  updateChartData(row, column, value, hotInstance) {
-    this.chart.dataProvider[column][hotInstance.getSettings().rowHeaders(row)] = value;
+  updateChartData(row, column, value) {
+    if (column === 3) {
+      return;
+    }
+
+    this.chart.dataProvider[row].data[column] = value;
 
     this.chart.validateNow(true);
+  }
+
+  /**
+*
+* Watches changes from Handsontable and updates it in the chart.
+*
+* @param {Number} column column index.
+* @param {Number} value column value.
+*
+*/
+
+  updateCellData(row, column, value) {
+    if (column === 3) {
+      const valueSplit = value.split(':');
+      const seconds = ((+valueSplit[0]) * (60 * 60)) + ((+valueSplit[1]) * 60) + (+valueSplit[2]);
+
+      this.chart.dataProvider[row].data.push(seconds);
+    }
+
+    this.chart.validateData();
   }
 }
 
