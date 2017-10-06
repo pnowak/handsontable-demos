@@ -1,10 +1,10 @@
 import Handsontable from 'handsontable';
-import AmChartsWrapper from './amCharts';
+import HighchartsWrapper from './highchartsWrapper';
 
 const chartWrappers = [];
 
 function onAfterInit() {
-  chartWrappers.push(new AmChartsWrapper('chart', this));
+  chartWrappers.push(new HighchartsWrapper('chart', this));
 }
 
 function onBeforeChange(changes) {

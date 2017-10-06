@@ -1,5 +1,5 @@
 import Handsontable from 'handsontable';
-import FusionChartsWrapper from './fusionCharts';
+import FusionChartsWrapper from './fusionChartsWrapper';
 
 const chartWrappers = [];
 

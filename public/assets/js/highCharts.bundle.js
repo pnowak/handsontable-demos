@@ -32413,16 +32413,16 @@ var _handsontable = __webpack_require__(122);
 
 var _handsontable2 = _interopRequireDefault(_handsontable);
 
-var _highcharts = __webpack_require__(197);
+var _highchartsWrapper = __webpack_require__(197);
 
-var _highcharts2 = _interopRequireDefault(_highcharts);
+var _highchartsWrapper2 = _interopRequireDefault(_highchartsWrapper);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var chartWrappers = [];
 
 function onAfterInit() {
-  chartWrappers.push(new _highcharts2.default('chart', this));
+  chartWrappers.push(new _highchartsWrapper2.default('chart', this));
 }
 
 function onBeforeChange(changes) {

@@ -14,7 +14,7 @@
 * @param {Number} columnValues column values from Handsontable object settings.
 * @returns {Array} a merged key-value pair in array.
 */
-function zipHeadersWithValues(columnHeaders, columnValues, key) {
+export default function zipHeadersWithValues(columnHeaders, columnValues, key) {
   return columnHeaders.map((item, index) => {
     const obj = {};
 
@@ -24,5 +24,3 @@ function zipHeadersWithValues(columnHeaders, columnValues, key) {
     return obj;
   });
 }
-
-export default zipHeadersWithValues;

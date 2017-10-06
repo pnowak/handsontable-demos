@@ -1,7 +1,7 @@
-import HighchartsWrapper from './highcharts';
-import AmChartsWrapper from './amCharts';
-import ChartJsWrapper from './chartJs';
-import FusionChartsWrapper from './fusionCharts';
+import HighchartsWrapper from './wrappers/highchartsWrapper';
+import AmChartsWrapper from './wrappers/amChartsWrapper';
+import ChartJsWrapper from './wrappers/chartJsWrapper';
+import FusionChartsWrapper from './wrappers/fusionChartsWrapper';
 
 const SELECTED_CLASS = 'selected';
 

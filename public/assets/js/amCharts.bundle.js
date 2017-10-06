@@ -32309,6 +32309,7 @@ webpackEmptyContext.id = 187;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = zipHeadersWithValues;
 /**
 * Helper function.
 *
@@ -32336,8 +32337,6 @@ function zipHeadersWithValues(columnHeaders, columnValues, key) {
   });
 }
 
-exports.default = zipHeadersWithValues;
-
 /***/ }),
 /* 191 */,
 /* 192 */,
@@ -32363,9 +32362,9 @@ __webpack_require__(203);
 
 __webpack_require__(205);
 
-var _zip = __webpack_require__(190);
+var _zipHeadersWithValues = __webpack_require__(190);
 
-var _zip2 = _interopRequireDefault(_zip);
+var _zipHeadersWithValues2 = _interopRequireDefault(_zipHeadersWithValues);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32422,7 +32421,7 @@ var AmChartsWrapper = function () {
       return {
         type: 'serial',
         theme: 'light',
-        dataProvider: (0, _zip2.default)(hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0), 'key'),
+        dataProvider: (0, _zipHeadersWithValues2.default)(hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0), 'key'),
         valueAxes: [{
           gridColor: '#FFFFFF',
           gridAlpha: 0.2,
@@ -32477,16 +32476,16 @@ var _handsontable = __webpack_require__(122);
 
 var _handsontable2 = _interopRequireDefault(_handsontable);
 
-var _amCharts = __webpack_require__(194);
+var _amChartsWrapper = __webpack_require__(194);
 
-var _amCharts2 = _interopRequireDefault(_amCharts);
+var _amChartsWrapper2 = _interopRequireDefault(_amChartsWrapper);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var chartWrappers = [];
 
 function onAfterInit() {
-  chartWrappers.push(new _amCharts2.default('chart', this));
+  chartWrappers.push(new _amChartsWrapper2.default('chart', this));
 }
 
 function onBeforeChange(changes) {

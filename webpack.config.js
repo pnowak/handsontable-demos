@@ -3,10 +3,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = [
   {
     entry: {
-      amCharts: './integrations/amChartsIndex.js',
-      highCharts: './integrations/highchartsIndex.js',
-      fusionCharts: './integrations/fusionChartsIndex.js',
-      chartJs: './integrations/chartJsIndex.js',
+      amCharts: './integrations/wrappers/amChartsIndex.js',
+      highCharts: './integrations/wrappers/highchartsIndex.js',
+      fusionCharts: './integrations/wrappers/fusionChartsIndex.js',
+      chartJs: './integrations/wrappers/chartJsIndex.js',
     },
     output: {
       filename: '[name].bundle.js',

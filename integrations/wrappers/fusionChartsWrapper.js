@@ -1,6 +1,6 @@
 import FusionCharts from 'fusioncharts';
 import Charts from 'fusioncharts/fusioncharts.charts';
-import zipHeadersWithValues from './helper/zip';
+import zipHeadersWithValues from '.././helper/zipHeadersWithValues';
 
 // Load the charts module pass FusionCharts as dependency
 Charts(FusionCharts);
@@ -19,7 +19,7 @@ class FusionChartsWrapper {
 * @param {object} hotInstance - a reference to the Handsontable instance.
 */
   constructor(fusionChartsRootId, hotInstance) {
-    this.name = 'fusioncharts';
+    this.name = 'fusionCharts';
     this.chart = new FusionCharts(FusionChartsWrapper
       .getChartOptions(fusionChartsRootId, hotInstance))
     .render();

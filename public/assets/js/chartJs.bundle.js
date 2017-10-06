@@ -34012,16 +34012,16 @@ var _handsontable = __webpack_require__(122);
 
 var _handsontable2 = _interopRequireDefault(_handsontable);
 
-var _chartJs = __webpack_require__(195);
+var _chartJsWrapper = __webpack_require__(195);
 
-var _chartJs2 = _interopRequireDefault(_chartJs);
+var _chartJsWrapper2 = _interopRequireDefault(_chartJsWrapper);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var chartWrappers = [];
 
 function onAfterInit() {
-  chartWrappers.push(new _chartJs2.default('chart', this));
+  chartWrappers.push(new _chartJsWrapper2.default('chart', this));
 }
 
 function onBeforeChange(changes) {

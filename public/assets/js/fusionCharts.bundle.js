@@ -32309,6 +32309,7 @@ webpackEmptyContext.id = 187;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = zipHeadersWithValues;
 /**
 * Helper function.
 *
@@ -32336,8 +32337,6 @@ function zipHeadersWithValues(columnHeaders, columnValues, key) {
   });
 }
 
-exports.default = zipHeadersWithValues;
-
 /***/ }),
 /* 191 */,
 /* 192 */,
@@ -32364,9 +32363,9 @@ var _fusioncharts3 = __webpack_require__(253);
 
 var _fusioncharts4 = _interopRequireDefault(_fusioncharts3);
 
-var _zip = __webpack_require__(190);
+var _zipHeadersWithValues = __webpack_require__(190);
 
-var _zip2 = _interopRequireDefault(_zip);
+var _zipHeadersWithValues2 = _interopRequireDefault(_zipHeadersWithValues);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32392,7 +32391,7 @@ var FusionChartsWrapper = function () {
   function FusionChartsWrapper(fusionChartsRootId, hotInstance) {
     _classCallCheck(this, FusionChartsWrapper);
 
-    this.name = 'fusioncharts';
+    this.name = 'fusionCharts';
     this.chart = new _fusioncharts2.default(FusionChartsWrapper.getChartOptions(fusionChartsRootId, hotInstance)).render();
   }
 
@@ -32437,7 +32436,7 @@ var FusionChartsWrapper = function () {
             xAxisName: 'Month',
             yAxisName: 'Values'
           },
-          data: (0, _zip2.default)(hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0), 'label')
+          data: (0, _zipHeadersWithValues2.default)(hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0), 'label')
         }
       };
     }
@@ -32464,16 +32463,16 @@ var _handsontable = __webpack_require__(122);
 
 var _handsontable2 = _interopRequireDefault(_handsontable);
 
-var _fusionCharts = __webpack_require__(196);
+var _fusionChartsWrapper = __webpack_require__(196);
 
-var _fusionCharts2 = _interopRequireDefault(_fusionCharts);
+var _fusionChartsWrapper2 = _interopRequireDefault(_fusionChartsWrapper);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var chartWrappers = [];
 
 function onAfterInit() {
-  chartWrappers.push(new _fusionCharts2.default('chart', this));
+  chartWrappers.push(new _fusionChartsWrapper2.default('chart', this));
 }
 
 function onBeforeChange(changes) {
