@@ -57,13 +57,13 @@ class HighchartsWrapper {
   static zipTeamWithRowData(hotInstance) {
     const rowsArray = [];
 
-    for (let index = 0; index < hotInstance.countRows(); index += 1) {
-      const obj = {};
+    for (let indexRow = 0; indexRow < hotInstance.countRows(); indexRow += 1) {
+      const objectGame = {};
 
-      obj.name = hotInstance.getSettings().rowHeaders(index);
-      obj.data = hotInstance.getDataAtRow(index);
+      objectGame.name = hotInstance.getSettings().rowHeaders(indexRow);
+      objectGame.data = hotInstance.getDataAtRow(indexRow);
 
-      rowsArray.push(obj); console.log(obj);
+      rowsArray.push(objectGame);
     }
 
     return rowsArray;
@@ -75,48 +75,50 @@ class HighchartsWrapper {
 *
 *
 * @param {Object} Handsontable object.
-* @returns {Array} a merged key-value pair in array.
+* @returns {Array} a column headers in array.
 */
   static updateChartColumns(hotInstance) {
     const categoriesArray = [];
 
-    for (let index = 0; index < hotInstance.countCols(); index += 1) {
-      categoriesArray.push(hotInstance.getSettings().colHeaders(index));
+    for (let indexColumn = 0; indexColumn < hotInstance.countCols(); indexColumn += 1) {
+      categoriesArray.push(hotInstance.getSettings().colHeaders(indexColumn));
     }
 
     return categoriesArray;
   }
 
-   /**
+  /**
 *
+* Create new row
 *
-*
-* @param {}
+* @param {Object} Handsontable object.
+* @param {Number} index index next row.
 *
 */
   addNewGame(hotInstance, index) {
-    const obj = {};
+    const objectGame = {};
 
-    obj.name = hotInstance.getSettings().rowHeaders(index);
-    obj.data = hotInstance.getDataAtRow(index);
+    objectGame.name = hotInstance.getSettings().rowHeaders(index);
+    objectGame.data = hotInstance.getDataAtRow(index);
 
-    this.chart.addSeries(obj);
+    this.chart.addSeries(objectGame);
 
     this.chart.update(HighchartsWrapper.getChartOptions(hotInstance));
   }
 
   /**
 *
+* Create new column
 *
-*
-* @param {}
+* @param {Object} Handsontable object.
+* @param {Number} index index next column.
 *
 */
   addNewTeam(hotInstance, index) {
     this.chart.xAxis[0].categories.push(hotInstance.getSettings().colHeaders(index));
 
-    for (let i = 0; i < this.chart.series.length; i += 1) {
-      this.chart.series[i].data[index] = hotInstance.getDataAtRow(index);
+    for (let indexSeries = 0; indexSeries < this.chart.series.length; indexSeries += 1) {
+      this.chart.series[indexSeries].data[index] = hotInstance.getDataAtRow(index);
     }
 
     this.chart.update(HighchartsWrapper.getChartOptions(hotInstance));
@@ -124,9 +126,10 @@ class HighchartsWrapper {
 
   /**
 *
+* Remove row
 *
-*
-* @param {index}
+* @param {Number} index index remove row.
+* @param {Object} Handsontable object.
 *
 */
   removeRow(index, hotInstance) {
@@ -137,9 +140,10 @@ class HighchartsWrapper {
 
   /**
 *
+* Remove column
 *
-*
-* @param {}
+* @param {Number} index index remove column.
+* @param {Object} Handsontable object.
 *
 */
   removeColumn(index, hotInstance) {

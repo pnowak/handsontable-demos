@@ -65,7 +65,7 @@ class ChartJsWrapper {
 * Helper function.
 *
 * Zip column header to the value of the column from Handsontable object settings.
-* amCharts data provider needs data array in form:
+* chart.js data provider needs data array in form:
 *
 * @example
 * {
@@ -82,14 +82,14 @@ class ChartJsWrapper {
     const backgroundColors = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)',
       'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'];
 
-    for (let index = 0; index < hotInstance.countRows(); index += 1) {
-      const obj = {};
+    for (let indexRow = 0; indexRow < hotInstance.countRows(); indexRow += 1) {
+      const objectTeam = {};
 
-      obj.label = hotInstance.getSettings().rowHeaders(index);
-      obj.backgroundColor = backgroundColors[index];
-      obj.data = hotInstance.getDataAtRow(index);
+      objectTeam.label = hotInstance.getSettings().rowHeaders(indexRow);
+      objectTeam.backgroundColor = backgroundColors[indexRow];
+      objectTeam.data = hotInstance.getDataAtRow(indexRow);
 
-      rowsArray.push(obj); console.log(obj);
+      rowsArray.push(objectTeam);
     }
 
     return rowsArray;
@@ -99,13 +99,13 @@ class ChartJsWrapper {
 * Helper function.
 *
 * @param {Object} Handsontable object.
-* @returns {Array} a merged key-value pair in array.
+* @returns {Array} merged key-value pair
 */
   static updateChartColumns(hotInstance) {
     const categoriesArray = [];
 
-    for (let index = 0; index < hotInstance.countCols(); index += 1) {
-      categoriesArray.push(hotInstance.getSettings().colHeaders(index));
+    for (let indexColumn = 0; indexColumn < hotInstance.countCols(); indexColumn += 1) {
+      categoriesArray.push(hotInstance.getSettings().colHeaders(indexColumn));
     }
 
     return categoriesArray;
@@ -113,44 +113,46 @@ class ChartJsWrapper {
 
   /**
 *
+* Create new row
 *
-*
-* @param {}
+* @param {Object} Handsontable object.
+* @param {Number} index index next row.
 *
 */
   addNewGame(hotInstance, index) {
     const backgroundColors = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)',
       'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'];
-    const obj = {};
+    const objectTeam = {};
 
-    obj.label = hotInstance.getSettings().rowHeaders(index);
-    obj.backgroundColor = backgroundColors[index];
+    objectTeam.label = hotInstance.getSettings().rowHeaders(index);
+    objectTeam.backgroundColor = backgroundColors[index];
 
-    obj.data = hotInstance.getDataAtRow(index).map((item) => {
-      const o = {};
+    objectTeam.data = hotInstance.getDataAtRow(index).map((item) => {
+      const objectGame = {};
 
-      o.value = item;
+      objectGame.value = item;
 
-      return o;
+      return objectGame;
     });
 
-    this.chart.data.datasets.push(obj);
+    this.chart.data.datasets.push(objectTeam);
 
     this.chart.update();
   }
 
   /**
 *
+* Create new column
 *
-*
-* @param {}
+* @param {Object} Handsontable object.
+* @param {Number} index index next column.
 *
 */
   addNewTeam(hotInstance, index) {
     this.chart.data.labels.push(hotInstance.getSettings().colHeaders(index));
 
-    for (let i = 0; i < this.chart.data.datasets.length; i += 1) {
-      this.chart.data.datasets[i].data[index] = { value: null };
+    for (let indexDataset = 0; indexDataset < this.chart.data.datasets.length; indexDataset += 1) {
+      this.chart.data.datasets[indexDataset].data[index] = { value: null };
     }
 
     this.chart.update();
@@ -158,16 +160,17 @@ class ChartJsWrapper {
 
   /**
 *
+* Remove row
 *
-*
-* @param {}
+* @param {Number} index index remove row.
+* @param {Object} Handsontable object.
 *
 */
   removeRow(index, hotInstance) {
     this.chart.data.datasets.splice(index, 1);
 
-    for (let i = 0; i < hotInstance.countRows(); i += 1) {
-      this.chart.data.datasets[i].label = hotInstance.getSettings().rowHeaders(i);
+    for (let indexRow = 0; indexRow < hotInstance.countRows(); indexRow += 1) {
+      this.chart.data.datasets[indexRow].label = hotInstance.getSettings().rowHeaders(indexRow);
     }
 
     this.chart.update();
@@ -175,20 +178,22 @@ class ChartJsWrapper {
 
   /**
 *
+* Remove column
 *
-*
-* @param {}
+* @param {Number} index index remove column.
+* @param {Object} Handsontable object.
 *
 */
   removeColumn(index, hotInstance) {
     this.chart.data.labels.splice(index, 1);
 
-    for (let i = 0; i < hotInstance.countCols(); i += 1) {
-      this.chart.data.labels[i] = hotInstance.getSettings().colHeaders(i);
+    for (let indexcolumn = 0; indexcolumn < hotInstance.countCols(); indexcolumn += 1) {
+      this.chart.data.labels[indexcolumn] = hotInstance.getSettings().colHeaders(indexcolumn);
 
-      for (let j = 0; j < hotInstance.countRows(); j += 1) {
-        this.chart.data.datasets[j].label = hotInstance.getSettings().rowHeaders(j);
-        this.chart.data.datasets[j].data[index] = hotInstance.getDataAtCell(j, i);
+      for (let indexRow = 0; indexRow < hotInstance.countRows(); indexRow += 1) {
+        this.chart.data.datasets[indexRow].label = hotInstance.getSettings().rowHeaders(indexRow);
+        this.chart.data.datasets[indexRow].data[index] =
+          hotInstance.getDataAtCell(indexRow, indexcolumn);
       }
     }
 

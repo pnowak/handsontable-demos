@@ -74,18 +74,18 @@ class AmChartsWrapper {
   static zipTeamWithGameData(hotInstance) {
     const colsArray = [];
 
-    for (let i = 0; i < hotInstance.countCols(); i += 1) {
+    for (let indexColumn = 0; indexColumn < hotInstance.countCols(); indexColumn += 1) {
       const obj = {};
 
-      obj.team = hotInstance.getSettings().colHeaders(i);
+      obj.team = hotInstance.getSettings().colHeaders(indexColumn);
 
-      hotInstance.getDataAtCol(i).map((item, index) => {
+      hotInstance.getDataAtCol(indexColumn).map((item, index) => {
         obj[hotInstance.getSettings().rowHeaders(index)] = item;
 
         return obj;
       });
 
-      colsArray.push(obj); console.log(obj);
+      colsArray.push(obj);
     }
 
     return colsArray;
@@ -102,26 +102,27 @@ class AmChartsWrapper {
   static updateChartGraphs(hotInstance) {
     const graphs = [];
 
-    for (let index = 0; index < hotInstance.countRows(); index += 1) {
-      const obj = {};
+    for (let indexRow = 0; indexRow < hotInstance.countRows(); indexRow += 1) {
+      const objectGraph = {};
 
-      obj.fillAlphas = 0.8;
-      obj.lineAlpha = 0.2;
-      obj.type = 'column';
-      obj.balloonText = `${hotInstance.getSettings().rowHeaders(index)}: [[${hotInstance.getSettings().rowHeaders(index)}]]`;
-      obj.valueField = `${hotInstance.getSettings().rowHeaders(index)}`;
+      objectGraph.fillAlphas = 0.8;
+      objectGraph.lineAlpha = 0.2;
+      objectGraph.type = 'column';
+      objectGraph.balloonText = `${hotInstance.getSettings().rowHeaders(indexRow)}: [[${hotInstance.getSettings().rowHeaders(indexRow)}]]`;
+      objectGraph.valueField = `${hotInstance.getSettings().rowHeaders(indexRow)}`;
 
-      graphs.push(obj);
+      graphs.push(objectGraph);
     }
-    console.log(graphs);
+
     return graphs;
   }
 
   /**
 *
+* Create new row
 *
-*
-* @param {}
+* @param {Object} Handsontable object.
+* @param {Number} index index next row.
 *
 */
   addNewGame(hotInstance, index) {
@@ -135,8 +136,8 @@ class AmChartsWrapper {
 
     this.chart.graphs.push(objectGraph);
 
-    for (let i = 0; i < hotInstance.countCols(); i += 1) {
-      this.chart.dataProvider[i][hotInstance.getSettings().rowHeaders(index)] = 0;
+    for (let indexColumn = 0; indexColumn < hotInstance.countCols(); indexColumn += 1) {
+      this.chart.dataProvider[indexColumn][hotInstance.getSettings().rowHeaders(index)] = 0;
     }
 
     this.chart.validateNow(true);
@@ -144,9 +145,10 @@ class AmChartsWrapper {
 
   /**
 *
+* Create new column
 *
-*
-* @param {}
+* @param {Object} Handsontable object.
+* @param {Number} index index next column.
 *
 */
   addNewTeam(hotInstance, index) {
@@ -154,8 +156,8 @@ class AmChartsWrapper {
       team: `Team ${index + 1}`,
     };
 
-    for (let i = 0; i < hotInstance.countRows(); i += 1) {
-      objectTeam[hotInstance.getSettings().rowHeaders(i)] = 0;
+    for (let indexRow = 0; indexRow < hotInstance.countRows(); indexRow += 1) {
+      objectTeam[hotInstance.getSettings().rowHeaders(indexRow)] = 0;
     }
 
     this.chart.dataProvider.push(objectTeam);
@@ -163,24 +165,25 @@ class AmChartsWrapper {
     this.chart.validateNow(true);
   }
 
-  /**
+ /**
 *
+* Remove row
 *
-*
-* @param {}
+* @param {Number} index index remove row.
+* @param {Object} Handsontable object.
 *
 */
   removeRow(index, hotInstance) {
     this.chart.graphs.splice(index, 1);
 
-    for (let j = 0; j < hotInstance.countRows(); j += 1) {
-      for (let i = 0; i < hotInstance.countCols(); i += 1) {
-        this.chart.dataProvider[i][hotInstance.getSettings().rowHeaders(j)] =
-        hotInstance.getDataAtCell(j, i);
+    for (let indexRow = 0; indexRow < hotInstance.countRows(); indexRow += 1) {
+      for (let indexColumn = 0; indexColumn < hotInstance.countCols(); indexColumn += 1) {
+        this.chart.dataProvider[indexColumn][hotInstance.getSettings().rowHeaders(indexRow)] =
+        hotInstance.getDataAtCell(indexRow, indexColumn);
       }
 
-      this.chart.graphs[j].balloonText = `${hotInstance.getSettings().rowHeaders(j)}: [[${hotInstance.getSettings().rowHeaders(j)}]]`;
-      this.chart.graphs[j].valueField = `${hotInstance.getSettings().rowHeaders(j)}`;
+      this.chart.graphs[indexRow].balloonText = `${hotInstance.getSettings().rowHeaders(indexRow)}: [[${hotInstance.getSettings().rowHeaders(indexRow)}]]`;
+      this.chart.graphs[indexRow].valueField = `${hotInstance.getSettings().rowHeaders(indexRow)}`;
     }
 
     this.chart.validateNow(true);
@@ -188,20 +191,21 @@ class AmChartsWrapper {
 
   /**
 *
+* Remove column
 *
-*
-* @param {}
+* @param {Number} index index remove column.
+* @param {Object} Handsontable object.
 *
 */
   removeColumn(index, hotInstance) {
     this.chart.dataProvider.splice(index, 1);
 
-    for (let i = 0; i < hotInstance.countCols(); i += 1) {
-      this.chart.dataProvider[i].team = hotInstance.getSettings().colHeaders(i);
+    for (let indexColumn = 0; indexColumn < hotInstance.countCols(); indexColumn += 1) {
+      this.chart.dataProvider[indexColumn].team = hotInstance.getSettings().colHeaders(indexColumn);
 
-      for (let j = 0; j < hotInstance.countRows(); j += 1) {
-        this.chart.graphs[j].balloonText = `${hotInstance.getSettings().rowHeaders(j)}: [[${hotInstance.getSettings().rowHeaders(j)}]]`;
-        this.chart.graphs[j].valueField = `${hotInstance.getSettings().rowHeaders(j)}`;
+      for (let indexRow = 0; indexRow < hotInstance.countRows(); indexRow += 1) {
+        this.chart.graphs[indexRow].balloonText = `${hotInstance.getSettings().rowHeaders(indexRow)}: [[${hotInstance.getSettings().rowHeaders(indexRow)}]]`;
+        this.chart.graphs[indexRow].valueField = `${hotInstance.getSettings().rowHeaders(indexRow)}`;
       }
     }
 

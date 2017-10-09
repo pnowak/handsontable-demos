@@ -62,19 +62,19 @@ class FusionChartsWrapper {
   static zipTeamWithRowData(hotInstance) {
     const rowsArray = [];
 
-    for (let index = 0; index < hotInstance.countRows(); index += 1) {
-      const obj = {};
+    for (let indexRow = 0; indexRow < hotInstance.countRows(); indexRow += 1) {
+      const objectGame = {};
 
-      obj.seriesname = hotInstance.getSettings().rowHeaders(index);
-      obj.data = hotInstance.getDataAtRow(index).map((item) => {
-        const o = {};
+      objectGame.seriesname = hotInstance.getSettings().rowHeaders(indexRow);
+      objectGame.data = hotInstance.getDataAtRow(indexRow).map((item) => {
+        const objectResult = {};
 
-        o.value = item;
+        objectResult.value = item;
 
-        return o;
+        return objectResult;
       });
 
-      rowsArray.push(obj); console.log(obj);
+      rowsArray.push(objectGame);
     }
 
     return rowsArray;
@@ -91,12 +91,12 @@ class FusionChartsWrapper {
   static updateChartColumns(hotInstance) {
     const category = [];
 
-    for (let index = 0; index < hotInstance.countCols(); index += 1) {
-      const o = {};
+    for (let indexColumn = 0; indexColumn < hotInstance.countCols(); indexColumn += 1) {
+      const objectTeam = {};
 
-      o.label = hotInstance.getSettings().colHeaders(index);
+      objectTeam.label = hotInstance.getSettings().colHeaders(indexColumn);
 
-      category.push(o);
+      category.push(objectTeam);
     }
 
     return category;
@@ -104,43 +104,46 @@ class FusionChartsWrapper {
 
   /**
 *
+* Create new row
 *
-*
-* @param {}
+* @param {Object} Handsontable object.
+* @param {Number} index index next row.
 *
 */
   addNewGame(hotInstance, index) {
-    const obj = {};
+    const objectTeam = {};
 
-    obj.seriesname = hotInstance.getSettings().rowHeaders(index);
-    obj.data = hotInstance.getDataAtRow(index).map((item) => {
-      const o = {};
+    objectTeam.seriesname = hotInstance.getSettings().rowHeaders(index);
+    objectTeam.data = hotInstance.getDataAtRow(index).map((item) => {
+      const objectGame = {};
 
-      o.value = item;
+      objectGame.value = item;
 
-      return o;
+      return objectGame;
     });
 
-    this.chart.args.dataSource.dataset.push(obj);
+    this.chart.args.dataSource.dataset.push(objectTeam);
 
     this.chart.setJSONData(this.chart.args.dataSource);
   }
 
   /**
 *
+* Create new column
 *
-*
-* @param {}
+* @param {Object} Handsontable object.
+* @param {Number} index index next column.
 *
 */
   addNewTeam(hotInstance, index) {
-    const o = {};
-    o.label = hotInstance.getSettings().colHeaders(index);
+    const objectTeam = {};
+    objectTeam.label = hotInstance.getSettings().colHeaders(index);
 
-    this.chart.args.dataSource.categories[0].category.push(o);
+    this.chart.args.dataSource.categories[0].category.push(objectTeam);
 
-    for (let i = 0; i < this.chart.args.dataSource.dataset.length; i += 1) {
-      this.chart.args.dataSource.dataset[i].data[index] = { value: null };
+    for (let indexDataset = 0; indexDataset < this.chart.args.dataSource.dataset.length;
+      indexDataset += 1) {
+      this.chart.args.dataSource.dataset[indexDataset].data[index] = { value: null };
     }
 
     this.chart.setJSONData(this.chart.args.dataSource);
@@ -148,16 +151,18 @@ class FusionChartsWrapper {
 
   /**
 *
+* Remove row
 *
-*
-* @param {}
+* @param {Number} index index remove row.
+* @param {Object} Handsontable object.
 *
 */
   removeRow(index, hotInstance) {
     this.chart.args.dataSource.dataset.splice(index, 1);
 
-    for (let i = 0; i < hotInstance.countRows(); i += 1) {
-      this.chart.args.dataSource.dataset[i].seriesname = hotInstance.getSettings().rowHeaders(i);
+    for (let indexRow = 0; indexRow < hotInstance.countRows(); indexRow += 1) {
+      this.chart.args.dataSource.dataset[indexRow].seriesname =
+        hotInstance.getSettings().rowHeaders(indexRow);
     }
 
     this.chart.setJSONData(this.chart.args.dataSource);
@@ -165,21 +170,24 @@ class FusionChartsWrapper {
 
   /**
 *
+* Remove column
 *
-*
-* @param {}
+* @param {Number} index index remove column.
+* @param {Object} Handsontable object.
 *
 */
   removeColumn(index, hotInstance) {
     this.chart.args.dataSource.categories[0].category.splice(index, 1);
 
-    for (let i = 0; i < hotInstance.countCols(); i += 1) {
-      this.chart.args.dataSource.categories[0].category[i].label =
-      hotInstance.getSettings().colHeaders(i);
+    for (let indexColumn = 0; indexColumn < hotInstance.countCols(); indexColumn += 1) {
+      this.chart.args.dataSource.categories[0].category[indexColumn].label =
+      hotInstance.getSettings().colHeaders(indexColumn);
 
-      for (let j = 0; j < hotInstance.countRows(); j += 1) {
-        this.chart.args.dataSource.dataset[j].seriesname = hotInstance.getSettings().rowHeaders(j);
-        this.chart.args.dataSource.dataset[j].data[i].value = hotInstance.getDataAtCell(j, i);
+      for (let indexRow = 0; indexRow < hotInstance.countRows(); indexRow += 1) {
+        this.chart.args.dataSource.dataset[indexRow].seriesname =
+          hotInstance.getSettings().rowHeaders(indexRow);
+        this.chart.args.dataSource.dataset[indexRow].data[indexColumn].value =
+          hotInstance.getDataAtCell(indexRow, indexColumn);
       }
     }
 
