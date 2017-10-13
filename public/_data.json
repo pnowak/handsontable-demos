@@ -25,14 +25,5 @@
     "document url": "http://www.chartjs.org/docs/latest/",
     "author": "Chart.js",
     "license": "Free under MIT license"
-  },
-  "fusionCharts": {
-    "title": "FusionCharts",
-    "description": "Delightful JavaScript charts for web and mobile applications",
-    "github url": "https://github.com/fusioncharts",
-    "website url": "http://www.fusioncharts.com/",
-    "document url": "http://www.fusioncharts.com/dev/",
-    "author": "FusionCharts",
-    "license": "Development and testing licenses are free. Non watermarked product version free for non commercial use. Deployment licenses start at $149"
   }
 }

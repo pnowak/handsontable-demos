@@ -5,7 +5,6 @@ module.exports = [
     entry: {
       amCharts: './integrations/wrappers/amChartsIndex.js',
       highCharts: './integrations/wrappers/highchartsIndex.js',
-      fusionCharts: './integrations/wrappers/fusionChartsIndex.js',
       chartJs: './integrations/wrappers/chartJsIndex.js',
     },
     output: {

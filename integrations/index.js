@@ -1,7 +1,6 @@
 import HighchartsWrapper from './wrappers/highchartsWrapper';
 import AmChartsWrapper from './wrappers/amChartsWrapper';
 import ChartJsWrapper from './wrappers/chartJsWrapper';
-import FusionChartsWrapper from './wrappers/fusionChartsWrapper';
 
 const SELECTED_CLASS = 'selected';
 
@@ -11,7 +10,6 @@ const mapChartsToWrapper = new Map();
 mapChartsToWrapper.set('Highcharts', HighchartsWrapper);
 mapChartsToWrapper.set('amCharts', AmChartsWrapper);
 mapChartsToWrapper.set('Chart.js', ChartJsWrapper);
-mapChartsToWrapper.set('FusionCharts', FusionChartsWrapper);
 
 function onAfterInit() {
   const isListItem = document.getElementsByTagName('li');
