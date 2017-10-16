@@ -3,7 +3,7 @@ import 'amcharts3';
 import 'amcharts3/amcharts/serial';
 import 'amcharts3/amcharts/pie';
 import 'amcharts3/amcharts/themes/light';
-import zipHeadersWithValues from '.././helper/zipHeadersWithValues';
+import bindHeadersWithValues from '.././helper/bindHeadersWithValues';
 
 /**
 * A amChart data visualisation.
@@ -34,7 +34,7 @@ class AmChartsWrapper {
     return {
       type: 'serial',
       theme: 'light',
-      dataProvider: zipHeadersWithValues(
+      dataProvider: bindHeadersWithValues(
         hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0), 'key'),
       valueAxes: [{
         gridColor: '#FFFFFF',

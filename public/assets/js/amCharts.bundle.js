@@ -32324,9 +32324,9 @@ __webpack_require__(201);
 
 __webpack_require__(203);
 
-var _zipHeadersWithValues = __webpack_require__(196);
+var _bindHeadersWithValues = __webpack_require__(196);
 
-var _zipHeadersWithValues2 = _interopRequireDefault(_zipHeadersWithValues);
+var _bindHeadersWithValues2 = _interopRequireDefault(_bindHeadersWithValues);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32383,7 +32383,7 @@ var AmChartsWrapper = function () {
       return {
         type: 'serial',
         theme: 'light',
-        dataProvider: (0, _zipHeadersWithValues2.default)(hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0), 'key'),
+        dataProvider: (0, _bindHeadersWithValues2.default)(hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0), 'key'),
         valueAxes: [{
           gridColor: '#FFFFFF',
           gridAlpha: 0.2,
@@ -32438,8 +32438,8 @@ exports.default = zipHeadersWithValues;
 /**
 * Helper function.
 *
-* Zip column header to the value of the column from Handsontable object settings.
-* amCharts/FusionCharts data provider needs data array in form:
+* Bind column header to the value of the column from Handsontable object settings.
+* amCharts data provider needs data array in form:
 *
 * @example
 * {
@@ -32449,6 +32449,7 @@ exports.default = zipHeadersWithValues;
 *
 * @param {String} columnHeaders column headers from Handsontable object settings.
 * @param {Number} columnValues column values from Handsontable object settings.
+* @param {String} key property name.
 * @returns {Array} a merged key-value pair in array.
 */
 function zipHeadersWithValues(columnHeaders, columnValues, key) {

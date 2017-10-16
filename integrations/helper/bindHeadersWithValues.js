@@ -1,8 +1,8 @@
 /**
 * Helper function.
 *
-* Zip column header to the value of the column from Handsontable object settings.
-* amCharts/FusionCharts data provider needs data array in form:
+* Bind column header to the value of the column from Handsontable object settings.
+* amCharts data provider needs data array in form:
 *
 * @example
 * {
@@ -12,6 +12,7 @@
 *
 * @param {String} columnHeaders column headers from Handsontable object settings.
 * @param {Number} columnValues column values from Handsontable object settings.
+* @param {String} key property name.
 * @returns {Array} a merged key-value pair in array.
 */
 export default function zipHeadersWithValues(columnHeaders, columnValues, key) {

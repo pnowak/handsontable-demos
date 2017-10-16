@@ -9,7 +9,7 @@ class AmChartsWrapper {
     return {
       type: 'serial',
       theme: 'light',
-      dataProvider: zipHeadersWithValues(
+      dataProvider: bindHeadersWithValues(
         hotInstance.getSettings().colHeaders, hotInstance.getDataAtRow(0), 'key'),
       valueAxes: [{
         gridColor: '#FFFFFF',
@@ -52,7 +52,7 @@ class AmChartsWrapper {
 
 const chartWrappers = [];
 
-function zipHeadersWithValues(columnHeaders, columnValues, key) {
+function bindHeadersWithValues(columnHeaders, columnValues, key) {
   return columnHeaders.map((item, index) => {
     const obj = {};
 
