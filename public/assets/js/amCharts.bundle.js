@@ -32484,10 +32484,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var chartWrappers = [];
 
+/**
+*
+* Initializes the AmChartsWrapper.
+*
+*/
 function onAfterInit() {
   chartWrappers.push(new _amChartsWrapper2.default('chart', this));
 }
 
+/**
+*
+* Watches changes from Handsontable and updates it in the AmChartsWrapper.
+*
+* @param {Array} changes array of changes from Handsontable.
+*
+*/
 function onBeforeChange(changes) {
   var _this = this;
 
@@ -32508,6 +32520,11 @@ function onBeforeChange(changes) {
   });
 }
 
+/**
+*
+* Initializes Handsontable instances.
+*
+*/
 document.addEventListener('DOMContentLoaded', function () {
   // eslint-disable-next-line no-new
   new _handsontable2.default(document.getElementById('root'), {

@@ -3,10 +3,22 @@ import AmChartsWrapper from './amChartsWrapper';
 
 const chartWrappers = [];
 
+/**
+*
+* Initializes the AmChartsWrapper.
+*
+*/
 function onAfterInit() {
   chartWrappers.push(new AmChartsWrapper('chart', this));
 }
 
+/**
+*
+* Watches changes from Handsontable and updates it in the AmChartsWrapper.
+*
+* @param {Array} changes array of changes from Handsontable.
+*
+*/
 function onBeforeChange(changes) {
   changes.forEach((change) => {
     chartWrappers.forEach((chartWrapper) => {
@@ -22,6 +34,11 @@ function onBeforeChange(changes) {
   });
 }
 
+/**
+*
+* Initializes Handsontable instances.
+*
+*/
 document.addEventListener('DOMContentLoaded', () => {
   // eslint-disable-next-line no-new
   new Handsontable(document.getElementById('root'), {

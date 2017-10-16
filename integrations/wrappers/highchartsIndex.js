@@ -3,10 +3,22 @@ import HighchartsWrapper from './highchartsWrapper';
 
 const chartWrappers = [];
 
+/**
+*
+* Initializes the HighchartsWrapper.
+*
+*/
 function onAfterInit() {
   chartWrappers.push(new HighchartsWrapper('chart', this));
 }
 
+/**
+*
+* Watches changes from Handsontable and updates it in the HighchartsWrapper.
+*
+* @param {Array} changes array of changes from Handsontable.
+*
+*/
 function onBeforeChange(changes) {
   changes.forEach((change) => {
     chartWrappers.forEach((chartWrapper) => {
@@ -22,6 +34,11 @@ function onBeforeChange(changes) {
   });
 }
 
+/**
+*
+* Initializes Handsontable instances.
+*
+*/
 document.addEventListener('DOMContentLoaded', () => {
   // eslint-disable-next-line no-new
   new Handsontable(document.getElementById('root'), {

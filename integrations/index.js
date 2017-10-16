@@ -11,6 +11,12 @@ mapChartsToWrapper.set('Highcharts', HighchartsWrapper);
 mapChartsToWrapper.set('amCharts', AmChartsWrapper);
 mapChartsToWrapper.set('Chart.js', ChartJsWrapper);
 
+/**
+*
+* Checks which wrapper has the selected class
+* and initializes the given wrapper.
+*
+*/
 function onAfterInit() {
   const isListItem = document.getElementsByTagName('li');
   const allListItems = Array.from(isListItem);
@@ -25,6 +31,13 @@ function onAfterInit() {
   });
 }
 
+/**
+*
+* Watches changes from Handsontable and updates it in the chart.
+*
+* @param {Array} changes array of changes from Handsontable.
+*
+*/
 function onBeforeChange(changes) {
   changes.forEach((change) => {
     chartWrappers.forEach((chartWrapper) => {
@@ -40,6 +53,11 @@ function onBeforeChange(changes) {
   });
 }
 
+/**
+*
+* Initializes Handsontable instances.
+*
+*/
 document.addEventListener('DOMContentLoaded', () => {
   // eslint-disable-next-line no-new
   new Handsontable(document.getElementById('root'), {
